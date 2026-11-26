@@ -1,840 +1,59 @@
 <!doctype html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sir Lewis Hamilton — #44 | Still We Rise</title>
-  <meta name="description" content="Official-style digital portfolio of Sir Lewis Hamilton (#44): 7-Time Formula 1 World Champion, 106 Grand Prix Wins, Scuderia Ferrari, 3D F1 Garage, and Beyond the Visor.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0b0c'/%3E%3Ccircle cx='32' cy='32' r='26' fill='%23e10600'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='monospace' font-weight='700' font-size='26' fill='%23ffffff'%3E44%3C/text%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sir Lewis Hamilton — #44 | Atelier Grand Prix</title>
+  <meta name="description" content="Official-style digital portfolio of Sir Lewis Hamilton (#44): 7-Time Formula 1 World Champion, 106 Grand Prix Wins, Scuderia Ferrari, 3D Paddock, and Beyond the Visor.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23131314'/%3E%3Ccircle cx='32' cy='32' r='26' fill='%23e00600'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='monospace' font-weight='700' font-size='26' fill='%23ffffff'%3E44%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#131314",
+            "surface-container-lowest": "#0e0e0f",
+            "surface-container-low": "#1c1b1c",
+            "surface-container": "#201f20",
+            "surface-container-high": "#2a2a2b",
+            "surface-container-highest": "#353436",
+            "on-surface": "#e5e2e3",
+            "on-surface-variant": "#d0c5af",
+            "primary": "#f2ca50",
+            "primary-container": "#d4af37",
+            "primary-fixed-dim": "#e9c349",
+            "on-primary": "#3c2f00",
+            "secondary": "#ffb4a8",
+            "secondary-container": "#e00600",
+            "on-secondary-container": "#fff1ef",
+            "tertiary": "#39e6d1",
+            "outline": "#99907c",
+            "outline-variant": "#4d4635"
+          },
+          fontFamily: {
+            serif: ["Playfair Display", "Georgia", "serif"],
+            sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
   <style>
-    @font-face {
-      font-family: "Geist";
-      font-style: normal;
-      font-weight: 100 900;
-      font-display: swap;
-      src: url("https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2") format("woff2");
-    }
-
-    @font-face {
-      font-family: "Geist Mono";
-      font-style: normal;
-      font-weight: 100 900;
-      font-display: swap;
-      src: url("https://fonts.gstatic.com/s/geistmono/v6/or3nQ6H-1_WfwkMZI_qYFrcdmg.woff2") format("woff2");
-    }
-
-    @font-face {
-      font-family: "Instrument Serif";
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url("https://fonts.gstatic.com/s/instrumentserif/v5/jizBRFtNs2ka5fXjeivQ4LroWlx-6zUTjg.woff2") format("woff2");
-    }
-
-    :root {
-      --bg-obsidian: #0b0b0c;
-      --bg-carbon: #131417;
-      --cream: #f4efe6;
-      --muted: #8e8c86;
-      --line: rgba(244, 239, 230, 0.12);
-
-      --ferrari-red: #e10600;
-      --ferrari-dark: #150406;
-      --modena-yellow: #ffd200;
-      --gold: #d4af37;
-      --mclaren-papaya: #ff5500;
-      --mclaren-silver: #d4d8dd;
-      --mclaren-bg: #101216;
-      --mercedes-teal: #00d2be;
-      --mercedes-silver: #c2c8ce;
-      --mercedes-bg: #080d0e;
-
-      --era-accent: var(--ferrari-red);
-      --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-      --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-      --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      background: var(--bg-obsidian);
-      color: var(--cream);
-      font-family: var(--font-sans);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg-obsidian);
-      color: var(--cream);
-      overflow-x: hidden;
-    }
-
-    body.no-scroll { overflow: hidden; }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 90;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.7 0 0 0 -0.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") repeat;
-      filter: invert(1);
-      opacity: 0.04;
-    }
-
-    /* Preloader */
-    .preloader {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: var(--bg-obsidian);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 28px;
-      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.7s;
-    }
-
-    .preloader.is-done {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    /* From Uiverse.io by AspenBranch - https://uiverse.io/AspenBranch/slippery-sheep-50
-       MIT License, Copyright (c) AspenBranch */
-    .uiverse-pattern {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(
-        45deg,
-        #0b0b0c,
-        #0b0b0c 20px,
-        #131418 20px,
-        #131418 40px
-      );
-      opacity: 0.85;
-      pointer-events: none;
-    }
-
-    /* From Uiverse.io by alexruix - https://uiverse.io/alexruix/neat-tiger-82
-       MIT License, Copyright (c) alexruix (Alex Ruiz) */
-    .uiverse-loader {
-      position: relative;
-      width: 112px;
-      height: 112px;
-      z-index: 1;
-    }
-
-    .uiverse-loader__box1,
-    .uiverse-loader__box2,
-    .uiverse-loader__box3 {
-      border: 16px solid var(--cream);
-      box-sizing: border-box;
-      position: absolute;
-      display: block;
-    }
-
-    .uiverse-loader__box1 {
-      border-color: var(--ferrari-red);
-      width: 112px;
-      height: 48px;
-      margin-top: 64px;
-      margin-left: 0px;
-      animation: abox1 4s 0s forwards ease-in-out infinite;
-    }
-
-    .uiverse-loader__box2 {
-      border-color: var(--cream);
-      width: 48px;
-      height: 48px;
-      margin-top: 0px;
-      margin-left: 0px;
-      animation: abox2 4s 0s forwards ease-in-out infinite;
-    }
-
-    .uiverse-loader__box3 {
-      border-color: var(--gold);
-      width: 48px;
-      height: 48px;
-      margin-top: 0px;
-      margin-left: 64px;
-      animation: abox3 4s 0s forwards ease-in-out infinite;
-    }
-
-    @keyframes abox1 {
-      0% { width: 112px; height: 48px; margin-top: 64px; margin-left: 0px; }
-      12.5% { width: 48px; height: 48px; margin-top: 64px; margin-left: 0px; }
-      25% { width: 48px; height: 48px; margin-top: 64px; margin-left: 0px; }
-      37.5% { width: 48px; height: 48px; margin-top: 64px; margin-left: 0px; }
-      50% { width: 48px; height: 48px; margin-top: 64px; margin-left: 0px; }
-      62.5% { width: 48px; height: 48px; margin-top: 64px; margin-left: 0px; }
-      75% { width: 48px; height: 112px; margin-top: 0px; margin-left: 0px; }
-      87.5% { width: 48px; height: 48px; margin-top: 0px; margin-left: 0px; }
-      100% { width: 48px; height: 48px; margin-top: 0px; margin-left: 0px; }
-    }
-
-    @keyframes abox2 {
-      0% { width: 48px; height: 48px; margin-top: 0px; margin-left: 0px; }
-      12.5% { width: 48px; height: 48px; margin-top: 0px; margin-left: 0px; }
-      25% { width: 48px; height: 48px; margin-top: 0px; margin-left: 0px; }
-      37.5% { width: 48px; height: 48px; margin-top: 0px; margin-left: 0px; }
-      50% { width: 112px; height: 48px; margin-top: 0px; margin-left: 0px; }
-      62.5% { width: 48px; height: 48px; margin-top: 0px; margin-left: 64px; }
-      75% { width: 48px; height: 48px; margin-top: 0px; margin-left: 64px; }
-      87.5% { width: 48px; height: 48px; margin-top: 0px; margin-left: 64px; }
-      100% { width: 48px; height: 48px; margin-top: 0px; margin-left: 64px; }
-    }
-
-    @keyframes abox3 {
-      0% { width: 48px; height: 48px; margin-top: 0px; margin-left: 64px; }
-      12.5% { width: 48px; height: 48px; margin-top: 0px; margin-left: 64px; }
-      25% { width: 48px; height: 112px; margin-top: 0px; margin-left: 64px; }
-      37.5% { width: 48px; height: 48px; margin-top: 64px; margin-left: 64px; }
-      50% { width: 48px; height: 48px; margin-top: 64px; margin-left: 64px; }
-      62.5% { width: 48px; height: 48px; margin-top: 64px; margin-left: 64px; }
-      75% { width: 48px; height: 48px; margin-top: 64px; margin-left: 64px; }
-      87.5% { width: 48px; height: 48px; margin-top: 64px; margin-left: 64px; }
-      100% { width: 112px; height: 48px; margin-top: 64px; margin-left: 0px; }
-    }
-
-    .preloader__center { position: relative; z-index: 1; text-align: center; }
-    .preloader__num {
-      display: block;
-      font-family: var(--font-mono);
-      font-size: 28px;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: 0.08em;
-    }
-    .preloader__sub {
-      display: block;
-      margin-top: 6px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--gold);
-    }
-
-    /* Header */
-    .topbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 60;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px clamp(20px, 4vw, 48px) 28px;
-      background: linear-gradient(to bottom, rgba(11, 11, 12, 0.85) 0%, rgba(11, 11, 12, 0.4) 60%, transparent 100%);
-      pointer-events: none;
-    }
-    .topbar > * { pointer-events: auto; }
-
-    .crest {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--cream);
-      background: rgba(11, 11, 12, 0.72);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--line);
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.1em;
-    }
-    .crest__badge {
-      display: inline-grid;
-      place-items: center;
-      width: 24px; height: 24px;
-      border-radius: 50%;
-      background: var(--ferrari-red);
-      color: #fff;
-      font-weight: 700;
-      font-size: 11px;
-    }
-
-    .era-pill {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(11, 11, 12, 0.72);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--line);
-      padding: 4px;
-      border-radius: 999px;
-    }
-    .era-pill a {
-      text-decoration: none;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 6px 12px;
-      border-radius: 999px;
-      transition: color 0.25s, background 0.25s;
-    }
-    .era-pill a:hover, .era-pill a.is-active { color: var(--cream); background: rgba(255,255,255,0.09); }
-    .era-pill a[data-target="mclaren"].is-active { color: var(--mclaren-papaya); }
-    .era-pill a[data-target="mercedes"].is-active { color: var(--mercedes-teal); }
-    .era-pill a[data-target="ferrari"].is-active { color: var(--ferrari-red); }
-
-    .menu-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--ferrari-red);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 16px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-    .menu-btn__lines { display: grid; gap: 4px; width: 16px; }
-    .menu-btn__lines span { display: block; height: 1.5px; background: currentColor; }
-
-    /* Nav Overlay */
-    .nav-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 80;
-      background: #0d0e10;
-      background-image: radial-gradient(circle at 80% 20%, rgba(225, 6, 0, 0.16), transparent 55%),
-                        radial-gradient(circle at 15% 85%, rgba(212, 175, 55, 0.12), transparent 50%);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 28px clamp(24px, 5vw, 72px) 40px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-12px);
-      transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.4s;
-    }
-    .nav-overlay.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
-    .nav-overlay__top { display: flex; justify-content: space-between; align-items: center; }
-    .nav-close {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--cream);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 10px 16px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-    .nav-overlay__grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 48px;
-      align-items: center;
-      margin: auto 0;
-    }
-    .nav-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-    .nav-links a {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 18px;
-      text-decoration: none;
-      color: var(--cream);
-      font-family: var(--font-serif);
-      font-size: clamp(28px, 4.2vw, 54px);
-      line-height: 1.05;
-      transition: color 0.25s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .nav-links a span { font-family: var(--font-mono); font-size: 12px; color: var(--gold); letter-spacing: 0.12em; }
-    .nav-links a:hover { color: var(--ferrari-red); transform: translateX(10px); }
-    .nav-meta { border-left: 1px solid var(--line); padding-left: 40px; display: grid; gap: 24px; }
-    .nav-meta__crest { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); }
-    .nav-meta__quote { font-family: var(--font-serif); font-size: 28px; line-height: 1.25; margin: 0; }
-    .nav-overlay__foot {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      border-top: 1px solid var(--line);
-      padding-top: 20px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .nav-socials { display: flex; gap: 20px; }
-    .nav-socials a { color: var(--cream); text-decoration: none; letter-spacing: 0.08em; }
-
-    /* Hero — Clean Editorial Split */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      padding: 104px clamp(24px, 5vw, 72px) 48px;
-      background:
-        radial-gradient(ellipse 65% 55% at 75% 45%, rgba(225, 6, 0, 0.14), transparent 68%),
-        var(--bg-obsidian);
-    }
-    .hero__grid {
-      width: 100%;
-      max-width: 1360px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: clamp(32px, 5vw, 72px);
-      align-items: center;
-    }
-    .hero__kicker {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--gold);
-      margin: 0 0 18px;
-    }
-    .hero__title {
-      font-family: var(--font-serif);
-      font-weight: 400;
-      font-size: clamp(60px, 7.2vw, 114px);
-      line-height: 0.92;
-      letter-spacing: -0.02em;
-      margin: 0;
-    }
-    .hero__title em { font-style: italic; color: var(--ferrari-red); }
-    .hero__sub {
-      font-size: clamp(15px, 1.25vw, 18px);
-      line-height: 1.6;
-      color: rgba(244, 239, 230, 0.78);
-      max-width: 44ch;
-      margin: 22px 0 28px;
-    }
-    .hero__metrics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 28px;
-      padding: 18px 0;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      margin-bottom: 28px;
-      font-family: var(--font-mono);
-    }
-    .hero__metric strong {
-      display: block;
-      font-size: 22px;
-      color: var(--cream);
-      font-weight: 600;
-    }
-    .hero__metric span {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
-    }
-    .hero__actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 14px;
-    }
-    .scroll-cue {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #fff;
-      background: var(--ferrari-red);
-      padding: 12px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-    }
-    .hero__secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--cream);
-      background: transparent;
-      border: 1px solid var(--line);
-      padding: 12px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-    }
-    .hero__secondary:hover { border-color: var(--gold); color: var(--gold); }
-    .hero__media {
-      position: relative;
-      border-radius: 22px;
-      overflow: hidden;
-      aspect-ratio: 4 / 5;
-      max-height: 78vh;
-      width: 100%;
-      background: #121215;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 32px 80px -24px rgba(0, 0, 0, 0.85);
-    }
-    .hero__media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
-    .hero__media-cap {
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      bottom: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 14px;
-      border-radius: 10px;
-      background: rgba(11, 11, 12, 0.78);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--line);
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-    .hero__media-cap span { color: var(--gold); }
-
-    /* Sections */
-    .section {
-      position: relative;
-      padding: clamp(72px, 10vw, 124px) clamp(20px, 5vw, 72px);
-      border-top: 1px solid var(--line);
-    }
-    .section__eyebrow { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold); margin: 0 0 14px; }
-    .section__heading { font-family: var(--font-serif); font-weight: 400; font-size: clamp(38px, 5vw, 72px); line-height: 1; margin: 0 0 24px; max-width: 18ch; }
-
-    /* Telemetry */
-    .telemetry { background: #0d0e11; }
-    .telemetry__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-top: 40px; }
-    .stat-card { background: var(--bg-carbon); border: 1px solid var(--line); border-radius: 14px; padding: 24px 20px; position: relative; overflow: hidden; }
-    .stat-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--ferrari-red), var(--gold)); }
-    .stat-card__val { font-family: var(--font-mono); font-size: clamp(34px, 3.6vw, 48px); font-weight: 600; font-variant-numeric: tabular-nums; }
-    .stat-card__label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-top: 8px; }
-    .stat-card__note { font-size: 12px; color: var(--gold); margin-top: 6px; }
-    .wins-bar { margin-top: 40px; background: var(--bg-carbon); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
-    .wins-bar__head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
-    .wins-bar__track { display: flex; height: 14px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,0.06); gap: 3px; }
-    .wins-bar__legend { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 14px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
-    .wins-bar__legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 8px; vertical-align: middle; }
-
-    /* 3D Garage Showroom */
-    .garage {
-      background: radial-gradient(circle at 50% 45%, rgba(225, 6, 0, 0.1), transparent 60%), #0a0b0d;
-    }
-    .garage__head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      gap: 24px;
-      margin-bottom: 28px;
-    }
-    .garage__controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .car-btn {
-      background: var(--bg-carbon);
-      color: var(--muted);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 10px 18px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.25s;
-    }
-    .car-btn.is-active {
-      background: var(--ferrari-red);
-      color: #fff;
-      border-color: var(--ferrari-red);
-    }
-    .car-btn[data-car="mercedes"].is-active { background: var(--mercedes-teal); color: #081111; border-color: var(--mercedes-teal); }
-    .car-btn[data-car="mclaren"].is-active { background: var(--mclaren-papaya); color: #fff; border-color: var(--mclaren-papaya); }
-
-    .garage__stage {
-      position: relative;
-      height: clamp(380px, 58vh, 580px);
-      background: radial-gradient(circle at 50% 70%, rgba(255,255,255,0.04), transparent 65%), #0c0d10;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-    .garage__stage canvas { width: 100%; height: 100%; display: block; cursor: grab; }
-    .garage__stage canvas:active { cursor: grabbing; }
-    .garage__hud {
-      position: absolute;
-      left: 20px;
-      right: 20px;
-      bottom: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      pointer-events: none;
-    }
-    .garage__hud > * { pointer-events: auto; }
-    .garage__status {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: rgba(11, 11, 12, 0.78);
-      border: 1px solid var(--line);
-      padding: 8px 14px;
-      border-radius: 999px;
-    }
-    .garage__mode {
-      display: flex;
-      gap: 8px;
-    }
-    .mode-btn {
-      background: rgba(11, 11, 12, 0.82);
-      color: var(--cream);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-    .mode-btn.is-active { border-color: var(--gold); color: var(--gold); }
-
-    /* Era Chapters with Vertical Editorial Gallery */
-    .era--mclaren {
-      background: radial-gradient(circle at 85% 20%, rgba(255, 85, 0, 0.14), transparent 55%), var(--mclaren-bg);
-      --era-local: var(--mclaren-papaya);
-      --era-local-2: var(--mclaren-silver);
-    }
-    .era--mercedes {
-      background: radial-gradient(circle at 15% 25%, rgba(0, 210, 190, 0.14), transparent 55%), var(--mercedes-bg);
-      --era-local: var(--mercedes-teal);
-      --era-local-2: var(--mercedes-silver);
-    }
-    .era--ferrari {
-      background: radial-gradient(circle at 80% 30%, rgba(225, 6, 0, 0.22), transparent 55%), var(--ferrari-dark);
-      --era-local: var(--ferrari-red);
-      --era-local-2: var(--modena-yellow);
-    }
-    .era__header { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: end; margin-bottom: 44px; }
-    .era__years { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--era-local); margin-bottom: 10px; }
-    .era__title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(42px, 5.5vw, 78px); line-height: 0.96; margin: 0; }
-    .era__summary { font-size: 16px; line-height: 1.65; color: rgba(244, 239, 230, 0.8); margin: 0; }
-    .era__chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-    .era__chip { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); color: var(--era-local-2); }
-
-    .era__gallery {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-    .era__card {
-      position: relative;
-      margin: 0;
-      border-radius: 16px;
-      overflow: hidden;
-      background: #0c0c0e;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      aspect-ratio: 3 / 4;
-    }
-    .era__card img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .era__card:hover img { transform: scale(1.04); }
-    .era__caption {
-      position: absolute; left: 0; right: 0; bottom: 0;
-      padding: 36px 16px 14px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.88), transparent);
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--cream); display: flex; justify-content: space-between; gap: 8px;
-    }
-    .era__caption span { color: var(--era-local); white-space: nowrap; }
-
-    /* Helmets Hall of Fame */
-    .helmets { background: #0b0b0c; }
-    .helmets__top { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: 40px; }
-    .helmets__filters { display: flex; flex-wrap: wrap; gap: 8px; }
-    .filter-btn {
-      background: var(--bg-carbon); color: var(--muted); border: 1px solid var(--line);
-      border-radius: 999px; padding: 8px 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
-    }
-    .filter-btn.is-active, .filter-btn:hover { background: var(--cream); color: #111; border-color: var(--cream); }
-    .helmets__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
-    .helmet-card {
-      position: relative; background: #141417; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; cursor: pointer;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s;
-    }
-    .helmet-card:hover { transform: translateY(-4px); border-color: var(--gold); }
-    .helmet-card.is-hidden { display: none; }
-    .helmet-card__media {
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
-      background: radial-gradient(circle at 50% 45%, #1d1e23 0%, #0b0b0c 80%);
-    }
-    .helmet-card__media img {
-      width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s;
-      -webkit-mask-image: radial-gradient(circle at 50% 48%, #000 48%, transparent 88%);
-      mask-image: radial-gradient(circle at 50% 48%, #000 48%, transparent 88%);
-    }
-    .helmet-card[data-lightbg="true"] .helmet-card__media {
-      background: radial-gradient(circle at 50% 48%, #2a2824 0%, #0b0b0c 74%);
-    }
-    .helmet-card[data-lightbg="true"] .helmet-card__media img {
-      -webkit-mask-image: radial-gradient(ellipse 46% 42% at 50% 48%, #000 52%, transparent 82%);
-      mask-image: radial-gradient(ellipse 46% 42% at 50% 48%, #000 52%, transparent 82%);
-      filter: brightness(0.92) contrast(1.06);
-    }
-    .helmet-card:hover .helmet-card__media img { transform: scale(1.06); }
-    .helmet-card__tag {
-      position: absolute; right: 0; bottom: 0; background: #0b0b0c; padding: 10px 16px 10px 18px;
-      border-top-left-radius: 16px; border-top: 1px solid var(--line); border-left: 1px solid var(--line);
-      font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; text-align: right;
-    }
-    .helmet-card__tag strong { display: block; color: var(--cream); font-size: 12px; }
-    .helmet-card__tag span { color: var(--gold); }
-
-    /* Modal */
-    .modal {
-      position: fixed; inset: 0; z-index: 95; background: rgba(8, 8, 10, 0.85); backdrop-filter: blur(14px);
-      display: grid; place-items: center; padding: 24px; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s;
-    }
-    .modal.is-open { opacity: 1; visibility: visible; }
-    .modal__box {
-      background: var(--bg-carbon); border: 1px solid var(--line); border-radius: 20px;
-      max-width: 820px; width: 100%; max-height: 90vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; position: relative;
-    }
-    .modal__img { aspect-ratio: 1 / 1; max-height: 90vh; overflow: hidden; background: #0b0b0c; }
-    .modal__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .modal__body { padding: 32px; display: flex; flex-direction: column; justify-content: center; gap: 14px; overflow-y: auto; }
-    .modal__close {
-      position: absolute; top: 14px; right: 14px; z-index: 2;
-      background: rgba(11, 11, 12, 0.85); color: var(--cream); border: 1px solid var(--line); border-radius: 8px;
-      padding: 8px 14px; font-family: var(--font-mono); font-size: 11px; cursor: pointer;
-    }
-
-    /* Circuits */
-    .circuits { background: #0f1013; }
-    .circuits__layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center; margin-top: 32px; }
-    .circuit-tabs { display: grid; gap: 10px; }
-    .circuit-tab {
-      text-align: left; background: var(--bg-carbon); border: 1px solid var(--line); border-radius: 12px;
-      padding: 16px 20px; color: var(--cream); cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-    }
-    .circuit-tab.is-active, .circuit-tab:hover { border-color: var(--ferrari-red); background: rgba(225, 6, 0, 0.08); }
-    .circuit-tab strong { display: block; font-size: 16px; font-weight: 500; }
-    .circuit-tab small { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
-    .circuit-tab__wins { font-family: var(--font-mono); font-size: 13px; color: var(--gold); }
-    .circuit-stage { background: var(--bg-carbon); border: 1px solid var(--line); border-radius: 18px; padding: 32px; display: grid; gap: 20px; }
-    .circuit-stage__map {
-      height: 240px;
-      display: grid;
-      place-items: center;
-      background: rgba(11, 11, 12, 0.55);
-      border-radius: 12px;
-      padding: 18px;
-    }
-    .circuit-stage__map img {
-      max-width: 100%;
-      max-height: 200px;
-      object-fit: contain;
-      filter: invert(1) contrast(1.25) drop-shadow(0 0 8px rgba(225, 6, 0, 0.35));
-    }
-    .circuit-stage__info h3 { font-family: var(--font-serif); font-weight: 400; font-size: 34px; margin: 0 0 8px; }
-    .circuit-stage__info p { margin: 0; color: rgba(244, 239, 230, 0.78); line-height: 1.55; font-size: 15px; }
-
-    /* Ventures */
-    .ventures { background: #100f0d; }
-    .ventures__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px; }
-    .venture-card { background: #171613; border: 1px solid rgba(212, 175, 55, 0.18); border-radius: 18px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.1fr; }
-    .venture-card__img { min-height: 240px; overflow: hidden; }
-    .venture-card__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .venture-card__body { padding: 26px; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
-    .venture-card__tag { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); }
-    .venture-card__title { font-family: var(--font-serif); font-weight: 400; font-size: 30px; margin: 0; }
-    .venture-card__desc { margin: 0; font-size: 14px; line-height: 1.55; color: rgba(244, 239, 230, 0.75); }
-
-    /* Footer */
-    .footer-wrap { padding: 24px clamp(16px, 3vw, 40px) 32px; background: var(--bg-obsidian); }
-    .footer { position: relative; background: #111113; border: 2px solid var(--ferrari-red); border-radius: 24px; padding: 64px clamp(24px, 5vw, 64px) 32px; overflow: hidden; }
-    .footer__notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--ferrari-red); color: #fff; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 20px; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
-    .footer__statement { font-family: var(--font-serif); font-size: clamp(54px, 10vw, 150px); line-height: 0.9; text-align: center; margin: 12px 0 40px; color: rgba(244, 239, 230, 0.1); user-select: none; }
-    .footer__statement span { color: rgba(225, 6, 0, 0.28); }
-    .marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 16px 0; margin-bottom: 36px; }
-    .marquee__track { display: flex; gap: 48px; white-space: nowrap; width: max-content; animation: marquee 28s linear infinite; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+    html { scroll-behavior: smooth; background-color: #131314; color: #e5e2e3; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { margin: 0; overflow-x: hidden; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    #editorial-menu-overlay { transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0.35s ease; }
+    #editorial-menu-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
+    #editorial-menu-overlay:not(.open) { opacity: 0; visibility: hidden; pointer-events: none; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .footer__cols { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px; font-family: var(--font-mono); font-size: 12px; }
-    .footer__cols h4 { margin: 0 0 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); }
-    .footer__cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-    .footer__cols a { color: var(--cream); text-decoration: none; }
-    .footer__cols a:hover { color: var(--ferrari-red); }
-    .footer__bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
-
-    @media (max-width: 1200px) {
-      .helmets__grid { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    @media (max-width: 1024px) {
-      .era__gallery { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 760px) {
-      .helmets__grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 960px) {
-      .era-pill { display: none; }
-      .hero__grid { grid-template-columns: 1fr; }
-      .hero__media { max-height: 540px; }
-      .era__header { grid-template-columns: 1fr; gap: 16px; }
-      .circuits__layout { grid-template-columns: 1fr; }
-      .ventures__grid { grid-template-columns: 1fr; }
-      .venture-card { grid-template-columns: 1fr; }
-      .nav-overlay__grid { grid-template-columns: 1fr; }
-      .nav-meta { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 20px; }
-      .modal__box { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 560px) {
-      .era__gallery { grid-template-columns: 1fr; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .marquee__track { animation: none; }
-    }
   </style>
   <script type="importmap">
     {
@@ -845,457 +64,481 @@
     }
   </script>
 </head>
-<body>
-  <div class="preloader" id="preloader" role="progressbar" aria-label="Loading Lewis Hamilton Portfolio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-    <!-- From Uiverse.io by AspenBranch - https://uiverse.io/AspenBranch/slippery-sheep-50 -->
-    <div class="uiverse-pattern" aria-hidden="true"></div>
-    <!-- From Uiverse.io by alexruix - https://uiverse.io/alexruix/neat-tiger-82 -->
-    <div class="uiverse-loader" aria-hidden="true">
-      <div class="uiverse-loader__box1"></div>
-      <div class="uiverse-loader__box2"></div>
-      <div class="uiverse-loader__box3"></div>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-surface">
+
+  <!-- Fixed Header -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_1px_12px_rgba(0,0,0,0.45)]">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 py-3 flex flex-col gap-2">
+      <div class="flex items-center justify-between">
+        <a href="#hero" class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-secondary-container flex items-center justify-center font-mono font-bold text-sm text-white shadow-md">44</div>
+          <div class="flex flex-col">
+            <span class="font-serif text-xs md:text-sm font-semibold tracking-[0.2em] text-on-surface uppercase">SIR LEWIS HAMILTON</span>
+            <span class="font-mono text-[10px] text-primary tracking-widest">44 // ATELIER GRAND PRIX</span>
+          </div>
+        </a>
+
+        <div class="hidden md:flex items-center gap-1.5">
+          <a class="px-3 py-1 rounded bg-surface-container text-on-surface-variant font-mono text-[11px] tracking-wider uppercase hover:bg-surface-container-highest hover:text-primary transition-all" href="#telemetry">Telemetry</a>
+          <a class="px-3 py-1 rounded bg-surface-container text-on-surface-variant font-mono text-[11px] tracking-wider uppercase hover:bg-surface-container-highest hover:text-primary transition-all" href="#garage">3D Garage</a>
+          <a class="px-3 py-1 rounded bg-surface-container text-on-surface-variant font-mono text-[11px] tracking-wider uppercase hover:bg-surface-container-highest hover:text-primary transition-all" href="#eras">Eras</a>
+          <a class="px-3 py-1 rounded bg-surface-container text-on-surface-variant font-mono text-[11px] tracking-wider uppercase hover:bg-surface-container-highest hover:text-primary transition-all" href="#helmets">Helmets</a>
+          <a class="px-3 py-1 rounded bg-secondary-container/20 text-secondary font-mono text-[11px] tracking-wider uppercase hover:bg-secondary-container/30 transition-all" href="#circuits">Circuits</a>
+        </div>
+
+        <button aria-label="Open Editorial Menu" class="relative w-10 h-10 flex items-center justify-center rounded-xl bg-surface-container-high text-on-surface hover:text-primary transition-colors" id="menu-open-btn">
+          <span class="material-symbols-outlined text-[22px]">menu</span>
+          <span class="absolute -top-1 -right-1 px-1 bg-secondary-container text-on-secondary-container font-mono text-[9px] font-bold rounded">44</span>
+        </button>
+      </div>
+
+      <div class="flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar">
+        <a class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-mono text-[10px] tracking-wider uppercase whitespace-nowrap" href="#garage">Garage</a>
+        <a class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-mono text-[10px] tracking-wider uppercase whitespace-nowrap" href="#eras">McLaren</a>
+        <a class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-mono text-[10px] tracking-wider uppercase whitespace-nowrap" href="#eras">Mercedes</a>
+        <a class="px-2.5 py-1 rounded bg-secondary-container/20 text-secondary font-mono text-[10px] tracking-wider uppercase whitespace-nowrap" href="#eras">Ferrari</a>
+      </div>
     </div>
-    <div class="preloader__center">
-      <span class="preloader__num" id="loaderNum">000</span>
-      <span class="preloader__sub">CAR #44 // 7× WORLD CHAMPION</span>
-    </div>
-  </div>
-
-  <header class="topbar">
-    <a class="crest" href="#hero">
-      <span class="crest__badge">44</span>
-      <span>SIR LEWIS HAMILTON</span>
-    </a>
-
-    <nav class="era-pill" aria-label="Era Quick Jump">
-      <a href="#garage" data-target="garage">3D Garage</a>
-      <a href="#mclaren" data-target="mclaren">McLaren</a>
-      <a href="#mercedes" data-target="mercedes">Mercedes</a>
-      <a href="#ferrari" data-target="ferrari" class="is-active">Ferrari</a>
-    </nav>
-
-    <button class="menu-btn" id="menuOpenBtn" aria-expanded="false" aria-controls="navOverlay">
-      <span>Menu</span>
-      <span class="menu-btn__lines" aria-hidden="true"><span></span><span></span></span>
-    </button>
   </header>
 
-  <div class="nav-overlay" id="navOverlay" aria-hidden="true">
-    <div class="nav-overlay__top">
-      <span class="crest__badge" style="width:36px;height:36px;font-size:14px;">44</span>
-      <button class="nav-close" id="menuCloseBtn">Close ✕</button>
-    </div>
-
-    <div class="nav-overlay__grid">
-      <ul class="nav-links">
-        <li><a href="#hero" class="nav-link"><span>01</span> Home</a></li>
-        <li><a href="#telemetry" class="nav-link"><span>02</span> Telemetry &amp; Records</a></li>
-        <li><a href="#garage" class="nav-link"><span>03</span> 3D F1 Garage</a></li>
-        <li><a href="#mclaren" class="nav-link"><span>04</span> The Three Eras</a></li>
-        <li><a href="#helmets" class="nav-link"><span>05</span> Helmets Hall of Fame</a></li>
-        <li><a href="#circuits" class="nav-link"><span>06</span> Signature Circuits</a></li>
-        <li><a href="#ventures" class="nav-link"><span>07</span> Beyond the Visor</a></li>
-      </ul>
-
-      <div class="nav-meta">
-        <div class="nav-meta__crest">7× World Champion · 106 Wins · Scuderia Ferrari</div>
-        <p class="nav-meta__quote">“Still I rise—not just for the trophies, but for everyone who never saw themselves on the grid.”</p>
-        <div style="font-family:var(--font-mono);font-size:12px;color:var(--muted);">
-          STEVENAGE, UK → MARANELLO, ITALY<br>
-          FORMULA 1 DEBUT: AUSTRALIA 2007
-        </div>
-      </div>
-    </div>
-
-    <div class="nav-overlay__foot">
-      <span>CAR #44 ARCHIVE &amp; PORTFOLIO</span>
-      <div class="nav-socials">
-        <a href="#ventures">MISSION 44</a>
-        <a href="#ventures">+44</a>
-        <a href="#ventures">DAWN APOLLO</a>
-        <a href="#ventures">ALMAVE</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Hero — Clean Editorial Split -->
-  <section class="hero" id="hero">
-    <div class="hero__grid">
-      <div>
-        <p class="hero__kicker">Scuderia Ferrari · Car #44 · 7× World Champion</p>
-        <h1 class="hero__title">Still We <em>Rise.</em></h1>
-        <p class="hero__sub">Twenty seasons at the pinnacle of Formula 1. One hundred and six Grand Prix victories across McLaren, Mercedes-AMG, and Scuderia Ferrari.</p>
-
-        <div class="hero__metrics">
-          <div class="hero__metric"><strong>7</strong><span>World Titles</span></div>
-          <div class="hero__metric"><strong>106</strong><span>GP Wins</span></div>
-          <div class="hero__metric"><strong>105</strong><span>Poles</span></div>
-          <div class="hero__metric"><strong>209</strong><span>Podiums</span></div>
+  <main class="flex-1 w-full max-w-6xl mx-auto px-4 md:px-8 pt-28 md:pt-24 pb-24 md:pb-16">
+    <!-- SECTION 1: HERO -->
+    <section id="hero" class="relative py-6 md:py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-6 flex flex-col gap-5">
+        <div class="flex items-center gap-2 flex-wrap">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-sans text-[10px] font-bold tracking-[0.16em] uppercase">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+            <span>Scuderia Ferrari</span>
+          </div>
+          <div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-primary font-mono text-[11px]">
+            <span class="font-bold">#44</span>
+            <span class="text-on-surface-variant">·</span>
+            <span>7× World Champion</span>
+          </div>
         </div>
 
-        <div class="hero__actions">
-          <a class="scroll-cue" href="#telemetry">Explore 20 Years ↓</a>
-          <a class="hero__secondary" href="#ferrari">Ferrari Chapter →</a>
+        <h1 class="font-serif text-5xl md:text-7xl font-bold text-on-surface tracking-tight leading-[0.95]">
+          Still We <span class="italic text-primary font-medium">Rise.</span>
+        </h1>
+
+        <p class="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-xl">
+          Two decades of unapologetic speed, seven world championships, and an enduring legacy spanning from Stevenage to Maranello.
+        </p>
+
+        <!-- 2026 Breakthrough Widget -->
+        <div class="p-4 rounded-xl bg-gradient-to-r from-secondary-container/20 via-surface-container to-surface-container border border-white/[0.06] flex flex-col gap-3 shadow-lg">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[10px] uppercase font-bold tracking-wider">BREAKTHROUGH</span>
+              <span class="font-serif text-lg text-on-surface font-semibold">Barcelona-Catalunya GP</span>
+            </div>
+            <span class="font-mono text-sm text-secondary font-bold">2026 WIN</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2 py-2 rounded bg-surface-container-lowest/80 px-3">
+            <div class="flex flex-col">
+              <span class="font-mono text-[10px] text-outline uppercase">Fastest Lap</span>
+              <span class="font-mono text-sm text-tertiary font-semibold">1:15.847</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-mono text-[10px] text-outline uppercase">Gap to P2</span>
+              <span class="font-mono text-sm text-primary font-semibold">+4.421s</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-mono text-[10px] text-outline uppercase">Chassis</span>
+              <span class="font-mono text-sm text-on-surface font-semibold">SF-26 V6</span>
+            </div>
+          </div>
+          <a href="#telemetry" class="w-full py-3 rounded bg-primary text-on-primary font-sans text-xs font-bold tracking-[0.18em] text-center uppercase flex items-center justify-center gap-1.5 shadow-md hover:bg-primary-fixed-dim transition-all">
+            <span>Explore 20 Years</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+          </a>
         </div>
       </div>
 
-      <figure class="hero__media" style="margin:0;">
-        <img id="heroPortraitImg" src="./assets/Mine/lewis hamilton • '25 japan.jpeg" alt="Sir Lewis Hamilton in Scuderia Ferrari cockpit #44">
-        <figcaption class="hero__media-cap">
-          <strong>Scuderia Ferrari · #44</strong>
-          <span>Suzuka 2025</span>
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- Telemetry -->
-  <section class="section telemetry" id="telemetry">
-    <p class="section__eyebrow">01 // Career Telemetry (2007–2026)</p>
-    <h2 class="section__heading">Every record, rewritten.</h2>
-
-    <div class="telemetry__grid">
-      <div class="stat-card">
-        <div class="stat-card__val">7</div>
-        <div class="stat-card__label">World Titles</div>
-        <div class="stat-card__note">2008, 14, 15, 17, 18, 19, 20</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__val">106</div>
-        <div class="stat-card__label">Grand Prix Wins</div>
-        <div class="stat-card__note">All-time F1 record</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__val">105</div>
-        <div class="stat-card__label">Pole Positions</div>
-        <div class="stat-card__note">All-time F1 record</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__val">209</div>
-        <div class="stat-card__label">Podium Finishes</div>
-        <div class="stat-card__note">All-time F1 record</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__val">401</div>
-        <div class="stat-card__label">Grands Prix Starts</div>
-        <div class="stat-card__note">20 seasons on the grid</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__val">5,285.5</div>
-        <div class="stat-card__label">Career Points</div>
-        <div class="stat-card__note">70 Fastest Laps</div>
-      </div>
-    </div>
-
-    <div class="wins-bar">
-      <div class="wins-bar__head">
-        <span>106 Victories by Constructor</span>
-        <span style="color:var(--gold)">2007 — 2026</span>
-      </div>
-      <div class="wins-bar__track">
-        <div class="wins-bar__seg" style="width:19.8%;background:var(--mclaren-papaya);" title="McLaren: 21 Wins"></div>
-        <div class="wins-bar__seg" style="width:79.2%;background:var(--mercedes-teal);" title="Mercedes-AMG: 84 Wins"></div>
-        <div class="wins-bar__seg" style="width:1%;min-width:10px;background:var(--ferrari-red);" title="Scuderia Ferrari: 1 Win"></div>
-      </div>
-      <div class="wins-bar__legend">
-        <span><i style="background:var(--mclaren-papaya)"></i>McLaren (21 Wins)</span>
-        <span><i style="background:var(--mercedes-teal)"></i>Mercedes-AMG Petronas (84 Wins)</span>
-        <span><i style="background:var(--ferrari-red)"></i>Scuderia Ferrari (1 Win · Barcelona 2026)</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive 3D F1 Garage -->
-  <section class="section garage" id="garage">
-    <div class="garage__head">
-      <div>
-        <p class="section__eyebrow">02 // Interactive WebGL Showroom</p>
-        <h2 class="section__heading" style="margin-bottom:0">The 3D Garage</h2>
-      </div>
-      <div class="garage__controls" role="group" aria-label="Select 3D F1 Car">
-        <button class="car-btn is-active" data-car="ferrari">2026 Ferrari SF-26</button>
-        <button class="car-btn" data-car="mercedes">2020 Mercedes W11</button>
-        <button class="car-btn" data-car="mclaren">2012 McLaren MP4-27</button>
-      </div>
-    </div>
-
-    <div class="garage__stage" id="garageStage">
-      <div class="garage__hud">
-        <div class="garage__status" id="garageStatus">Scroll here or select a chassis to load 3D model</div>
-        <div class="garage__mode">
-          <button class="mode-btn is-active" id="modeSolidBtn">Studio Solid</button>
-          <button class="mode-btn" id="modePointsBtn">Point Cloud</button>
+      <div class="lg:col-span-6">
+        <div class="relative w-full aspect-[4/5] max-h-[620px] rounded-2xl bg-gradient-to-b from-surface-container to-surface-container-lowest overflow-hidden shadow-2xl border border-white/[0.08]">
+          <img src="./assets/Mine/lewis hamilton • '25 japan.jpeg" alt="Sir Lewis Hamilton in Scuderia Ferrari cockpit #44 at Suzuka 2025" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-transparent to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between px-3.5 py-2 rounded-lg bg-surface/85 backdrop-blur-md border border-white/[0.08] font-mono text-[11px]">
+            <span class="text-primary uppercase">SUZUKA COCKPIT // #44</span>
+            <span class="text-on-surface uppercase font-semibold">106 WINS · 105 POLES</span>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Era I: McLaren -->
-  <section class="section era era--mclaren" id="mclaren">
-    <div class="era__header">
-      <div>
-        <div class="era__years">Chapter I // 2007 — 2012 · Woking</div>
-        <h2 class="era__title">McLaren Mercedes:<br>The Prodigy</h2>
-      </div>
-      <div>
-        <p class="era__summary">From his audacious debut overtake in Melbourne 2007 to that rain-soaked final corner at Interlagos in 2008, Hamilton announced himself with fearless late-braking and 21 victories in Chrome Silver and Rocket Red.</p>
-        <div class="era__chips">
-          <span class="era__chip">21 Wins</span>
-          <span class="era__chip">26 Poles</span>
-          <span class="era__chip">2008 World Champion</span>
+    <!-- SECTION 2: CAREER TELEMETRY -->
+    <section id="telemetry" class="py-12 border-t border-white/[0.06]">
+      <div class="mb-6">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-2 h-2 rounded-full bg-primary"></span>
+          <span class="font-sans text-[11px] font-bold text-primary uppercase tracking-[0.2em]">ALL-TIME RECORD ARCHIVE</span>
         </div>
+        <h2 class="font-serif text-3xl md:text-5xl text-on-surface font-semibold">Career Telemetry</h2>
+        <p class="text-sm text-on-surface-variant mt-1">The definitive statistical benchmark in Formula 1 history.</p>
       </div>
-    </div>
 
-    <div class="era__gallery">
-      <figure class="era__card">
-        <img src="./assets/Mine/LEWIS MCLAREN.jpeg" alt="Lewis Hamilton celebrating in McLaren Vodafone race suit" loading="lazy">
-        <figcaption class="era__caption">Night Victory Pose <span>McLaren</span></figcaption>
-      </figure>
-      <figure class="era__card">
-        <img src="./assets/Mine/Lewis Hamilton - McLaren MP4-25.jpeg" alt="Lewis Hamilton raising fist in McLaren MP4-25 cockpit" loading="lazy">
-        <figcaption class="era__caption">MP4-25 Cockpit <span>2010</span></figcaption>
-      </figure>
-      <figure class="era__card">
-        <img src="./assets/Mine/Lewis Hamilton at McLaren.jpeg" alt="Lewis Hamilton driving McLaren in heavy rain spray" loading="lazy">
-        <figcaption class="era__caption">Wet-Weather Mastery <span>2011</span></figcaption>
-      </figure>
-      <figure class="era__card">
-        <img src="./assets/Autofetched/mclaren-mp4-22.jpg" alt="McLaren MP4-22 chassis" loading="lazy">
-        <figcaption class="era__caption">McLaren MP4-22 <span>2007</span></figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- Era II: Mercedes-AMG Petronas -->
-  <section class="section era era--mercedes" id="mercedes">
-    <div class="era__header">
-      <div>
-        <div class="era__years">Chapter II // 2013 — 2024 · Brackley</div>
-        <h2 class="era__title">Mercedes-AMG:<br>The Dynasty</h2>
-      </div>
-      <div>
-        <p class="era__summary">A twelve-season partnership that redefined Formula 1. Eighty-four victories, six Drivers' Championships, and nine triumphs at Silverstone—culminating in an unforgettable farewell home win in 2024.</p>
-        <div class="era__chips">
-          <span class="era__chip">84 Wins</span>
-          <span class="era__chip">6 World Titles</span>
-          <span class="era__chip">9× British GP Winner</span>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+        <div class="p-4 rounded-xl bg-surface-container flex flex-col justify-between shadow-md border border-white/[0.05]">
+          <span class="font-mono text-[10px] text-outline uppercase tracking-wider">World Titles</span>
+          <div class="my-2">
+            <span class="font-mono text-4xl text-primary font-bold">7</span>
+            <span class="font-mono text-[11px] text-primary-container block">FIA Champion</span>
+          </div>
+          <span class="font-mono text-[10px] text-on-surface-variant">’08, ’14, ’15, ’17–’20</span>
         </div>
-      </div>
-    </div>
-
-    <div class="era__gallery">
-      <figure class="era__card">
-        <img src="./assets/Mine/Lewis Hamilton - Mercedes F1.jpeg" alt="Lewis Hamilton Abu Dhabi donuts in Mercedes-AMG F1" loading="lazy">
-        <figcaption class="era__caption">Yas Marina Farewell <span>Abu Dhabi</span></figcaption>
-      </figure>
-      <figure class="era__card">
-        <img src="./assets/Mine/Lewis Hamilton wins the Hungarian GP, 2019 - photo by Motorsport Images.jpeg" alt="Lewis Hamilton celebrating 2019 Hungarian GP win" loading="lazy">
-        <figcaption class="era__caption">8th Hungaroring Win <span>2019</span></figcaption>
-      </figure>
-      <figure class="era__card">
-        <img src="./assets/Mine/Lewis Hamilton.jpeg" alt="Lewis Hamilton in 2020 black Mercedes suit and purple helmet" loading="lazy">
-        <figcaption class="era__caption">W11 — 7th Crown <span>2020</span></figcaption>
-      </figure>
-      <figure class="era__card">
-        <img src="./assets/Mine/lewis hamilton • '23 brazil.jpeg" alt="Lewis Hamilton in Brazil 2023 tribute helmet" loading="lazy">
-        <figcaption class="era__caption">Interlagos Tribute <span>Brazil 2023</span></figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- Era III: Scuderia Ferrari -->
-  <section class="section era era--ferrari" id="ferrari">
-    <div class="era__header">
-      <div>
-        <div class="era__years">Chapter III // 2025 — Present · Maranello</div>
-        <h2 class="era__title">Scuderia Ferrari:<br>The Crimson Chapter</h2>
-      </div>
-      <div>
-        <p class="era__summary">Joining the Prancing Horse in 2025, Hamilton spent a transitional year building with Maranello before storming back in 2026—taking his landmark first victory in Ferrari red at Barcelona-Catalunya and climbing to 3rd in the championship.</p>
-        <div class="era__chips">
-          <span class="era__chip">Barcelona 2026 Winner</span>
-          <span class="era__chip">7 Podiums in 2026</span>
-          <span class="era__chip">267 Pts (2026)</span>
+        <div class="p-4 rounded-xl bg-surface-container flex flex-col justify-between shadow-md border border-white/[0.05]">
+          <span class="font-mono text-[10px] text-outline uppercase tracking-wider">GP Victories</span>
+          <div class="my-2">
+            <span class="font-mono text-4xl text-secondary font-bold">106</span>
+            <span class="font-mono text-[11px] text-secondary block">F1 Record Holder</span>
+          </div>
+          <span class="font-mono text-[10px] text-on-surface-variant">26.4% Win Rate</span>
         </div>
-      </div>
-    </div>
-
-    <div class="era__gallery">
-      <figure class="era__card">
-        <img src="./assets/Mine/lewis hamilton • '25 japan.jpeg" alt="Top-down view of Lewis Hamilton in Ferrari cockpit at Japan 2025" loading="lazy">
-        <figcaption class="era__caption">Suzuka Cockpit #44 <span>Japan 2025</span></figcaption>
-      </figure>
-      <figure class="era__card">
-        <img src="./assets/Mine/LEWIS HAMILTON SINGAPORE 2025_.jpeg" alt="Lewis Hamilton in Scuderia Ferrari suit and gold helmet" loading="lazy">
-        <figcaption class="era__caption">Marina Bay Portrait <span>Singapore 2025</span></figcaption>
-      </figure>
-      <figure class="era__card">
-        <img src="./assets/Autofetched/ferrari-fanzone-2025.jpg" alt="Lewis Hamilton on Suzuka Fanzone stage in Ferrari red" loading="lazy">
-        <figcaption class="era__caption">Tifosi &amp; Fanzone <span>2025</span></figcaption>
-      </figure>
-      <figure class="era__card">
-        <img src="./assets/Autofetched/ferrari-bahrain-2026.jpg" alt="Lewis Hamilton Ferrari qualifying under Bahrain floodlights 2026" loading="lazy">
-        <figcaption class="era__caption">SF-26 Floodlights <span>Bahrain 2026</span></figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- Helmets Hall of Fame -->
-  <section class="section helmets" id="helmets">
-    <div class="helmets__top">
-      <div>
-        <p class="section__eyebrow">04 // Archive</p>
-        <h2 class="section__heading" style="margin-bottom:0">Helmets Hall of Fame</h2>
-      </div>
-      <div class="helmets__filters" role="group" aria-label="Filter helmets by era">
-        <button class="filter-btn is-active" data-filter="all">All (10)</button>
-        <button class="filter-btn" data-filter="mclaren">McLaren</button>
-        <button class="filter-btn" data-filter="mercedes">Mercedes</button>
-        <button class="filter-btn" data-filter="ferrari">Ferrari</button>
-      </div>
-    </div>
-
-    <div class="helmets__grid" id="helmetsGrid"></div>
-  </section>
-
-  <!-- Helmet Detail Modal -->
-  <div class="modal" id="helmetModal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal__box">
-      <button class="modal__close" id="modalCloseBtn">Close ✕</button>
-      <div class="modal__img"><img id="modalImg" src="" alt=""></div>
-      <div class="modal__body">
-        <span class="section__eyebrow" id="modalEra"></span>
-        <h3 style="font-family:var(--font-serif);font-size:36px;font-weight:400;margin:0;" id="modalTitle"></h3>
-        <p style="margin:0;color:rgba(244,239,230,0.8);line-height:1.6;font-size:15px;" id="modalDesc"></p>
-        <div style="font-family:var(--font-mono);font-size:12px;color:var(--gold);padding-top:8px;" id="modalStats"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Signature Circuits -->
-  <section class="section circuits" id="circuits">
-    <p class="section__eyebrow">05 // On Track</p>
-    <h2 class="section__heading">Signature Circuits</h2>
-
-    <div class="circuits__layout">
-      <div class="circuit-tabs" id="circuitTabs"></div>
-      <div class="circuit-stage">
-        <div class="circuit-stage__map">
-          <img id="circuitMapImg" src="./assets/circuits/silverstone.svg" alt="Circuit track map">
+        <div class="p-4 rounded-xl bg-surface-container flex flex-col justify-between shadow-md border border-white/[0.05]">
+          <span class="font-mono text-[10px] text-outline uppercase tracking-wider">Pole Positions</span>
+          <div class="my-2">
+            <span class="font-mono text-4xl text-tertiary font-bold">105</span>
+            <span class="font-mono text-[11px] text-tertiary block">All-Time #1</span>
+          </div>
+          <span class="font-mono text-[10px] text-on-surface-variant">32 Circuits</span>
         </div>
-        <div class="circuit-stage__info">
-          <h3 id="circuitName"></h3>
-          <p id="circuitStory"></p>
+        <div class="p-4 rounded-xl bg-surface-container flex flex-col justify-between shadow-md border border-white/[0.05]">
+          <span class="font-mono text-[10px] text-outline uppercase tracking-wider">Podiums</span>
+          <div class="my-2">
+            <span class="font-mono text-4xl text-on-surface font-bold">209</span>
+            <span class="font-mono text-[11px] text-outline block">52.1% Rate</span>
+          </div>
+          <span class="font-mono text-[10px] text-on-surface-variant">All-Time #1</span>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Beyond the Visor -->
-  <section class="section ventures" id="ventures">
-    <p class="section__eyebrow">06 // The Man</p>
-    <h2 class="section__heading">Beyond the Visor</h2>
-
-    <div class="ventures__grid">
-      <article class="venture-card">
-        <div class="venture-card__img"><img src="./assets/Autofetched/venture-mission44.jpg" alt="Mission 44" loading="lazy"></div>
-        <div class="venture-card__body">
-          <span class="venture-card__tag">Foundation · Est. 2021</span>
-          <h3 class="venture-card__title">Mission 44</h3>
-          <p class="venture-card__desc">Founded to build a fairer, more inclusive future—opening STEM and motorsport career pathways for underrepresented young people globally.</p>
+        <div class="p-4 rounded-xl bg-surface-container flex flex-col justify-between shadow-md border border-white/[0.05]">
+          <span class="font-mono text-[10px] text-outline uppercase tracking-wider">GP Starts</span>
+          <div class="my-2">
+            <span class="font-mono text-4xl text-on-surface font-bold">401</span>
+            <span class="font-mono text-[11px] text-outline block">’07 – Present</span>
+          </div>
+          <span class="font-mono text-[10px] text-on-surface-variant">20 Seasons</span>
         </div>
-      </article>
-
-      <article class="venture-card">
-        <div class="venture-card__img"><img src="./assets/Autofetched/venture-plus44.jpg" alt="+44 Plus 44" loading="lazy"></div>
-        <div class="venture-card__body">
-          <span class="venture-card__tag">Fashion &amp; Culture</span>
-          <h3 class="venture-card__title">+44 (Plus 44)</h3>
-          <p class="venture-card__desc">Creative lifestyle and streetwear house anchored by his lifelong racing number, bridging paddock heritage with high-fashion collaborations.</p>
-        </div>
-      </article>
-
-      <article class="venture-card">
-        <div class="venture-card__img"><img src="./assets/Autofetched/venture-dawn-apollo.jpg" alt="Dawn Apollo Films" loading="lazy"></div>
-        <div class="venture-card__body">
-          <span class="venture-card__tag">Cinema · Est. 2022</span>
-          <h3 class="venture-card__title">Dawn Apollo Films</h3>
-          <p class="venture-card__desc">Production studio co-founded to tell bold, diverse stories—spanning Apple Original Films' F1 feature and Hamilton's documentary.</p>
-        </div>
-      </article>
-
-      <article class="venture-card">
-        <div class="venture-card__img"><img src="./assets/Autofetched/venture-almave.jpg" alt="Almave" loading="lazy"></div>
-        <div class="venture-card__body">
-          <span class="venture-card__tag">Distilled Agave · Jalisco</span>
-          <h3 class="venture-card__title">Almave</h3>
-          <p class="venture-card__desc">Non-alcoholic blue agave spirit crafted in Jalisco with master distiller Iván Saldaña—authentic agave character without the alcohol.</p>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <div class="footer-wrap">
-    <footer class="footer">
-      <div class="footer__notch">Car #44 · Legacy</div>
-      <div class="footer__statement">STILL WE <span>RISE.</span></div>
-
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee__track">
-          <span>SCUDERIA FERRARI</span><span>·</span>
-          <span>MISSION 44</span><span>·</span>
-          <span>+44</span><span>·</span>
-          <span>DAWN APOLLO FILMS</span><span>·</span>
-          <span>ALMAVE</span><span>·</span>
-          <span>DENVER BRONCOS</span><span>·</span>
-          <span>MERCEDES-AMG</span><span>·</span>
-          <span>MCLAREN</span><span>·</span>
-          <span>SCUDERIA FERRARI</span><span>·</span>
-          <span>MISSION 44</span><span>·</span>
-          <span>+44</span><span>·</span>
-          <span>DAWN APOLLO FILMS</span><span>·</span>
-          <span>ALMAVE</span><span>·</span>
-          <span>DENVER BRONCOS</span><span>·</span>
-          <span>MERCEDES-AMG</span><span>·</span>
-          <span>MCLAREN</span><span>·</span>
+        <div class="p-4 rounded-xl bg-surface-container flex flex-col justify-between shadow-md border border-white/[0.05]">
+          <span class="font-mono text-[10px] text-outline uppercase tracking-wider">Career Points</span>
+          <div class="my-2">
+            <span class="font-mono text-3xl text-primary font-bold">5,285.5</span>
+            <span class="font-mono text-[11px] text-tertiary block">70 Fastest Laps</span>
+          </div>
+          <span class="font-mono text-[10px] text-on-surface-variant">All-Time #1</span>
         </div>
       </div>
 
-      <div class="footer__cols">
+      <div class="p-4 rounded-xl bg-surface-container-low flex flex-col gap-3 shadow-md border border-white/[0.05]">
+        <div class="flex items-center justify-between">
+          <span class="font-sans text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Constructor Victory Split (106 Wins)</span>
+          <span class="font-mono text-[11px] text-primary font-semibold">100% VERIFIED</span>
+        </div>
+        <div class="w-full h-3 rounded-full bg-surface-container-highest overflow-hidden flex">
+          <div class="h-full bg-primary" style="width: 19.8%;" title="21 McLaren Wins"></div>
+          <div class="h-full bg-tertiary" style="width: 79.2%;" title="84 Mercedes Wins"></div>
+          <div class="h-full bg-secondary-container" style="width: 1%; min-width: 8px;" title="1 Ferrari Win"></div>
+        </div>
+        <div class="flex items-center justify-between flex-wrap gap-2 pt-1 font-mono text-[11px]">
+          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-primary"></span>McLaren (21)</span>
+          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-tertiary"></span>Mercedes (84)</span>
+          <span class="flex items-center gap-1.5 text-secondary"><span class="w-2.5 h-2.5 rounded bg-secondary-container"></span>Ferrari (1)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: THE 3D GARAGE (REAL GLB MODELS) -->
+    <section id="garage" class="py-12 border-t border-white/[0.06]">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
         <div>
-          <h4>Chapters</h4>
-          <ul>
-            <li><a href="#mclaren">McLaren (2007–2012)</a></li>
-            <li><a href="#mercedes">Mercedes-AMG (2013–2024)</a></li>
-            <li><a href="#ferrari">Scuderia Ferrari (2025–2026)</a></li>
-          </ul>
+          <span class="font-sans text-[11px] font-bold text-primary tracking-[0.2em] uppercase">Interactive Paddock</span>
+          <h2 class="font-serif text-3xl md:text-5xl text-on-surface font-semibold">The 3D Garage</h2>
+          <p class="text-sm text-on-surface-variant mt-1">Real-time studio orbit of Lewis Hamilton’s championship machinery.</p>
         </div>
-        <div>
-          <h4>3D &amp; Archive</h4>
-          <ul>
-            <li><a href="#garage">3D F1 Garage</a></li>
-            <li><a href="#telemetry">Telemetry &amp; Records</a></li>
-            <li><a href="#helmets">Helmets Hall of Fame</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Ventures</h4>
-          <ul>
-            <li><a href="#ventures">Mission 44</a></li>
-            <li><a href="#ventures">+44 Studio</a></li>
-            <li><a href="#ventures">Dawn Apollo Films &amp; Almave</a></li>
-          </ul>
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <button class="py-2 px-3.5 rounded bg-secondary-container text-on-secondary-container font-mono text-[11px] font-semibold whitespace-nowrap transition-all" id="car-btn-0">Ferrari SF-26 (2026)</button>
+          <button class="py-2 px-3.5 rounded bg-surface-container text-on-surface-variant font-mono text-[11px] font-semibold whitespace-nowrap hover:bg-surface-container-high" id="car-btn-1">Mercedes W11 (2020)</button>
+          <button class="py-2 px-3.5 rounded bg-surface-container text-on-surface-variant font-mono text-[11px] font-semibold whitespace-nowrap hover:bg-surface-container-high" id="car-btn-2">McLaren MP4-27 (2012)</button>
         </div>
       </div>
 
-      <div class="footer__bottom">
-        <span>SIR LEWIS HAMILTON · #44 PORTFOLIO ARCHIVE</span>
-        <span>THREE.JS WEBGL PORTRAIT + 3D GLB GARAGE</span>
+      <div class="relative w-full h-80 md:h-[460px] rounded-2xl overflow-hidden bg-surface-container-lowest border border-white/[0.08] shadow-2xl" id="garageStage">
+        <div class="absolute top-3 left-3 px-2.5 py-1 rounded bg-surface-container-lowest/85 backdrop-blur-md flex items-center gap-1.5 font-mono text-[10px] text-on-surface pointer-events-none">
+          <span class="material-symbols-outlined text-primary text-[14px]">3d_rotation</span>
+          <span id="garageStatus">Scroll to load 3D model</span>
+        </div>
+      </div>
+
+      <div class="mt-3 p-4 rounded-xl bg-surface-container flex flex-col md:flex-row md:items-center justify-between gap-4 border border-white/[0.05]">
+        <div class="flex items-center gap-3">
+          <span class="font-serif text-xl text-on-surface font-semibold" id="car-title">Scuderia Ferrari SF-26</span>
+          <span class="font-mono text-[10px] text-secondary font-medium px-2 py-0.5 rounded bg-secondary-container/20" id="car-engine-pill">V6 TURBO HYBRID</span>
+        </div>
+        <div class="grid grid-cols-3 gap-3 text-center">
+          <div class="px-3 py-2 rounded bg-surface-container-low">
+            <span class="font-mono text-[9px] text-outline uppercase block">Downforce</span>
+            <span class="font-mono text-sm text-primary font-bold" id="car-downforce">1,840 kg</span>
+          </div>
+          <div class="px-3 py-2 rounded bg-surface-container-low">
+            <span class="font-mono text-[9px] text-outline uppercase block">Power</span>
+            <span class="font-mono text-sm text-on-surface font-bold" id="car-power">1,050+ bhp</span>
+          </div>
+          <div class="px-3 py-2 rounded bg-surface-container-low">
+            <span class="font-mono text-[9px] text-outline uppercase block">Weight</span>
+            <span class="font-mono text-sm text-tertiary font-bold" id="car-weight">798 kg</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: THE THREE ERAS -->
+    <section id="eras" class="py-12 border-t border-white/[0.06]">
+      <div class="mb-6">
+        <span class="font-sans text-[11px] font-bold text-primary tracking-[0.2em] uppercase">Chronicle of Dominance</span>
+        <h2 class="font-serif text-3xl md:text-5xl text-on-surface font-semibold">The Three Eras</h2>
+        <p class="text-sm text-on-surface-variant mt-1">Three dynasties, one champion, twenty years of relentless triumph.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <!-- McLaren -->
+        <div class="p-5 rounded-2xl bg-surface-container-low flex flex-col gap-4 shadow-xl border border-white/[0.06]">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-[10px] text-primary tracking-widest uppercase">CHAPTER I · 2007–2012</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-high font-mono text-[10px] text-on-surface-variant">MCLAREN</span>
+          </div>
+          <h3 class="font-serif text-2xl text-on-surface">The Rookie Prodigy</h3>
+          <p class="text-sm text-on-surface-variant leading-relaxed">From his sensational debut podium in Australia to the last-corner title climax in São Paulo 2008.</p>
+          <div class="w-full h-60 rounded-xl overflow-hidden relative">
+            <img src="./assets/Mine/LEWIS MCLAREN.jpeg" alt="Lewis Hamilton McLaren celebration" class="w-full h-full object-cover object-top" loading="lazy">
+            <div class="absolute bottom-2 left-2 px-2 py-1 rounded bg-surface/80 backdrop-blur font-mono text-[10px]">2008 · 1ST CROWN</div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center mt-auto">
+            <div class="p-2 rounded bg-surface-container"><span class="font-mono text-lg text-primary font-bold">1×</span><span class="font-mono text-[9px] text-outline block">TITLE</span></div>
+            <div class="p-2 rounded bg-surface-container"><span class="font-mono text-lg font-bold">21</span><span class="font-mono text-[9px] text-outline block">WINS</span></div>
+            <div class="p-2 rounded bg-surface-container"><span class="font-mono text-lg text-secondary font-bold">26</span><span class="font-mono text-[9px] text-outline block">POLES</span></div>
+          </div>
+        </div>
+
+        <!-- Mercedes -->
+        <div class="p-5 rounded-2xl bg-surface-container flex flex-col gap-4 shadow-xl border border-white/[0.06]">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-[10px] text-tertiary tracking-widest uppercase">CHAPTER II · 2013–2024</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-high font-mono text-[10px] text-tertiary">MERCEDES-AMG</span>
+          </div>
+          <h3 class="font-serif text-2xl text-on-surface">Silver Arrows Dynasty</h3>
+          <p class="text-sm text-on-surface-variant leading-relaxed">Six world championships, 84 Grand Prix victories, and 9 iconic Silverstone wins.</p>
+          <div class="w-full h-60 rounded-xl overflow-hidden relative">
+            <img src="./assets/Mine/Lewis Hamilton - Mercedes F1.jpeg" alt="Lewis Hamilton Mercedes Abu Dhabi donuts" class="w-full h-full object-cover" loading="lazy">
+            <div class="absolute bottom-2 left-2 px-2 py-1 rounded bg-surface/80 backdrop-blur font-mono text-[10px] text-tertiary">84 WINS · 6 TITLES</div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center mt-auto">
+            <div class="p-2 rounded bg-surface-container-low"><span class="font-mono text-lg text-primary font-bold">6×</span><span class="font-mono text-[9px] text-outline block">TITLES</span></div>
+            <div class="p-2 rounded bg-surface-container-low"><span class="font-mono text-lg text-tertiary font-bold">84</span><span class="font-mono text-[9px] text-outline block">WINS</span></div>
+            <div class="p-2 rounded bg-surface-container-low"><span class="font-mono text-lg font-bold">78</span><span class="font-mono text-[9px] text-outline block">POLES</span></div>
+          </div>
+        </div>
+
+        <!-- Ferrari -->
+        <div class="p-5 rounded-2xl bg-gradient-to-b from-secondary-container/20 to-surface-container-low flex flex-col gap-4 shadow-xl border border-secondary-container/30">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-[10px] text-secondary tracking-widest uppercase">CHAPTER III · 2025–NOW</span>
+            <span class="px-2 py-0.5 rounded bg-secondary-container font-mono text-[10px] text-on-secondary-container">FERRARI</span>
+          </div>
+          <h3 class="font-serif text-2xl text-on-surface">Il Cavallino Rampante</h3>
+          <p class="text-sm text-on-surface-variant leading-relaxed">Dressed in Rosso Corsa, taking his breakthrough win in Ferrari red at Barcelona-Catalunya 2026.</p>
+          <div class="w-full h-60 rounded-xl overflow-hidden relative">
+            <img src="./assets/Mine/LEWIS HAMILTON SINGAPORE 2025_.jpeg" alt="Lewis Hamilton Scuderia Ferrari" class="w-full h-full object-cover object-top" loading="lazy">
+            <div class="absolute bottom-2 left-2 px-2 py-1 rounded bg-secondary-container/90 font-mono text-[10px] text-white font-bold">MARANELLO</div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center mt-auto">
+            <div class="p-2 rounded bg-surface-container"><span class="font-mono text-lg text-secondary font-bold">1</span><span class="font-mono text-[9px] text-outline block">2026 WIN</span></div>
+            <div class="p-2 rounded bg-surface-container"><span class="font-mono text-lg text-primary font-bold">7</span><span class="font-mono text-[9px] text-outline block">PODIUMS</span></div>
+            <div class="p-2 rounded bg-surface-container"><span class="font-mono text-lg font-bold">267</span><span class="font-mono text-[9px] text-outline block">PTS</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: HELMETS HALL OF FAME (REAL HELMETS) -->
+    <section id="helmets" class="py-12 border-t border-white/[0.06]">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
+        <div>
+          <span class="font-sans text-[11px] font-bold text-primary tracking-[0.2em] uppercase">Crown Jewels of Speed</span>
+          <h2 class="font-serif text-3xl md:text-5xl text-on-surface font-semibold">Helmets Hall of Fame</h2>
+          <p class="text-sm text-on-surface-variant mt-1">Authentic race helmets honoring icons, equality, and world titles.</p>
+        </div>
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <button class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-mono text-[11px] font-semibold whitespace-nowrap" data-filter="all">All (10)</button>
+          <button class="px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-mono text-[11px] whitespace-nowrap hover:bg-surface-container-high" data-filter="mclaren">McLaren (1)</button>
+          <button class="px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-mono text-[11px] whitespace-nowrap hover:bg-surface-container-high" data-filter="mercedes">Mercedes (6)</button>
+          <button class="px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-mono text-[11px] whitespace-nowrap hover:bg-surface-container-high" data-filter="ferrari">Ferrari (3)</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4" id="helmets-grid"></div>
+    </section>
+
+    <!-- Helmet Detail Modal -->
+    <div class="fixed inset-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl p-4 flex items-center justify-center hidden opacity-0 transition-opacity duration-300" id="helmet-modal">
+      <div class="w-full max-w-xl p-6 rounded-2xl bg-surface-container flex flex-col gap-3 shadow-2xl relative border border-white/10">
+        <button id="modal-close-btn" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:text-primary" aria-label="Close modal">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+        <span class="font-mono text-xs text-primary uppercase" id="modal-helmet-year"></span>
+        <h3 class="font-serif text-2xl text-on-surface" id="modal-helmet-title"></h3>
+        <div class="p-3 rounded bg-surface-container-low flex items-center justify-between font-mono text-xs">
+          <span class="text-outline">Chassis Match:</span>
+          <span class="text-on-surface font-semibold" id="modal-helmet-chassis"></span>
+        </div>
+        <p class="text-sm text-on-surface-variant leading-relaxed" id="modal-helmet-story"></p>
+      </div>
+    </div>
+
+    <!-- SECTION 6: SIGNATURE CIRCUITS (REAL OFFICIAL SVGS) -->
+    <section id="circuits" class="py-12 border-t border-white/[0.06]">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
+        <div>
+          <span class="font-sans text-[11px] font-bold text-primary tracking-[0.2em] uppercase">Conquered Tarmac</span>
+          <h2 class="font-serif text-3xl md:text-5xl text-on-surface font-semibold">Signature Circuits</h2>
+        </div>
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar" id="circuit-tabs"></div>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-surface-container-low grid grid-cols-1 md:grid-cols-12 gap-6 items-center shadow-xl border border-white/[0.06]">
+        <div class="md:col-span-5 h-56 rounded-xl bg-surface-container flex items-center justify-center p-4">
+          <img id="circuit-img" src="./assets/circuits/silverstone.svg" alt="Circuit map" class="max-w-full max-h-48 object-contain" style="filter: invert(1) contrast(1.2);">
+        </div>
+        <div class="md:col-span-7 flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="font-mono text-[10px] text-secondary uppercase tracking-widest" id="circuit-country"></span>
+              <h3 class="font-serif text-2xl md:text-3xl text-on-surface" id="circuit-name"></h3>
+            </div>
+            <div class="text-right">
+              <span class="font-mono text-2xl text-primary font-bold" id="circuit-record"></span>
+              <span class="font-mono text-[9px] text-outline block uppercase">Record</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <div class="p-2.5 rounded bg-surface-container text-center"><span class="font-mono text-[10px] text-outline uppercase block">Length</span><span class="font-mono text-sm font-semibold" id="circuit-length"></span></div>
+            <div class="p-2.5 rounded bg-surface-container text-center"><span class="font-mono text-[10px] text-outline uppercase block">DRS</span><span class="font-mono text-sm text-tertiary font-semibold" id="circuit-drs"></span></div>
+            <div class="p-2.5 rounded bg-surface-container text-center"><span class="font-mono text-[10px] text-outline uppercase block">Lap Record</span><span class="font-mono text-sm text-primary font-semibold" id="circuit-laprecord"></span></div>
+          </div>
+          <div class="p-3.5 rounded-xl bg-surface-container border-l-2 border-primary">
+            <p class="font-serif italic text-sm text-on-surface" id="circuit-quote"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: BEYOND THE VISOR -->
+    <section id="ventures" class="py-12 border-t border-white/[0.06]">
+      <div class="mb-6">
+        <span class="font-sans text-[11px] font-bold text-primary tracking-[0.2em] uppercase">Culture, Venture &amp; Purpose</span>
+        <h2 class="font-serif text-3xl md:text-5xl text-on-surface font-semibold">Beyond the Visor</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="p-5 rounded-2xl bg-surface-container flex flex-col gap-3 shadow-lg border border-white/[0.05]">
+          <div class="flex items-center justify-between font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded bg-primary/20 text-primary font-bold uppercase">PHILANTHROPY · EST. 2021</span>
+            <span class="text-on-surface-variant">MISSION 44</span>
+          </div>
+          <h3 class="font-serif text-2xl text-on-surface">Mission 44</h3>
+          <p class="text-sm text-on-surface-variant">Charitable foundation empowering underserved young people and building diverse pathways in STEM and motorsport.</p>
+          <div class="w-full h-44 rounded-xl overflow-hidden mt-1"><img src="./assets/Autofetched/venture-mission44.jpg" alt="Mission 44" class="w-full h-full object-cover" loading="lazy"></div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-surface-container flex flex-col gap-3 shadow-lg border border-white/[0.05]">
+          <div class="flex items-center justify-between font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-bold uppercase">FASHION &amp; CULTURE</span>
+            <span class="text-primary">+44 WORLD</span>
+          </div>
+          <h3 class="font-serif text-2xl text-on-surface">+44 World</h3>
+          <p class="text-sm text-on-surface-variant">Creative fashion imprint curating contemporary garments and limited capsules bridging motorsport and luxury ateliers.</p>
+          <div class="w-full h-44 rounded-xl overflow-hidden mt-1"><img src="./assets/Autofetched/venture-plus44.jpg" alt="+44 World" class="w-full h-full object-cover" loading="lazy"></div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-surface-container flex flex-col gap-3 shadow-lg border border-white/[0.05]">
+          <div class="flex items-center justify-between font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded bg-tertiary/20 text-tertiary font-bold uppercase">CINEMA · EST. 2022</span>
+            <span class="text-outline">HOLLYWOOD</span>
+          </div>
+          <h3 class="font-serif text-2xl text-on-surface">Dawn Apollo Films</h3>
+          <p class="text-sm text-on-surface-variant">Production studio co-founded to tell bold stories, including Apple Original Films’ Formula 1 feature and Hamilton’s documentary.</p>
+          <div class="w-full h-44 rounded-xl overflow-hidden mt-1"><img src="./assets/Autofetched/venture-dawn-apollo.jpg" alt="Dawn Apollo Films" class="w-full h-full object-cover" loading="lazy"></div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-surface-container flex flex-col gap-3 shadow-lg border border-white/[0.05]">
+          <div class="flex items-center justify-between font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded bg-secondary-container/20 text-secondary font-bold uppercase">SPIRITS · JALISCO</span>
+            <span class="text-secondary">NON-ALCOHOLIC</span>
+          </div>
+          <h3 class="font-serif text-2xl text-on-surface">Almave</h3>
+          <p class="text-sm text-on-surface-variant">Super-premium non-alcoholic blue agave spirit crafted in Jalisco, Mexico with master distiller Iván Saldaña.</p>
+          <div class="w-full h-44 rounded-xl overflow-hidden mt-1"><img src="./assets/Autofetched/venture-almave.jpg" alt="Almave" class="w-full h-full object-cover" loading="lazy"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="pt-10 pb-8 mt-6 border-t border-white/[0.08]">
+      <div class="w-full overflow-hidden whitespace-nowrap py-3 bg-surface-container-lowest rounded-lg mb-8">
+        <div class="inline-flex gap-8 font-mono text-xs text-outline uppercase tracking-[0.25em] animate-[marquee_24s_linear_infinite]">
+          <span>SCUDERIA FERRARI</span><span class="text-primary">•</span>
+          <span>MERCEDES-AMG</span><span class="text-primary">•</span>
+          <span>MCLAREN RACING</span><span class="text-primary">•</span>
+          <span>MISSION 44</span><span class="text-primary">•</span>
+          <span>+44 WORLD</span><span class="text-primary">•</span>
+          <span>DAWN APOLLO</span><span class="text-primary">•</span>
+          <span>ALMAVE</span><span class="text-primary">•</span>
+          <span>SCUDERIA FERRARI</span><span class="text-primary">•</span>
+          <span>MERCEDES-AMG</span><span class="text-primary">•</span>
+          <span>MCLAREN RACING</span>
+        </div>
+      </div>
+
+      <div class="text-center py-6">
+        <h2 class="font-serif text-4xl md:text-6xl font-bold uppercase tracking-tight">STILL WE <span class="italic text-primary font-medium">RISE.</span></h2>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-6 border-t border-white/[0.06] font-mono text-[11px] text-outline">
+        <span>SIR LEWIS HAMILTON · #44 ATELIER GRAND PRIX</span>
+        <span>MARANELLO · BRACKLEY · WOKING · STEVENAGE</span>
       </div>
     </footer>
-  </div>
+  </main>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl border-t border-white/[0.08]">
+    <div class="flex justify-around items-center h-16 px-2">
+      <a href="#hero" class="flex flex-col items-center gap-0.5 text-primary"><span class="material-symbols-outlined text-[20px]">flag</span><span class="text-[10px] uppercase font-bold">Home</span></a>
+      <a href="#telemetry" class="flex flex-col items-center gap-0.5 text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="text-[10px] uppercase font-bold">Stats</span></a>
+      <a href="#garage" class="flex flex-col items-center gap-0.5 text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">garage</span><span class="text-[10px] uppercase font-bold">Garage</span></a>
+      <a href="#eras" class="flex flex-col items-center gap-0.5 text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">history_edu</span><span class="text-[10px] uppercase font-bold">Eras</span></a>
+      <a href="#ventures" class="flex flex-col items-center gap-0.5 text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">diamond</span><span class="text-[10px] uppercase font-bold">Atelier</span></a>
+    </div>
+  </nav>
+
+  <!-- Fullscreen Menu Overlay -->
+  <aside class="fixed inset-0 z-[60] bg-surface-container-lowest/98 backdrop-blur-2xl flex flex-col justify-between p-6 md:p-12" id="editorial-menu-overlay">
+    <div class="flex items-center justify-between">
+      <span class="font-mono text-xs text-primary tracking-[0.25em] uppercase">PORTFOLIO INDEX // #44</span>
+      <button aria-label="Close Menu" id="menu-close-btn" class="w-11 h-11 flex items-center justify-center rounded-xl bg-surface-container text-on-surface hover:text-primary">
+        <span class="material-symbols-outlined text-[24px]">close</span>
+      </button>
+    </div>
+    <div class="flex flex-col my-auto gap-3 max-w-2xl">
+      <a class="nav-link flex items-baseline justify-between py-1 hover:text-primary" href="#hero"><span class="font-serif text-3xl md:text-4xl">01 Home</span><span class="font-mono text-xs text-outline">#HERO</span></a>
+      <a class="nav-link flex items-baseline justify-between py-1 hover:text-primary" href="#telemetry"><span class="font-serif text-3xl md:text-4xl">02 Career Telemetry</span><span class="font-mono text-xs text-outline">#TELEMETRY</span></a>
+      <a class="nav-link flex items-baseline justify-between py-1 hover:text-primary" href="#garage"><span class="font-serif text-3xl md:text-4xl">03 The 3D Garage</span><span class="font-mono text-xs text-outline">#GARAGE</span></a>
+      <a class="nav-link flex items-baseline justify-between py-1 hover:text-primary" href="#eras"><span class="font-serif text-3xl md:text-4xl">04 The Three Eras</span><span class="font-mono text-xs text-outline">#ERAS</span></a>
+      <a class="nav-link flex items-baseline justify-between py-1 hover:text-primary" href="#helmets"><span class="font-serif text-3xl md:text-4xl">05 Helmets Hall of Fame</span><span class="font-mono text-xs text-outline">#HELMETS</span></a>
+      <a class="nav-link flex items-baseline justify-between py-1 hover:text-primary" href="#circuits"><span class="font-serif text-3xl md:text-4xl">06 Signature Circuits</span><span class="font-mono text-xs text-outline">#CIRCUITS</span></a>
+      <a class="nav-link flex items-baseline justify-between py-1 hover:text-primary" href="#ventures"><span class="font-serif text-3xl md:text-4xl">07 Beyond the Visor</span><span class="font-mono text-xs text-outline">#VENTURES</span></a>
+    </div>
+    <div class="font-mono text-[11px] text-outline uppercase tracking-wider">Stevenage, UK → Maranello, Italy | 7× World Champion | #44</div>
+  </aside>
 
   <script type="module">
     import * as THREE from "three";
@@ -1303,58 +546,28 @@
     import { OrbitControls } from "three/addons/controls/OrbitControls.js";
     import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
-    // 1. Preloader
-    const preloader = document.getElementById("preloader");
-    const loaderNum = document.getElementById("loaderNum");
+    // Menu Overlay
+    const overlay = document.getElementById("editorial-menu-overlay");
+    document.getElementById("menu-open-btn").addEventListener("click", () => overlay.classList.add("open"));
+    document.getElementById("menu-close-btn").addEventListener("click", () => overlay.classList.remove("open"));
+    document.querySelectorAll(".nav-link").forEach((el) => el.addEventListener("click", () => overlay.classList.remove("open")));
 
-    function setLoaderProgress(p) {
-      const pct = Math.round(Math.max(0, Math.min(1, p)) * 100);
-      loaderNum.textContent = String(pct).padStart(3, "0");
-      preloader.setAttribute("aria-valuenow", String(pct));
-    }
-
-    // 2. Hero Preloader Sync
-    const heroPortraitImg = document.getElementById("heroPortraitImg");
-    let prog = 0;
-    const fakeTick = setInterval(() => {
-      prog = Math.min(0.9, prog + 0.2);
-      setLoaderProgress(prog);
-    }, 60);
-
-    function finishHeroLoad() {
-      clearInterval(fakeTick);
-      setLoaderProgress(1);
-      setTimeout(() => preloader.classList.add("is-done"), 250);
-    }
-    if (heroPortraitImg.complete) {
-      finishHeroLoad();
-    } else {
-      heroPortraitImg.addEventListener("load", finishHeroLoad, { once: true });
-      heroPortraitImg.addEventListener("error", finishHeroLoad, { once: true });
-    }
-
-    // 3. Interactive 3D F1 Garage (GLB Showroom)
+    // 3D Garage (Real GLB Models + RoomEnvironment IBL)
     const garageStage = document.getElementById("garageStage");
     const garageStatus = document.getElementById("garageStatus");
-    const modeSolidBtn = document.getElementById("modeSolidBtn");
-    const modePointsBtn = document.getElementById("modePointsBtn");
+    const carDatabase = [
+      { title: "Scuderia Ferrari SF-26", engine: "V6 TURBO HYBRID", downforce: "1,840 kg", power: "1,050+ bhp", weight: "798 kg", url: "./assets/models/ferrari-2026.glb" },
+      { title: "Mercedes-AMG F1 W11 EQ", engine: "M11 EQ PERFORMANCE", downforce: "2,150 kg", power: "1,025 bhp", weight: "746 kg", url: "./assets/models/mercedes-2020.glb" },
+      { title: "McLaren-Mercedes MP4-27", engine: "2.4L V8", downforce: "1,520 kg", power: "750 bhp", weight: "640 kg", url: "./assets/models/mclaren-2012.glb" }
+    ];
 
-    const CARS = {
-      ferrari: { label: "2026 Scuderia Ferrari SF-26", url: "./assets/models/ferrari-2026.glb", color: 0xe10600 },
-      mercedes: { label: "2020 Mercedes-AMG W11 (7th Title)", url: "./assets/models/mercedes-2020.glb", color: 0x00d2be },
-      mclaren: { label: "2012 McLaren MP4-27", url: "./assets/models/mclaren-2012.glb", color: 0xff5500 },
-    };
-
-    let garageInited = false;
-    let gRenderer, gScene, gCam, gControls, currentCarGroup, currentPointsGroup;
-    let viewMode = "solid";
+    let gInited = false, gRenderer, gScene, gCam, gControls, currentCar;
     const gltfLoader = new GLTFLoader();
     const carCache = new Map();
 
-    function initGarageScene() {
-      if (garageInited) return;
-      garageInited = true;
-
+    function initGarage() {
+      if (gInited) return;
+      gInited = true;
       gRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
       gRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       gRenderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -1364,8 +577,8 @@
       garageStage.insertBefore(gRenderer.domElement, garageStage.firstChild);
 
       gScene = new THREE.Scene();
-      const gPmrem = new THREE.PMREMGenerator(gRenderer);
-      gScene.environment = gPmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+      const pmrem = new THREE.PMREMGenerator(gRenderer);
+      gScene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
       gScene.environmentIntensity = 0.85;
 
       gCam = new THREE.PerspectiveCamera(32, garageStage.clientWidth / garageStage.clientHeight, 0.1, 100);
@@ -1381,287 +594,175 @@
       gControls.autoRotate = true;
       gControls.autoRotateSpeed = 0.45;
 
-      const gKey = new THREE.DirectionalLight(0xffffff, 1.4);
-      gKey.position.set(4, 7, 4);
-      gKey.castShadow = true;
-      gKey.shadow.mapSize.set(2048, 2048);
-      gKey.shadow.bias = -0.0005;
-      gScene.add(gKey);
+      const key = new THREE.DirectionalLight(0xffffff, 1.4);
+      key.position.set(4, 7, 4);
+      key.castShadow = true;
+      key.shadow.mapSize.set(2048, 2048);
+      key.shadow.bias = -0.0005;
+      gScene.add(key);
 
-      const gShadowPlane = new THREE.Mesh(
-        new THREE.PlaneGeometry(14, 14),
-        new THREE.ShadowMaterial({ opacity: 0.55 })
-      );
-      gShadowPlane.rotation.x = -Math.PI / 2;
-      gShadowPlane.position.y = -0.35;
-      gShadowPlane.receiveShadow = true;
-      gScene.add(gShadowPlane);
+      const shadowPlane = new THREE.Mesh(new THREE.PlaneGeometry(14, 14), new THREE.ShadowMaterial({ opacity: 0.55 }));
+      shadowPlane.rotation.x = -Math.PI / 2;
+      shadowPlane.position.y = -0.35;
+      shadowPlane.receiveShadow = true;
+      gScene.add(shadowPlane);
 
-      function resizeGarage() {
-        const w = garageStage.clientWidth;
-        const h = garageStage.clientHeight;
-        gRenderer.setSize(w, h, false);
-        gCam.aspect = w / h;
+      function resizeG() {
+        gRenderer.setSize(garageStage.clientWidth, garageStage.clientHeight, false);
+        gCam.aspect = garageStage.clientWidth / garageStage.clientHeight;
         gCam.updateProjectionMatrix();
       }
-      window.addEventListener("resize", resizeGarage);
-      resizeGarage();
+      window.addEventListener("resize", resizeG);
+      resizeG();
 
-      function animateGarage() {
-        requestAnimationFrame(animateGarage);
+      (function anim() {
+        requestAnimationFrame(anim);
         gControls.update();
         gRenderer.render(gScene, gCam);
+      })();
+    }
+
+    async function setActiveCar(index) {
+      initGarage();
+      const data = carDatabase[index];
+      document.getElementById("car-title").textContent = data.title;
+      document.getElementById("car-engine-pill").textContent = data.engine;
+      document.getElementById("car-downforce").textContent = data.downforce;
+      document.getElementById("car-power").textContent = data.power;
+      document.getElementById("car-weight").textContent = data.weight;
+
+      for (let i = 0; i < 3; i++) {
+        const b = document.getElementById(`car-btn-${i}`);
+        b.className = i === index
+          ? "py-2 px-3.5 rounded bg-secondary-container text-on-secondary-container font-mono text-[11px] font-semibold whitespace-nowrap transition-all"
+          : "py-2 px-3.5 rounded bg-surface-container text-on-surface-variant font-mono text-[11px] font-semibold whitespace-nowrap hover:bg-surface-container-high";
       }
-      animateGarage();
-    }
 
-    function buildPointCloudFromGroup(group, accentHex) {
-      const positions = [];
-      group.updateMatrixWorld(true);
-      group.traverse((child) => {
-        if (child.isMesh && child.geometry) {
-          const posAttr = child.geometry.attributes.position;
-          if (!posAttr) return;
-          const v = new THREE.Vector3();
-          const step = Math.max(1, Math.floor(posAttr.count / 1200));
-          for (let i = 0; i < posAttr.count; i += step) {
-            v.fromBufferAttribute(posAttr, i).applyMatrix4(child.matrixWorld);
-            positions.push(v.x, v.y, v.z);
-          }
-        }
-      });
-      const geo = new THREE.BufferGeometry();
-      geo.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-      const mat = new THREE.PointsMaterial({
-        color: accentHex,
-        size: 0.025,
-        transparent: true,
-        opacity: 0.85,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      });
-      return new THREE.Points(geo, mat);
-    }
-
-    function applyGarageVisibility() {
-      if (currentCarGroup) currentCarGroup.visible = viewMode === "solid";
-      if (currentPointsGroup) currentPointsGroup.visible = viewMode === "points";
-    }
-
-    async function loadCar(key) {
-      initGarageScene();
-      const spec = CARS[key];
-      garageStatus.textContent = `Loading ${spec.label}...`;
-
-      if (currentCarGroup) gScene.remove(currentCarGroup);
-      if (currentPointsGroup) gScene.remove(currentPointsGroup);
-
-      if (carCache.has(key)) {
-        const cached = carCache.get(key);
-        currentCarGroup = cached.solid;
-        currentPointsGroup = cached.points;
-        gScene.add(currentCarGroup);
-        gScene.add(currentPointsGroup);
-        applyGarageVisibility();
-        garageStatus.textContent = `${spec.label} · Drag to orbit · Scroll to zoom`;
+      if (currentCar) gScene.remove(currentCar);
+      if (carCache.has(index)) {
+        currentCar = carCache.get(index);
+        gScene.add(currentCar);
+        garageStatus.textContent = `${data.title} · Drag to orbit`;
         return;
       }
 
-      try {
-        const gltf = await gltfLoader.loadAsync(spec.url, (ev) => {
-          if (ev.total) {
-            const pct = Math.round((ev.loaded / ev.total) * 100);
-            garageStatus.textContent = `Loading ${spec.label} · ${pct}%`;
-          }
-        });
-        const root = gltf.scene;
-        root.traverse((obj) => {
-          if (obj.isMesh) {
-            obj.castShadow = true;
-            obj.receiveShadow = true;
-          }
-        });
-        const box = new THREE.Box3().setFromObject(root);
-        const size = box.getSize(new THREE.Vector3());
-        const center = box.getCenter(new THREE.Vector3());
-        const maxDim = Math.max(size.x, size.y, size.z) || 1;
-        const scale = 4.2 / maxDim;
-        root.scale.setScalar(scale);
-        root.position.sub(center.multiplyScalar(scale));
-        root.position.y = -0.35 - box.min.y * scale;
-
-        const pts = buildPointCloudFromGroup(root, spec.color);
-        carCache.set(key, { solid: root, points: pts });
-
-        currentCarGroup = root;
-        currentPointsGroup = pts;
-        gScene.add(currentCarGroup);
-        gScene.add(currentPointsGroup);
-        applyGarageVisibility();
-        garageStatus.textContent = `${spec.label} · Drag to orbit · Scroll to zoom`;
-      } catch (err) {
-        console.error(err);
-        garageStatus.textContent = `Could not load ${spec.label}`;
-      }
+      garageStatus.textContent = `Loading ${data.title}...`;
+      const gltf = await gltfLoader.loadAsync(data.url, (ev) => {
+        if (ev.total) garageStatus.textContent = `Loading ${data.title} · ${Math.round((ev.loaded / ev.total) * 100)}%`;
+      });
+      const root = gltf.scene;
+      root.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+      const box = new THREE.Box3().setFromObject(root);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      const scale = 4.2 / (Math.max(size.x, size.y, size.z) || 1);
+      root.scale.setScalar(scale);
+      root.position.sub(center.multiplyScalar(scale));
+      root.position.y = -0.35 - box.min.y * scale;
+      carCache.set(index, root);
+      currentCar = root;
+      gScene.add(currentCar);
+      garageStatus.textContent = `${data.title} · Drag to orbit`;
     }
 
-    document.querySelectorAll(".car-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".car-btn").forEach((b) => b.classList.remove("is-active"));
-        btn.classList.add("is-active");
-        loadCar(btn.dataset.car);
-      });
-    });
-
-    modeSolidBtn.addEventListener("click", () => {
-      viewMode = "solid";
-      modeSolidBtn.classList.add("is-active");
-      modePointsBtn.classList.remove("is-active");
-      applyGarageVisibility();
-    });
-    modePointsBtn.addEventListener("click", () => {
-      viewMode = "points";
-      modePointsBtn.classList.add("is-active");
-      modeSolidBtn.classList.remove("is-active");
-      applyGarageVisibility();
-    });
-
-    const garageObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        garageObserver.disconnect();
-        loadCar("ferrari");
-      }
+    [0, 1, 2].forEach((i) => document.getElementById(`car-btn-${i}`).addEventListener("click", () => setActiveCar(i)));
+    const garageObs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) { garageObs.disconnect(); setActiveCar(0); }
     }, { threshold: 0.15 });
-    garageObserver.observe(document.getElementById("garage"));
+    garageObs.observe(document.getElementById("garage"));
 
-    // 4. Nav Overlay & Era Quick-Jump
-    const navOverlay = document.getElementById("navOverlay");
-    const menuOpenBtn = document.getElementById("menuOpenBtn");
-    const menuCloseBtn = document.getElementById("menuCloseBtn");
-    function toggleMenu(open) {
-      navOverlay.classList.toggle("is-open", open);
-      navOverlay.setAttribute("aria-hidden", String(!open));
-      menuOpenBtn.setAttribute("aria-expanded", String(open));
-      document.body.classList.toggle("no-scroll", open);
-    }
-    menuOpenBtn.addEventListener("click", () => toggleMenu(true));
-    menuCloseBtn.addEventListener("click", () => toggleMenu(false));
-    document.querySelectorAll(".nav-link").forEach((a) => a.addEventListener("click", () => toggleMenu(false)));
-
-    const eraLinks = document.querySelectorAll(".era-pill a");
-    const eraObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          eraLinks.forEach((l) => l.classList.toggle("is-active", l.dataset.target === id));
-        }
-      });
-    }, { threshold: 0.35 });
-    document.querySelectorAll("#garage, .era").forEach((s) => eraObserver.observe(s));
-
-    // 5. Helmets Hall of Fame (100% Real Lewis Hamilton Helmets)
+    // Helmets (10 Real Helmets)
     const HELMETS = [
-      { year: "2008", era: "mclaren", team: "McLaren MP4-23", title: "Senna Yellow Crown", img: "./assets/helmets/helmet-real-13.jpg", stats: "5 Wins · 1st World Title", desc: "Iconic Vodafone McLaren yellow shell inspired by Ayrton Senna, carried to Lewis's first Formula 1 World Championship in the rain at Interlagos." },
-      { year: "2018", era: "mercedes", team: "Mercedes F1 W09", title: "Five-Star Gold & Red", img: "./assets/helmets/helmet-real-18.jpg", stats: "11 Wins · 5th World Title", desc: "Championship gold and crimson geometry worn during one of his most dominant campaigns, equalling Juan Manuel Fangio's five titles." },
-      { year: "2019", era: "mercedes", team: "Mercedes F1 W10", title: "Burgundy & Pearl", img: "./assets/helmets/helmet-real-02.jpg", stats: "11 Wins · 6th World Title", desc: "Deep metallic burgundy and pearl white finish with Petronas visor strip, sealing a sixth World Drivers' Championship in Austin." },
-      { year: "2020", era: "mercedes", team: "Mercedes F1 W11", title: "Black & Purple Unity", img: "./assets/helmets/helmet-real-17.jpg", stats: "11 Wins · 7th World Title", desc: "Deep obsidian black and royal purple worn alongside the black W11 livery—matching Michael Schumacher's all-time record of seven titles." },
-      { year: "2021", era: "mercedes", team: "Mercedes F1 W12", title: "Interlagos Spectrum", img: "./assets/helmets/helmet-real-15.jpg", stats: "São Paulo Sprint-to-Win", desc: "Deep purple and obsidian shell with a wraparound rainbow prism stripe—worn during his unforgettable charge from P20 to P1 in Brazil." },
-      { year: "2022", era: "mercedes", team: "Mercedes F1 W13", title: "Brazil Honorary Citizen", img: "./assets/helmets/helmet-real-09.jpg", stats: "Interlagos Tribute", desc: "Brazilian flag green, yellow, and Ordem e Progresso blue worn in São Paulo after being granted honorary Brazilian citizenship." },
-      { year: "2024", era: "mercedes", team: "Mercedes F1 W15", title: "Silverstone Chrome & Gold", img: "./assets/helmets/helmet-real-11.jpg", stats: "9th British GP Victory", desc: "Mirror-chrome silver and gold crest celebrating his record-breaking ninth British Grand Prix win—his emotional final victory for Mercedes." },
-      { year: "2025", era: "ferrari", team: "Scuderia Ferrari SF-25", title: "Maranello Modena Yellow", img: "./assets/helmets/helmet-real-03.jpg", stats: "Ferrari Debut Era", desc: "Scuderia Ferrari yellow shell with Prancing Horse crest and crimson pinstripes, uniting his karting roots with Maranello." },
-      { year: "2025", era: "ferrari", team: "Scuderia Ferrari SF-25", title: "Singapore Gold Spec", img: "./assets/helmets/helmet-real-14.jpg", stats: "Marina Bay Night Edition", desc: "Mirror-gold Ferrari special edition worn under the Marina Bay floodlights, featuring the Singapore lion motif and gold leaf finish." },
-      { year: "2025", era: "ferrari", team: "Scuderia Ferrari SF-25", title: "Signed Melbourne Edition", img: "./assets/Autofetched/helmet-2025-ferrari.jpg", stats: "Australian GP Debut", desc: "Signed 2025 Scuderia Ferrari helmet from his debut Grand Prix weekend in Ferrari red." },
+      { year: "2008", era: "mclaren", team: "McLaren MP4-23", title: "Senna Tribute Yellow", img: "./assets/helmets/helmet-real-13.jpg", desc: "Iconic Vodafone McLaren yellow shell inspired by Ayrton Senna, carried to Lewis's first World Championship." },
+      { year: "2018", era: "mercedes", team: "Mercedes W09", title: "5× Gold Edition", img: "./assets/helmets/helmet-real-18.jpg", desc: "Championship gold and crimson geometry worn during his fifth world title campaign." },
+      { year: "2019", era: "mercedes", team: "Mercedes W10", title: "Burgundy & Pearl", img: "./assets/helmets/helmet-real-02.jpg", desc: "Deep metallic burgundy and pearl white finish sealing a sixth World Drivers' Championship." },
+      { year: "2020", era: "mercedes", team: "Mercedes W11", title: "Purple & Black BLM", img: "./assets/helmets/helmet-real-17.jpg", desc: "Deep obsidian black and royal purple worn alongside the black W11 for his record-tying 7th crown." },
+      { year: "2021", era: "mercedes", team: "Mercedes W12", title: "Interlagos Spectrum", img: "./assets/helmets/helmet-real-15.jpg", desc: "Rainbow prism stripe helmet worn during his unforgettable charge from P20 to P1 in Brazil." },
+      { year: "2022", era: "mercedes", team: "Mercedes W13", title: "Brazil Tribute", img: "./assets/helmets/helmet-real-09.jpg", desc: "Brazilian flag green, yellow, and blue worn in São Paulo after honorary citizenship." },
+      { year: "2024", era: "mercedes", team: "Mercedes W15", title: "Silverstone IX", img: "./assets/helmets/helmet-real-11.jpg", desc: "Mirror-chrome silver and gold crest celebrating his record-breaking ninth British GP victory." },
+      { year: "2025", era: "ferrari", team: "Ferrari SF-25", title: "Maranello Giallo", img: "./assets/helmets/helmet-real-03.jpg", desc: "Scuderia Ferrari Modena yellow shell with Prancing Horse crest and crimson pinstripes." },
+      { year: "2025", era: "ferrari", team: "Ferrari SF-25", title: "Singapore Gold Spec", img: "./assets/helmets/helmet-real-14.jpg", desc: "Mirror-gold Ferrari special edition worn under the Marina Bay floodlights." },
+      { year: "2025", era: "ferrari", team: "Ferrari SF-25", title: "Signed Melbourne", img: "./assets/Autofetched/helmet-2025-ferrari.jpg", desc: "Signed 2025 Scuderia Ferrari helmet from his debut Grand Prix weekend in Ferrari red." }
     ];
 
-    const helmetsGrid = document.getElementById("helmetsGrid");
-    const helmetModal = document.getElementById("helmetModal");
-    const modalImg = document.getElementById("modalImg");
-    const modalEra = document.getElementById("modalEra");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalDesc = document.getElementById("modalDesc");
-    const modalStats = document.getElementById("modalStats");
+    const helmetsGrid = document.getElementById("helmets-grid");
+    const helmetModal = document.getElementById("helmet-modal");
 
     HELMETS.forEach((h) => {
-      const card = document.createElement("article");
-      card.className = "helmet-card";
+      const card = document.createElement("div");
+      card.className = "p-3 rounded-xl bg-surface-container flex flex-col gap-2 cursor-pointer shadow-md group hover:bg-surface-container-high transition-colors border border-white/[0.05]";
       card.dataset.era = h.era;
       card.innerHTML = `
-        <div class="helmet-card__media"><img src="${h.img}" alt="${h.year} ${h.title}" loading="lazy"></div>
-        <div class="helmet-card__tag">
-          <strong>${h.title}</strong>
-          <span>${h.year} · ${h.era.toUpperCase()}</span>
+        <div class="aspect-square w-full rounded bg-surface-container-lowest overflow-hidden">
+          <img src="${h.img}" alt="${h.year} ${h.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy">
+        </div>
+        <div class="flex flex-col">
+          <span class="font-mono text-[9px] text-primary">${h.year} · ${h.era.toUpperCase()}</span>
+          <span class="font-serif text-sm text-on-surface font-semibold truncate">${h.title}</span>
         </div>
       `;
       card.addEventListener("click", () => {
-        modalImg.src = h.img;
-        modalImg.alt = `${h.year} ${h.title}`;
-        modalEra.textContent = `${h.year} // ${h.team}`;
-        modalTitle.textContent = h.title;
-        modalDesc.textContent = h.desc;
-        modalStats.textContent = h.stats;
-        helmetModal.classList.add("is-open");
-        helmetModal.setAttribute("aria-hidden", "false");
+        document.getElementById("modal-helmet-year").textContent = `${h.year} // ${h.era.toUpperCase()}`;
+        document.getElementById("modal-helmet-title").textContent = h.title;
+        document.getElementById("modal-helmet-chassis").textContent = h.team;
+        document.getElementById("modal-helmet-story").textContent = h.desc;
+        helmetModal.classList.remove("hidden");
+        setTimeout(() => helmetModal.classList.remove("opacity-0"), 10);
       });
       helmetsGrid.appendChild(card);
     });
 
-    document.getElementById("modalCloseBtn").addEventListener("click", () => {
-      helmetModal.classList.remove("is-open");
-      helmetModal.setAttribute("aria-hidden", "true");
-    });
-    helmetModal.addEventListener("click", (e) => {
-      if (e.target === helmetModal) {
-        helmetModal.classList.remove("is-open");
-        helmetModal.setAttribute("aria-hidden", "true");
-      }
-    });
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        if (helmetModal.classList.contains("is-open")) {
-          helmetModal.classList.remove("is-open");
-          helmetModal.setAttribute("aria-hidden", "true");
-        }
-        if (navOverlay.classList.contains("is-open")) toggleMenu(false);
-      }
-    });
+    function closeModal() {
+      helmetModal.classList.add("opacity-0");
+      setTimeout(() => helmetModal.classList.add("hidden"), 250);
+    }
+    document.getElementById("modal-close-btn").addEventListener("click", closeModal);
+    helmetModal.addEventListener("click", (e) => { if (e.target === helmetModal) closeModal(); });
 
-    document.querySelectorAll(".filter-btn").forEach((btn) => {
+    document.querySelectorAll("[data-filter]").forEach((btn) => {
       btn.addEventListener("click", () => {
-        document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("is-active"));
-        btn.classList.add("is-active");
+        document.querySelectorAll("[data-filter]").forEach((b) => {
+          b.className = "px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-mono text-[11px] whitespace-nowrap hover:bg-surface-container-high";
+        });
+        btn.className = "px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-mono text-[11px] font-semibold whitespace-nowrap";
         const f = btn.dataset.filter;
-        document.querySelectorAll(".helmet-card").forEach((card) => {
-          card.classList.toggle("is-hidden", f !== "all" && card.dataset.era !== f);
+        document.querySelectorAll("#helmets-grid > div").forEach((c) => {
+          c.style.display = (f === "all" || c.dataset.era === f) ? "flex" : "none";
         });
       });
     });
 
-    // 6. Real Official F1 Circuit Maps
+    // Circuits (Real Official SVGs)
     const CIRCUITS = [
-      { name: "Silverstone Circuit", country: "United Kingdom · 5.891 km", wins: "9 Wins", story: "An all-time Formula 1 record for victories at a single circuit. From his wet-weather masterclass in 2008 to his emotional ninth triumph in 2024, Silverstone is Hamilton's fortress.", svg: "./assets/circuits/silverstone.svg" },
-      { name: "Circuit de Barcelona-Catalunya", country: "Spain · 4.657 km", wins: "7 Wins", story: "Site of six Mercedes victories—and in 2026, the stage of his landmark first Grand Prix win in Scuderia Ferrari Rosso Corsa.", svg: "./assets/circuits/catalunya.svg" },
-      { name: "Autódromo José Carlos Pace", country: "Brazil (Interlagos) · 4.309 km", wins: "3 Wins", story: "Where he clinched his maiden 2008 title at the final corner—and delivered one of F1's greatest drives in 2021 from P20 in the Sprint to victory on Sunday.", svg: "./assets/circuits/interlagos.svg" },
-      { name: "Hungaroring", country: "Hungary · 4.381 km", wins: "8 Wins", story: "Relentless precision through technical, sweeping corners—eight Hungarian Grand Prix victories across McLaren and Mercedes.", svg: "./assets/circuits/hungaroring.svg" },
-      { name: "Autodromo Nazionale Monza", country: "Italy · 5.793 km", wins: "5 Wins", story: "The Temple of Speed—five victories already in his career, now carrying the roar of the Tifosi in Ferrari red.", svg: "./assets/circuits/monza.svg" }
+      { label: "Silverstone (9W)", country: "GREAT BRITAIN", name: "Silverstone Circuit", record: "9 WINS", length: "5.891 km", drs: "2 Zones", lap: "1:27.097", svg: "./assets/circuits/silverstone.svg", quote: '"Nowhere on earth compares to the energy of the home crowd at Copse and Abbey."' },
+      { label: "Barcelona (7W)", country: "SPAIN", name: "Barcelona-Catalunya", record: "7 WINS", length: "4.657 km", drs: "2 Zones", lap: "1:15.847", svg: "./assets/circuits/catalunya.svg", quote: '"Taking the 2026 win here in Ferrari scarlet was absolute poetry."' },
+      { label: "Hungaroring (8W)", country: "HUNGARY", name: "Hungaroring", record: "8 WINS", length: "4.381 km", drs: "1 Zone", lap: "1:16.627", svg: "./assets/circuits/hungaroring.svg", quote: '"Like Monaco without walls. Absolute rhythm through the middle sector."' },
+      { label: "Monza (5W)", country: "ITALY", name: "Autodromo Nazionale Monza", record: "5 WINS", length: "5.793 km", drs: "2 Zones", lap: "1:18.887", svg: "./assets/circuits/monza.svg", quote: '"The Temple of Speed. Hearing the roar of the Tifosi vibrates through your spine."' },
+      { label: "Interlagos (3W)", country: "BRAZIL", name: "Interlagos", record: "3 WINS", length: "4.309 km", drs: "2 Zones", lap: "1:10.540", svg: "./assets/circuits/interlagos.svg", quote: '"2008 made me a champion here. 2021 proved what is possible from last."' }
     ];
-    const circuitTabs = document.getElementById("circuitTabs");
-    const circuitMapImg = document.getElementById("circuitMapImg");
-    const circuitName = document.getElementById("circuitName");
-    const circuitStory = document.getElementById("circuitStory");
+
+    const cTabs = document.getElementById("circuit-tabs");
     function selectCircuit(idx) {
       const c = CIRCUITS[idx];
-      circuitMapImg.src = c.svg;
-      circuitMapImg.alt = `${c.name} track map`;
-      circuitName.textContent = c.name;
-      circuitStory.textContent = c.story;
-      document.querySelectorAll(".circuit-tab").forEach((t, i) => t.classList.toggle("is-active", i === idx));
+      document.getElementById("circuit-country").textContent = c.country;
+      document.getElementById("circuit-name").textContent = c.name;
+      document.getElementById("circuit-record").textContent = c.record;
+      document.getElementById("circuit-length").textContent = c.length;
+      document.getElementById("circuit-drs").textContent = c.drs;
+      document.getElementById("circuit-laprecord").textContent = c.lap;
+      document.getElementById("circuit-quote").textContent = c.quote;
+      document.getElementById("circuit-img").src = c.svg;
+      cTabs.querySelectorAll("button").forEach((b, i) => {
+        b.className = i === idx
+          ? "px-3 py-1.5 rounded bg-primary text-on-primary font-mono text-[11px] font-semibold whitespace-nowrap"
+          : "px-3 py-1.5 rounded bg-surface-container text-on-surface-variant font-mono text-[11px] whitespace-nowrap hover:bg-surface-container-high";
+      });
     }
-    CIRCUITS.forEach((c, idx) => {
+    CIRCUITS.forEach((c, i) => {
       const btn = document.createElement("button");
-      btn.className = "circuit-tab";
-      btn.innerHTML = `<div><strong>${c.name}</strong><small>${c.country}</small></div><span class="circuit-tab__wins">${c.wins}</span>`;
-      btn.addEventListener("click", () => selectCircuit(idx));
-      circuitTabs.appendChild(btn);
+      btn.textContent = c.label;
+      btn.addEventListener("click", () => selectCircuit(i));
+      cTabs.appendChild(btn);
     });
     selectCircuit(0);
   </script>
