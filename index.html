@@ -94,8 +94,11 @@
       inset: 0;
       z-index: 100;
       background: var(--bg-obsidian);
-      display: grid;
-      place-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
       transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.7s;
     }
 
@@ -105,16 +108,112 @@
       pointer-events: none;
     }
 
-    .preloader__ring { width: 220px; height: 220px; overflow: visible; }
-    .preloader__ring circle { fill: rgba(244, 239, 230, 0.16); transition: fill 0.2s, r 0.2s; }
-    .preloader__ring circle[data-on] { fill: var(--ferrari-red); r: 2.3px; }
-    .preloader__center { position: absolute; text-align: center; }
+    /* From Uiverse.io by AspenBranch - https://uiverse.io/AspenBranch/slippery-sheep-50
+       MIT License, Copyright (c) AspenBranch */
+    .uiverse-pattern {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        #0b0b0c,
+        #0b0b0c 20px,
+        #131418 20px,
+        #131418 40px
+      );
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    /* From Uiverse.io by alexruix - https://uiverse.io/alexruix/neat-tiger-82
+       MIT License, Copyright (c) alexruix (Alex Ruiz) */
+    .uiverse-loader {
+      position: relative;
+      width: 112px;
+      height: 112px;
+      z-index: 1;
+    }
+
+    .uiverse-loader__box1,
+    .uiverse-loader__box2,
+    .uiverse-loader__box3 {
+      border: 16px solid var(--cream);
+      box-sizing: border-box;
+      position: absolute;
+      display: block;
+    }
+
+    .uiverse-loader__box1 {
+      border-color: var(--ferrari-red);
+      width: 112px;
+      height: 48px;
+      margin-top: 64px;
+      margin-left: 0px;
+      animation: abox1 4s 0s forwards ease-in-out infinite;
+    }
+
+    .uiverse-loader__box2 {
+      border-color: var(--cream);
+      width: 48px;
+      height: 48px;
+      margin-top: 0px;
+      margin-left: 0px;
+      animation: abox2 4s 0s forwards ease-in-out infinite;
+    }
+
+    .uiverse-loader__box3 {
+      border-color: var(--gold);
+      width: 48px;
+      height: 48px;
+      margin-top: 0px;
+      margin-left: 64px;
+      animation: abox3 4s 0s forwards ease-in-out infinite;
+    }
+
+    @keyframes abox1 {
+      0% { width: 112px; height: 48px; margin-top: 64px; margin-left: 0px; }
+      12.5% { width: 48px; height: 48px; margin-top: 64px; margin-left: 0px; }
+      25% { width: 48px; height: 48px; margin-top: 64px; margin-left: 0px; }
+      37.5% { width: 48px; height: 48px; margin-top: 64px; margin-left: 0px; }
+      50% { width: 48px; height: 48px; margin-top: 64px; margin-left: 0px; }
+      62.5% { width: 48px; height: 48px; margin-top: 64px; margin-left: 0px; }
+      75% { width: 48px; height: 112px; margin-top: 0px; margin-left: 0px; }
+      87.5% { width: 48px; height: 48px; margin-top: 0px; margin-left: 0px; }
+      100% { width: 48px; height: 48px; margin-top: 0px; margin-left: 0px; }
+    }
+
+    @keyframes abox2 {
+      0% { width: 48px; height: 48px; margin-top: 0px; margin-left: 0px; }
+      12.5% { width: 48px; height: 48px; margin-top: 0px; margin-left: 0px; }
+      25% { width: 48px; height: 48px; margin-top: 0px; margin-left: 0px; }
+      37.5% { width: 48px; height: 48px; margin-top: 0px; margin-left: 0px; }
+      50% { width: 112px; height: 48px; margin-top: 0px; margin-left: 0px; }
+      62.5% { width: 48px; height: 48px; margin-top: 0px; margin-left: 64px; }
+      75% { width: 48px; height: 48px; margin-top: 0px; margin-left: 64px; }
+      87.5% { width: 48px; height: 48px; margin-top: 0px; margin-left: 64px; }
+      100% { width: 48px; height: 48px; margin-top: 0px; margin-left: 64px; }
+    }
+
+    @keyframes abox3 {
+      0% { width: 48px; height: 48px; margin-top: 0px; margin-left: 64px; }
+      12.5% { width: 48px; height: 48px; margin-top: 0px; margin-left: 64px; }
+      25% { width: 48px; height: 112px; margin-top: 0px; margin-left: 64px; }
+      37.5% { width: 48px; height: 48px; margin-top: 64px; margin-left: 64px; }
+      50% { width: 48px; height: 48px; margin-top: 64px; margin-left: 64px; }
+      62.5% { width: 48px; height: 48px; margin-top: 64px; margin-left: 64px; }
+      75% { width: 48px; height: 48px; margin-top: 64px; margin-left: 64px; }
+      87.5% { width: 48px; height: 48px; margin-top: 64px; margin-left: 64px; }
+      100% { width: 112px; height: 48px; margin-top: 64px; margin-left: 0px; }
+    }
+
+    .preloader__center { position: relative; z-index: 1; text-align: center; }
     .preloader__num {
       display: block;
       font-family: var(--font-mono);
-      font-size: 36px;
+      font-size: 28px;
       font-variant-numeric: tabular-nums;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
     }
     .preloader__sub {
       display: block;
@@ -744,10 +843,17 @@
 </head>
 <body>
   <div class="preloader" id="preloader" role="progressbar" aria-label="Loading Lewis Hamilton Portfolio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-    <svg class="preloader__ring" viewBox="-110 -110 220 220" aria-hidden="true"></svg>
+    <!-- From Uiverse.io by AspenBranch - https://uiverse.io/AspenBranch/slippery-sheep-50 -->
+    <div class="uiverse-pattern" aria-hidden="true"></div>
+    <!-- From Uiverse.io by alexruix - https://uiverse.io/alexruix/neat-tiger-82 -->
+    <div class="uiverse-loader" aria-hidden="true">
+      <div class="uiverse-loader__box1"></div>
+      <div class="uiverse-loader__box2"></div>
+      <div class="uiverse-loader__box3"></div>
+    </div>
     <div class="preloader__center">
       <span class="preloader__num" id="loaderNum">000</span>
-      <span class="preloader__sub">CAR #44 // 7X CHAMPION</span>
+      <span class="preloader__sub">CAR #44 // 7× WORLD CHAMPION</span>
     </div>
   </div>
 
@@ -1205,29 +1311,11 @@
     // 1. Preloader
     const preloader = document.getElementById("preloader");
     const loaderNum = document.getElementById("loaderNum");
-    const ringSvg = document.querySelector(".preloader__ring");
-    const SVG_NS = "http://www.w3.org/2000/svg";
-    const RING_DOTS = 72;
-    const ringDots = [];
-
-    for (let i = 0; i < RING_DOTS; i++) {
-      const a = (i / RING_DOTS) * Math.PI * 2 - Math.PI / 2;
-      const c = document.createElementNS(SVG_NS, "circle");
-      c.setAttribute("cx", (92 * Math.cos(a)).toFixed(2));
-      c.setAttribute("cy", (92 * Math.sin(a)).toFixed(2));
-      c.setAttribute("r", "1.6");
-      ringSvg.appendChild(c);
-      ringDots.push(c);
-    }
 
     function setLoaderProgress(p) {
       const pct = Math.round(Math.max(0, Math.min(1, p)) * 100);
       loaderNum.textContent = String(pct).padStart(3, "0");
       preloader.setAttribute("aria-valuenow", String(pct));
-      for (let i = 0; i < RING_DOTS; i++) {
-        if (i / RING_DOTS < p) ringDots[i].setAttribute("data-on", "");
-        else ringDots[i].removeAttribute("data-on");
-      }
     }
 
     // 2. Interactive 3D WebGL Hero (2026 Scuderia Ferrari SF-26 + Wind-Tunnel Particles)
