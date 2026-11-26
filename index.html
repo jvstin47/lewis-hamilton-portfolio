@@ -574,6 +574,7 @@
       gRenderer.toneMappingExposure = 0.95;
       gRenderer.shadowMap.enabled = true;
       gRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      gRenderer.domElement.className = "w-full h-full block";
       garageStage.insertBefore(gRenderer.domElement, garageStage.firstChild);
 
       gScene = new THREE.Scene();
@@ -582,14 +583,14 @@
       gScene.environmentIntensity = 0.85;
 
       gCam = new THREE.PerspectiveCamera(32, garageStage.clientWidth / garageStage.clientHeight, 0.1, 100);
-      gCam.position.set(-2.85, 1.15, 3.05);
+      gCam.position.set(-3.2, 1.25, 3.5);
 
       gControls = new OrbitControls(gCam, gRenderer.domElement);
       gControls.enableDamping = true;
       gControls.enablePan = false;
-      gControls.target.set(0, 0.02, 0);
-      gControls.minDistance = 1.8;
-      gControls.maxDistance = 6.5;
+      gControls.target.set(0, 0.0, 0);
+      gControls.minDistance = 2.0;
+      gControls.maxDistance = 7.5;
       gControls.maxPolarAngle = Math.PI * 0.48;
       gControls.autoRotate = true;
       gControls.autoRotateSpeed = 0.45;
@@ -694,15 +695,23 @@
           o.receiveShadow = true;
         }
       });
-      const box = new THREE.Box3().setFromObject(root);
+      // Compute tight bounds from visible meshes only, then center cleanly in a wrapper group
+      root.updateMatrixWorld(true);
+      const box = new THREE.Box3();
+      root.traverse((o) => {
+        if (o.isMesh && o.visible) box.expandByObject(o);
+      });
       const size = box.getSize(new THREE.Vector3());
       const center = box.getCenter(new THREE.Vector3());
-      const scale = 4.2 / (Math.max(size.x, size.y, size.z) || 1);
+      const scale = 3.8 / (Math.max(size.x, size.y, size.z) || 1);
+
+      const wrapper = new THREE.Group();
       root.scale.setScalar(scale);
-      root.position.sub(center.multiplyScalar(scale));
-      root.position.y = -0.35 - box.min.y * scale;
-      carCache.set(index, root);
-      currentCar = root;
+      root.position.set(-center.x * scale, -box.min.y * scale - 0.35, -center.z * scale);
+      wrapper.add(root);
+
+      carCache.set(index, wrapper);
+      currentCar = wrapper;
       gScene.add(currentCar);
       garageStatus.textContent = `${data.title} · Drag to orbit`;
     }
