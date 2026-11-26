@@ -378,150 +378,146 @@
     .nav-socials { display: flex; gap: 20px; }
     .nav-socials a { color: var(--cream); text-decoration: none; letter-spacing: 0.08em; }
 
-    /* Hero */
+    /* Hero — Clean Editorial Split */
     .hero {
       position: relative;
       min-height: 100vh;
       min-height: 100svh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 96px clamp(20px, 4vw, 56px) 34px;
-      background:
-        radial-gradient(ellipse 70% 55% at 52% 48%, rgba(225, 6, 0, 0.16), transparent 70%),
-        radial-gradient(ellipse 45% 35% at 48% 58%, rgba(212, 175, 55, 0.08), transparent 65%),
-        var(--bg-obsidian);
-    }
-    .hero__watermark {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      display: grid;
-      place-items: center;
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: clamp(240px, 38vw, 520px);
-      line-height: 0.8;
-      color: rgba(244, 239, 230, 0.028);
-      user-select: none;
-      pointer-events: none;
-      letter-spacing: -0.05em;
-    }
-    .hero__canvas-wrap {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-    }
-    .hero__canvas-wrap canvas { width: 100%; height: 100%; display: block; }
-    .hero__sketchfab {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      display: grid;
-      place-items: center;
-      padding-bottom: 120px;
-      pointer-events: none;
-    }
-    .hero__sketchfab iframe {
-      width: min(84vw, 780px);
-      height: min(58vh, 500px);
-      border: 0;
-      pointer-events: auto;
-      background: transparent;
-    }
-    .hero__top-meta {
-      position: relative;
-      z-index: 4;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 20px;
-      pointer-events: none;
-    }
-    .hero__top-meta > * { pointer-events: auto; }
-    .hero__specs {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-align: right;
-    }
-    .hero__specs strong { color: var(--cream); font-weight: 500; }
-    .hero__mode-pill {
-      display: inline-flex;
-      gap: 4px;
-      margin-top: 6px;
-      background: rgba(19, 20, 23, 0.78);
-      border: 1px solid var(--line);
-      padding: 4px;
-      border-radius: 999px;
-      backdrop-filter: blur(10px);
-    }
-    .hero__mode-btn {
-      background: transparent;
-      color: var(--muted);
-      border: none;
-      border-radius: 999px;
-      padding: 5px 12px;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-    .hero__mode-btn.is-active {
-      background: var(--ferrari-red);
-      color: #fff;
-    }
-    .hero__topo {
-      position: absolute; inset: 0; z-index: 0; opacity: 0.18; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800' fill='none' stroke='%23d4af37' stroke-width='0.7'%3E%3Cpath d='M-50 220 C 140 160, 260 310, 460 250 C 650 190, 740 280, 860 230'/%3E%3Cpath d='M-50 270 C 160 210, 280 350, 480 290 C 670 230, 750 320, 860 270'/%3E%3Cpath d='M-50 540 C 180 480, 320 620, 520 550 C 700 490, 760 580, 860 530'/%3E%3Cpath d='M-50 590 C 190 530, 340 670, 540 600 C 710 540, 770 630, 860 580'/%3E%3Ccircle cx='400' cy='400' r='260' stroke-dasharray='4 8'/%3E%3C/svg%3E");
-      background-size: cover;
-    }
-    .hero__content {
-      position: relative;
-      z-index: 4;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: end;
-      gap: 24px;
-      pointer-events: none;
-    }
-    .hero__content > * { pointer-events: auto; }
-    .hero__kicker { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold); margin: 0 0 10px; }
-    .hero__title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(52px, 7.5vw, 118px); line-height: 0.92; letter-spacing: -0.02em; margin: 0; text-shadow: 0 8px 32px rgba(0, 0, 0, 0.85); }
-    .hero__title em { font-style: italic; color: var(--ferrari-red); }
-    .hero__sub { font-size: clamp(14px, 1.2vw, 17px); line-height: 1.5; color: rgba(244, 239, 230, 0.86); max-width: 38ch; margin: 14px 0 0; text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9); }
-    .hero__center-hint { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(244, 239, 230, 0.55); text-align: center; padding-bottom: 6px; }
-    .hero__widgets { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
-    .race-card {
-      background: rgba(19, 20, 23, 0.82);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 14px 18px;
       display: flex;
       align-items: center;
-      gap: 16px;
-      text-decoration: none;
+      padding: 104px clamp(24px, 5vw, 72px) 48px;
+      background:
+        radial-gradient(ellipse 65% 55% at 75% 45%, rgba(225, 6, 0, 0.14), transparent 68%),
+        var(--bg-obsidian);
+    }
+    .hero__grid {
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(32px, 5vw, 72px);
+      align-items: center;
+    }
+    .hero__kicker {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      margin: 0 0 18px;
+    }
+    .hero__title {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(60px, 7.2vw, 114px);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .hero__title em { font-style: italic; color: var(--ferrari-red); }
+    .hero__sub {
+      font-size: clamp(15px, 1.25vw, 18px);
+      line-height: 1.6;
+      color: rgba(244, 239, 230, 0.78);
+      max-width: 44ch;
+      margin: 22px 0 28px;
+    }
+    .hero__metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 28px;
+      font-family: var(--font-mono);
+    }
+    .hero__metric strong {
+      display: block;
+      font-size: 22px;
       color: var(--cream);
+      font-weight: 600;
     }
-    .race-card:hover { border-color: var(--ferrari-red); }
-    .race-card__meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
-    .race-card__meta strong { display: block; font-size: 13px; color: var(--cream); margin-top: 3px; }
-    .race-card__meta span { color: var(--gold); }
+    .hero__metric span {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
     .scroll-cue {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--cream); background: var(--ferrari-red); padding: 8px 14px; border-radius: 6px; text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #fff;
+      background: var(--ferrari-red);
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
     }
+    .hero__secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--cream);
+      background: transparent;
+      border: 1px solid var(--line);
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    .hero__secondary:hover { border-color: var(--gold); color: var(--gold); }
+    .hero__media {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      max-height: 78vh;
+      width: 100%;
+      background: #121215;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 32px 80px -24px rgba(0, 0, 0, 0.85);
+    }
+    .hero__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .hero__media-cap {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(11, 11, 12, 0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .hero__media-cap span { color: var(--gold); }
 
     /* Sections */
     .section {
@@ -820,9 +816,8 @@
 
     @media (max-width: 960px) {
       .era-pill { display: none; }
-      .hero__content { grid-template-columns: 1fr; }
-      .hero__center-hint { display: none; }
-      .hero__widgets { align-items: flex-start; }
+      .hero__grid { grid-template-columns: 1fr; }
+      .hero__media { max-height: 540px; }
       .era__header { grid-template-columns: 1fr; gap: 16px; }
       .circuits__layout { grid-template-columns: 1fr; }
       .ventures__grid { grid-template-columns: 1fr; }
@@ -923,48 +918,34 @@
     </div>
   </div>
 
-  <!-- Hero with Sketchfab 2025 Ferrari Helmet + Wind-Tunnel Particles -->
+  <!-- Hero — Clean Editorial Split -->
   <section class="hero" id="hero">
-    <div class="hero__topo" aria-hidden="true"></div>
-    <div class="hero__watermark" aria-hidden="true">44</div>
-    <div class="hero__canvas-wrap" id="heroCanvasWrap" aria-hidden="true"></div>
-    <div class="hero__sketchfab">
-      <iframe
-        id="heroHelmetFrame"
-        title="Lewis Hamilton 2025 Ferrari Helmet (Australian GP)"
-        allow="autoplay; fullscreen; xr-spatial-tracking; accelerometer; gyroscope; magnetometer"
-        src="https://sketchfab.com/models/e563e1d00ea94084a45d49de12c75071/embed?autostart=1&transparent=1&ui_theme=dark&ui_infos=0&ui_controls=1&ui_stop=0&ui_watermark_link=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=0&ui_annotations=0">
-      </iframe>
-    </div>
-
-    <div class="hero__top-meta">
+    <div class="hero__grid">
       <div>
         <p class="hero__kicker">Scuderia Ferrari · Car #44 · 7× World Champion</p>
-      </div>
-      <div class="hero__specs">
-        <span>HELMET // <strong>2025 AUSTRALIAN GP</strong></span>
-        <span>RECORD // <strong>106 WINS · 105 POLES</strong></span>
-      </div>
-    </div>
-
-    <div class="hero__content">
-      <div>
         <h1 class="hero__title">Still We <em>Rise.</em></h1>
-        <p class="hero__sub">Twenty seasons at the pinnacle of motorsport. One hundred and six Grand Prix victories across McLaren, Mercedes-AMG, and Scuderia Ferrari.</p>
+        <p class="hero__sub">Twenty seasons at the pinnacle of Formula 1. One hundred and six Grand Prix victories across McLaren, Mercedes-AMG, and Scuderia Ferrari.</p>
+
+        <div class="hero__metrics">
+          <div class="hero__metric"><strong>7</strong><span>World Titles</span></div>
+          <div class="hero__metric"><strong>106</strong><span>GP Wins</span></div>
+          <div class="hero__metric"><strong>105</strong><span>Poles</span></div>
+          <div class="hero__metric"><strong>209</strong><span>Podiums</span></div>
+        </div>
+
+        <div class="hero__actions">
+          <a class="scroll-cue" href="#telemetry">Explore 20 Years ↓</a>
+          <a class="hero__secondary" href="#ferrari">Ferrari Chapter →</a>
+        </div>
       </div>
 
-      <div class="hero__center-hint"></div>
-
-      <div class="hero__widgets">
-        <a class="race-card" href="#garage">
-          <img src="./assets/circuits/catalunya.svg" alt="" style="width:52px;height:34px;object-fit:contain;filter:invert(1);" aria-hidden="true">
-          <div class="race-card__meta">
-            <span>2026 Breakthrough</span>
-            <strong>Barcelona-Catalunya Win</strong>
-          </div>
-        </a>
-        <a class="scroll-cue" href="#telemetry">Explore 20 Years ↓</a>
-      </div>
+      <figure class="hero__media" style="margin:0;">
+        <img id="heroPortraitImg" src="./assets/Mine/lewis hamilton • '25 japan.jpeg" alt="Sir Lewis Hamilton in Scuderia Ferrari cockpit #44">
+        <figcaption class="hero__media-cap">
+          <strong>Scuderia Ferrari · #44</strong>
+          <span>Suzuka 2025</span>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -1332,100 +1313,25 @@
       preloader.setAttribute("aria-valuenow", String(pct));
     }
 
-    // 2. Hero Wind-Tunnel Particle Field + Sketchfab 2025 Helmet Preloader Sync
-    const heroWrap = document.getElementById("heroCanvasWrap");
-    const heroHelmetFrame = document.getElementById("heroHelmetFrame");
-    const heroRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
-    heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-    heroWrap.appendChild(heroRenderer.domElement);
-
-    const heroScene = new THREE.Scene();
-    const heroCam = new THREE.PerspectiveCamera(32, 1, 0.1, 60);
-    heroCam.position.set(0, 0, 4.4);
-
-    // Wind-tunnel aero particles
-    const P_COUNT = 2200;
-    const pPos = new Float32Array(P_COUNT * 3);
-    const pRand = new Float32Array(P_COUNT);
-    for (let i = 0; i < P_COUNT; i++) {
-      pPos[i * 3] = (Math.random() - 0.5) * 8.0;
-      pPos[i * 3 + 1] = (Math.random() - 0.5) * 3.5;
-      pPos[i * 3 + 2] = (Math.random() - 0.5) * 5.0;
-      pRand[i] = Math.random();
-    }
-    const pGeo = new THREE.BufferGeometry();
-    pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
-    pGeo.setAttribute("aRand", new THREE.BufferAttribute(pRand, 1));
-    const pMat = new THREE.ShaderMaterial({
-      uniforms: {
-        uTime: { value: 0 },
-        uRed: { value: new THREE.Color("#e10600") },
-        uGold: { value: new THREE.Color("#d4af37") },
-      },
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      vertexShader: `
-        attribute float aRand;
-        uniform float uTime;
-        varying float vRand;
-        void main() {
-          vec3 pos = position;
-          pos.z = mod(pos.z + uTime * (0.4 + aRand * 0.8) + 2.5, 5.0) - 2.5;
-          pos.y += sin(uTime * 0.6 + aRand * 25.0) * 0.06;
-          vec4 mv = modelViewMatrix * vec4(pos, 1.0);
-          gl_Position = projectionMatrix * mv;
-          gl_PointSize = (4.5 + aRand * 7.5) / -mv.z;
-          vRand = aRand;
-        }
-      `,
-      fragmentShader: `
-        uniform vec3 uRed;
-        uniform vec3 uGold;
-        varying float vRand;
-        void main() {
-          float r = length(gl_PointCoord - 0.5);
-          if (r > 0.5) discard;
-          float a = exp(-14.0 * r * r) * (0.18 + vRand * 0.35);
-          vec3 col = mix(uGold, uRed, step(0.55, vRand));
-          gl_FragColor = vec4(col, a);
-        }
-      `,
-    });
-    heroScene.add(new THREE.Points(pGeo, pMat));
-
-    function resizeHero() {
-      const w = heroWrap.clientWidth;
-      const h = heroWrap.clientHeight;
-      heroRenderer.setSize(w, h, false);
-      heroCam.aspect = w / h;
-      heroCam.updateProjectionMatrix();
-    }
-    window.addEventListener("resize", resizeHero);
-    resizeHero();
-
-    const start = performance.now() * 0.001;
-    function animateHero() {
-      requestAnimationFrame(animateHero);
-      const t = performance.now() * 0.001 - start;
-      pMat.uniforms.uTime.value = t;
-      heroRenderer.render(heroScene, heroCam);
-    }
-    animateHero();
-
+    // 2. Hero Preloader Sync
+    const heroPortraitImg = document.getElementById("heroPortraitImg");
     let prog = 0;
     const fakeTick = setInterval(() => {
-      prog = Math.min(0.9, prog + 0.15);
+      prog = Math.min(0.9, prog + 0.2);
       setLoaderProgress(prog);
-    }, 80);
+    }, 60);
 
     function finishHeroLoad() {
       clearInterval(fakeTick);
       setLoaderProgress(1);
       setTimeout(() => preloader.classList.add("is-done"), 250);
     }
-    heroHelmetFrame.addEventListener("load", finishHeroLoad, { once: true });
-    setTimeout(finishHeroLoad, 3000);
+    if (heroPortraitImg.complete) {
+      finishHeroLoad();
+    } else {
+      heroPortraitImg.addEventListener("load", finishHeroLoad, { once: true });
+      heroPortraitImg.addEventListener("error", finishHeroLoad, { once: true });
+    }
 
     // 3. Interactive 3D F1 Garage (GLB Showroom)
     const garageStage = document.getElementById("garageStage");
