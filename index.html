@@ -262,8 +262,9 @@
         </div>
       </div>
 
-      <div class="relative w-full h-80 md:h-[460px] rounded-2xl overflow-hidden bg-surface-container-lowest border border-white/[0.08] shadow-2xl" id="garageStage">
-        <div class="absolute top-3 left-3 px-2.5 py-1 rounded bg-surface-container-lowest/85 backdrop-blur-md flex items-center gap-1.5 font-mono text-[10px] text-on-surface pointer-events-none">
+      <div class="relative w-full h-80 md:h-[460px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl" id="garageStage" style="background: radial-gradient(ellipse 68% 58% at 50% 56%, rgba(224, 6, 0, 0.14) 0%, rgba(212, 175, 55, 0.05) 38%, #0c0c0e 78%);">
+        <div class="absolute inset-0 flex items-center justify-center font-serif italic text-[180px] md:text-[260px] leading-none text-white/[0.025] select-none pointer-events-none">44</div>
+        <div class="absolute top-3 left-3 px-2.5 py-1 rounded bg-surface-container-lowest/85 backdrop-blur-md flex items-center gap-1.5 font-mono text-[10px] text-on-surface pointer-events-none z-10">
           <span class="material-symbols-outlined text-primary text-[14px]">3d_rotation</span>
           <span id="garageStatus">Scroll to load 3D model</span>
         </div>
@@ -571,16 +572,16 @@
       gRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
       gRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       gRenderer.toneMapping = THREE.ACESFilmicToneMapping;
-      gRenderer.toneMappingExposure = 0.95;
+      gRenderer.toneMappingExposure = 1.08;
       gRenderer.shadowMap.enabled = true;
       gRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
-      gRenderer.domElement.className = "w-full h-full block";
+      gRenderer.domElement.className = "w-full h-full block relative z-[1]";
       garageStage.insertBefore(gRenderer.domElement, garageStage.firstChild);
 
       gScene = new THREE.Scene();
       const pmrem = new THREE.PMREMGenerator(gRenderer);
-      gScene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-      gScene.environmentIntensity = 0.85;
+      gScene.environment = pmrem.fromScene(new RoomEnvironment(), 0.03).texture;
+      gScene.environmentIntensity = 1.35;
 
       gCam = new THREE.PerspectiveCamera(32, garageStage.clientWidth / garageStage.clientHeight, 0.1, 100);
       gCam.position.set(-3.2, 1.25, 3.5);
@@ -595,18 +596,47 @@
       gControls.autoRotate = true;
       gControls.autoRotateSpeed = 0.45;
 
-      const key = new THREE.DirectionalLight(0xffffff, 1.4);
+      // 3-point automotive studio lighting
+      gScene.add(new THREE.HemisphereLight(0xfff6e5, 0x16161a, 0.9));
+
+      const key = new THREE.DirectionalLight(0xffffff, 2.2);
       key.position.set(4, 7, 4);
       key.castShadow = true;
       key.shadow.mapSize.set(2048, 2048);
       key.shadow.bias = -0.0005;
       gScene.add(key);
 
-      const shadowPlane = new THREE.Mesh(new THREE.PlaneGeometry(14, 14), new THREE.ShadowMaterial({ opacity: 0.55 }));
+      const fill = new THREE.DirectionalLight(0xffe6c2, 1.1);
+      fill.position.set(-5, 3.5, 4);
+      gScene.add(fill);
+
+      const rim = new THREE.DirectionalLight(0xff2a1a, 1.4);
+      rim.position.set(-3, 2.5, -5);
+      gScene.add(rim);
+
+      // Subtle grounded turntable disc + fine ring
+      const shadowPlane = new THREE.Mesh(new THREE.PlaneGeometry(14, 14), new THREE.ShadowMaterial({ opacity: 0.6 }));
       shadowPlane.rotation.x = -Math.PI / 2;
       shadowPlane.position.y = -0.35;
       shadowPlane.receiveShadow = true;
       gScene.add(shadowPlane);
+
+      const disc = new THREE.Mesh(
+        new THREE.CircleGeometry(2.55, 64),
+        new THREE.MeshStandardMaterial({ color: 0x151518, roughness: 0.55, metalness: 0.25, transparent: true, opacity: 0.65 })
+      );
+      disc.rotation.x = -Math.PI / 2;
+      disc.position.y = -0.352;
+      disc.receiveShadow = true;
+      gScene.add(disc);
+
+      const ring = new THREE.Mesh(
+        new THREE.RingGeometry(2.52, 2.55, 72),
+        new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.22, side: THREE.DoubleSide })
+      );
+      ring.rotation.x = -Math.PI / 2;
+      ring.position.y = -0.348;
+      gScene.add(ring);
 
       function resizeG() {
         gRenderer.setSize(garageStage.clientWidth, garageStage.clientHeight, false);
@@ -684,6 +714,11 @@
             m.transparent = true;
             m.opacity = 0.35;
             m.depthWrite = false;
+            m.needsUpdate = true;
+          } else if (n.includes("paint") || n.includes("carbody") || n.includes("chassis")) {
+            m.roughness = Math.min(m.roughness ?? 0.3, 0.18);
+            m.metalness = Math.max(m.metalness ?? 0.2, 0.35);
+            m.envMapIntensity = 1.65;
             m.needsUpdate = true;
           }
         });
