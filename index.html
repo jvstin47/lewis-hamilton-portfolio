@@ -819,8 +819,8 @@
         <p class="hero__kicker">Scuderia Ferrari · Car #44 · 7× World Champion</p>
       </div>
       <div class="hero__specs">
-        <span>CHASSIS // <strong>2026 SF-26</strong></span>
-        <span>RECORD // <strong>106 WINS · 105 POLES</strong></span>
+        <span>CHASSIS // <strong>2020 MERCEDES-AMG W11</strong></span>
+        <span>RECORD // <strong>106 WINS · 7× WORLD CHAMPION</strong></span>
         <div class="hero__mode-pill" role="group" aria-label="Hero 3D Render Mode">
           <button class="hero__mode-btn is-active" id="heroSolidBtn">3D Studio</button>
           <button class="hero__mode-btn" id="heroPointsBtn">Aero Points</button>
@@ -1373,7 +1373,7 @@
     });
 
     heroGltfLoader.load(
-      "./assets/models/ferrari-2026.glb",
+      "./assets/models/mercedes-2020.glb",
       (gltf) => {
         setLoaderProgress(1);
         setTimeout(() => preloader.classList.add("is-done"), 240);
@@ -1389,7 +1389,7 @@
         root.position.y = -0.18 - box.min.y * scale;
 
         heroCarSolid = root;
-        heroCarPoints = buildPointCloudFromGroup(root, 0xe10600);
+        heroCarPoints = buildPointCloudFromGroup(root, 0x00d2be);
         heroScene.add(heroCarSolid);
         heroScene.add(heroCarPoints);
         applyHeroMode();
