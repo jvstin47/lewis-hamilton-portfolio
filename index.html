@@ -1,0 +1,1578 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sir Lewis Hamilton — #44 | Still We Rise</title>
+  <meta name="description" content="Official-style digital portfolio of Sir Lewis Hamilton (#44): 7-Time Formula 1 World Champion, 106 Grand Prix Wins, Scuderia Ferrari, 3D F1 Garage, and Beyond the Visor.">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    @font-face {
+      font-family: "Geist";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2") format("woff2");
+    }
+
+    @font-face {
+      font-family: "Geist Mono";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("https://fonts.gstatic.com/s/geistmono/v6/or3nQ6H-1_WfwkMZI_qYFrcdmg.woff2") format("woff2");
+    }
+
+    @font-face {
+      font-family: "Instrument Serif";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("https://fonts.gstatic.com/s/instrumentserif/v5/jizBRFtNs2ka5fXjeivQ4LroWlx-6zUTjg.woff2") format("woff2");
+    }
+
+    :root {
+      --bg-obsidian: #0b0b0c;
+      --bg-carbon: #131417;
+      --cream: #f4efe6;
+      --muted: #8e8c86;
+      --line: rgba(244, 239, 230, 0.12);
+
+      --ferrari-red: #e10600;
+      --ferrari-dark: #150406;
+      --modena-yellow: #ffd200;
+      --gold: #d4af37;
+      --mclaren-papaya: #ff5500;
+      --mclaren-silver: #d4d8dd;
+      --mclaren-bg: #101216;
+      --mercedes-teal: #00d2be;
+      --mercedes-silver: #c2c8ce;
+      --mercedes-bg: #080d0e;
+
+      --era-accent: var(--ferrari-red);
+      --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+      --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg-obsidian);
+      color: var(--cream);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg-obsidian);
+      color: var(--cream);
+      overflow-x: hidden;
+    }
+
+    body.no-scroll { overflow: hidden; }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 90;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.7 0 0 0 -0.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") repeat;
+      filter: invert(1);
+      opacity: 0.04;
+    }
+
+    /* Preloader */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: var(--bg-obsidian);
+      display: grid;
+      place-items: center;
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.7s;
+    }
+
+    .preloader.is-done {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .preloader__ring { width: 220px; height: 220px; overflow: visible; }
+    .preloader__ring circle { fill: rgba(244, 239, 230, 0.16); transition: fill 0.2s, r 0.2s; }
+    .preloader__ring circle[data-on] { fill: var(--ferrari-red); r: 2.3px; }
+    .preloader__center { position: absolute; text-align: center; }
+    .preloader__num {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 36px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.04em;
+    }
+    .preloader__sub {
+      display: block;
+      margin-top: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+    }
+
+    /* Header */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px clamp(20px, 4vw, 48px);
+      pointer-events: none;
+    }
+    .topbar > * { pointer-events: auto; }
+
+    .crest {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--cream);
+      background: rgba(11, 11, 12, 0.72);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+    }
+    .crest__badge {
+      display: inline-grid;
+      place-items: center;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--ferrari-red);
+      color: #fff;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    .era-pill {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(11, 11, 12, 0.72);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      padding: 4px;
+      border-radius: 999px;
+    }
+    .era-pill a {
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: color 0.25s, background 0.25s;
+    }
+    .era-pill a:hover, .era-pill a.is-active { color: var(--cream); background: rgba(255,255,255,0.09); }
+    .era-pill a[data-target="mclaren"].is-active { color: var(--mclaren-papaya); }
+    .era-pill a[data-target="mercedes"].is-active { color: var(--mercedes-teal); }
+    .era-pill a[data-target="ferrari"].is-active { color: var(--ferrari-red); }
+
+    .menu-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ferrari-red);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .menu-btn__lines { display: grid; gap: 4px; width: 16px; }
+    .menu-btn__lines span { display: block; height: 1.5px; background: currentColor; }
+
+    /* Nav Overlay */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      background: #0d0e10;
+      background-image: radial-gradient(circle at 80% 20%, rgba(225, 6, 0, 0.16), transparent 55%),
+                        radial-gradient(circle at 15% 85%, rgba(212, 175, 55, 0.12), transparent 50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px clamp(24px, 5vw, 72px) 40px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-12px);
+      transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.4s;
+    }
+    .nav-overlay.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-overlay__top { display: flex; justify-content: space-between; align-items: center; }
+    .nav-close {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .nav-overlay__grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 48px;
+      align-items: center;
+      margin: auto 0;
+    }
+    .nav-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+    .nav-links a {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 18px;
+      text-decoration: none;
+      color: var(--cream);
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 4.2vw, 54px);
+      line-height: 1.05;
+      transition: color 0.25s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-links a span { font-family: var(--font-mono); font-size: 12px; color: var(--gold); letter-spacing: 0.12em; }
+    .nav-links a:hover { color: var(--ferrari-red); transform: translateX(10px); }
+    .nav-meta { border-left: 1px solid var(--line); padding-left: 40px; display: grid; gap: 24px; }
+    .nav-meta__crest { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); }
+    .nav-meta__quote { font-family: var(--font-serif); font-size: 28px; line-height: 1.25; margin: 0; }
+    .nav-overlay__foot {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .nav-socials { display: flex; gap: 20px; }
+    .nav-socials a { color: var(--cream); text-decoration: none; letter-spacing: 0.08em; }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 100px clamp(20px, 4vw, 48px) 32px;
+      background: radial-gradient(ellipse at 50% 40%, rgba(225, 6, 0, 0.14), transparent 65%), var(--bg-obsidian);
+    }
+    .hero__canvas-wrap { position: absolute; inset: 0; z-index: 1; }
+    .hero__canvas-wrap canvas { width: 100%; height: 100%; display: block; }
+    .hero__topo {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.18; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800' fill='none' stroke='%23d4af37' stroke-width='0.7'%3E%3Cpath d='M-50 220 C 140 160, 260 310, 460 250 C 650 190, 740 280, 860 230'/%3E%3Cpath d='M-50 270 C 160 210, 280 350, 480 290 C 670 230, 750 320, 860 270'/%3E%3Cpath d='M-50 540 C 180 480, 320 620, 520 550 C 700 490, 760 580, 860 530'/%3E%3Cpath d='M-50 590 C 190 530, 340 670, 540 600 C 710 540, 770 630, 860 580'/%3E%3Ccircle cx='400' cy='400' r='260' stroke-dasharray='4 8'/%3E%3C/svg%3E");
+      background-size: cover;
+    }
+    .hero__content {
+      position: relative;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: end;
+      gap: 24px;
+      pointer-events: none;
+    }
+    .hero__content > * { pointer-events: auto; }
+    .hero__kicker { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold); margin: 0 0 10px; }
+    .hero__title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(52px, 7.5vw, 118px); line-height: 0.92; letter-spacing: -0.02em; margin: 0; }
+    .hero__title em { font-style: italic; color: var(--ferrari-red); }
+    .hero__sub { font-size: clamp(14px, 1.2vw, 17px); line-height: 1.5; color: rgba(244, 239, 230, 0.8); max-width: 38ch; margin: 14px 0 0; }
+    .hero__center-hint { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(244, 239, 230, 0.55); text-align: center; padding-bottom: 6px; }
+    .hero__widgets { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+    .race-card {
+      background: rgba(19, 20, 23, 0.82);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: var(--cream);
+    }
+    .race-card:hover { border-color: var(--ferrari-red); }
+    .race-card__meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .race-card__meta strong { display: block; font-size: 13px; color: var(--cream); margin-top: 3px; }
+    .race-card__meta span { color: var(--gold); }
+    .scroll-cue {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--cream); background: var(--ferrari-red); padding: 8px 14px; border-radius: 6px; text-decoration: none;
+    }
+
+    /* Sections */
+    .section {
+      position: relative;
+      padding: clamp(72px, 10vw, 124px) clamp(20px, 5vw, 72px);
+      border-top: 1px solid var(--line);
+    }
+    .section__eyebrow { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold); margin: 0 0 14px; }
+    .section__heading { font-family: var(--font-serif); font-weight: 400; font-size: clamp(38px, 5vw, 72px); line-height: 1; margin: 0 0 24px; max-width: 18ch; }
+
+    /* Telemetry */
+    .telemetry { background: #0d0e11; }
+    .telemetry__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-top: 40px; }
+    .stat-card { background: var(--bg-carbon); border: 1px solid var(--line); border-radius: 14px; padding: 24px 20px; position: relative; overflow: hidden; }
+    .stat-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--ferrari-red), var(--gold)); }
+    .stat-card__val { font-family: var(--font-mono); font-size: clamp(34px, 3.6vw, 48px); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .stat-card__label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-top: 8px; }
+    .stat-card__note { font-size: 12px; color: var(--gold); margin-top: 6px; }
+    .wins-bar { margin-top: 40px; background: var(--bg-carbon); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+    .wins-bar__head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
+    .wins-bar__track { display: flex; height: 14px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,0.06); gap: 3px; }
+    .wins-bar__legend { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 14px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+    .wins-bar__legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 8px; vertical-align: middle; }
+
+    /* 3D Garage Showroom */
+    .garage {
+      background: radial-gradient(circle at 50% 45%, rgba(225, 6, 0, 0.1), transparent 60%), #0a0b0d;
+    }
+    .garage__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    .garage__controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .car-btn {
+      background: var(--bg-carbon);
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .car-btn.is-active {
+      background: var(--ferrari-red);
+      color: #fff;
+      border-color: var(--ferrari-red);
+    }
+    .car-btn[data-car="mercedes"].is-active { background: var(--mercedes-teal); color: #081111; border-color: var(--mercedes-teal); }
+    .car-btn[data-car="mclaren"].is-active { background: var(--mclaren-papaya); color: #fff; border-color: var(--mclaren-papaya); }
+
+    .garage__stage {
+      position: relative;
+      height: clamp(380px, 58vh, 580px);
+      background: radial-gradient(circle at 50% 70%, rgba(255,255,255,0.04), transparent 65%), #0c0d10;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .garage__stage canvas { width: 100%; height: 100%; display: block; cursor: grab; }
+    .garage__stage canvas:active { cursor: grabbing; }
+    .garage__hud {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      pointer-events: none;
+    }
+    .garage__hud > * { pointer-events: auto; }
+    .garage__status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(11, 11, 12, 0.78);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      border-radius: 999px;
+    }
+    .garage__mode {
+      display: flex;
+      gap: 8px;
+    }
+    .mode-btn {
+      background: rgba(11, 11, 12, 0.82);
+      color: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .mode-btn.is-active { border-color: var(--gold); color: var(--gold); }
+
+    /* Era Chapters with Vertical Editorial Gallery */
+    .era--mclaren {
+      background: radial-gradient(circle at 85% 20%, rgba(255, 85, 0, 0.14), transparent 55%), var(--mclaren-bg);
+      --era-local: var(--mclaren-papaya);
+      --era-local-2: var(--mclaren-silver);
+    }
+    .era--mercedes {
+      background: radial-gradient(circle at 15% 25%, rgba(0, 210, 190, 0.14), transparent 55%), var(--mercedes-bg);
+      --era-local: var(--mercedes-teal);
+      --era-local-2: var(--mercedes-silver);
+    }
+    .era--ferrari {
+      background: radial-gradient(circle at 80% 30%, rgba(225, 6, 0, 0.22), transparent 55%), var(--ferrari-dark);
+      --era-local: var(--ferrari-red);
+      --era-local-2: var(--modena-yellow);
+    }
+    .era__header { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: end; margin-bottom: 44px; }
+    .era__years { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--era-local); margin-bottom: 10px; }
+    .era__title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(42px, 5.5vw, 78px); line-height: 0.96; margin: 0; }
+    .era__summary { font-size: 16px; line-height: 1.65; color: rgba(244, 239, 230, 0.8); margin: 0; }
+    .era__chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .era__chip { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); color: var(--era-local-2); }
+
+    .era__gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .era__card {
+      position: relative;
+      margin: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #0c0c0e;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      aspect-ratio: 3 / 4;
+    }
+    .era__card img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .era__card:hover img { transform: scale(1.04); }
+    .era__caption {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 36px 16px 14px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.88), transparent);
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--cream); display: flex; justify-content: space-between; gap: 8px;
+    }
+    .era__caption span { color: var(--era-local); white-space: nowrap; }
+
+    /* Helmets Hall of Fame */
+    .helmets { background: #0b0b0c; }
+    .helmets__top { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: 40px; }
+    .helmets__filters { display: flex; flex-wrap: wrap; gap: 8px; }
+    .filter-btn {
+      background: var(--bg-carbon); color: var(--muted); border: 1px solid var(--line);
+      border-radius: 999px; padding: 8px 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+    }
+    .filter-btn.is-active, .filter-btn:hover { background: var(--cream); color: #111; border-color: var(--cream); }
+    .helmets__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+    .helmet-card {
+      position: relative; background: #141417; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; cursor: pointer;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s;
+    }
+    .helmet-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+    .helmet-card.is-hidden { display: none; }
+    .helmet-card__media { aspect-ratio: 1 / 1; overflow: hidden; background: #0e0e10; }
+    .helmet-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s; }
+    .helmet-card:hover .helmet-card__media img { transform: scale(1.06); }
+    .helmet-card__tag {
+      position: absolute; right: 0; bottom: 0; background: #0b0b0c; padding: 10px 16px 10px 18px;
+      border-top-left-radius: 16px; border-top: 1px solid var(--line); border-left: 1px solid var(--line);
+      font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; text-align: right;
+    }
+    .helmet-card__tag strong { display: block; color: var(--cream); font-size: 12px; }
+    .helmet-card__tag span { color: var(--gold); }
+
+    /* Modal */
+    .modal {
+      position: fixed; inset: 0; z-index: 95; background: rgba(8, 8, 10, 0.85); backdrop-filter: blur(14px);
+      display: grid; place-items: center; padding: 24px; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s;
+    }
+    .modal.is-open { opacity: 1; visibility: visible; }
+    .modal__box {
+      background: var(--bg-carbon); border: 1px solid var(--line); border-radius: 20px;
+      max-width: 820px; width: 100%; max-height: 90vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; position: relative;
+    }
+    .modal__img { aspect-ratio: 1 / 1; max-height: 90vh; overflow: hidden; background: #0b0b0c; }
+    .modal__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .modal__body { padding: 32px; display: flex; flex-direction: column; justify-content: center; gap: 14px; overflow-y: auto; }
+    .modal__close {
+      position: absolute; top: 14px; right: 14px; z-index: 2;
+      background: rgba(11, 11, 12, 0.85); color: var(--cream); border: 1px solid var(--line); border-radius: 8px;
+      padding: 8px 14px; font-family: var(--font-mono); font-size: 11px; cursor: pointer;
+    }
+
+    /* Circuits */
+    .circuits { background: #0f1013; }
+    .circuits__layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center; margin-top: 32px; }
+    .circuit-tabs { display: grid; gap: 10px; }
+    .circuit-tab {
+      text-align: left; background: var(--bg-carbon); border: 1px solid var(--line); border-radius: 12px;
+      padding: 16px 20px; color: var(--cream); cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    }
+    .circuit-tab.is-active, .circuit-tab:hover { border-color: var(--ferrari-red); background: rgba(225, 6, 0, 0.08); }
+    .circuit-tab strong { display: block; font-size: 16px; font-weight: 500; }
+    .circuit-tab small { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+    .circuit-tab__wins { font-family: var(--font-mono); font-size: 13px; color: var(--gold); }
+    .circuit-stage { background: var(--bg-carbon); border: 1px solid var(--line); border-radius: 18px; padding: 32px; display: grid; gap: 20px; }
+    .circuit-stage svg { width: 100%; max-height: 220px; stroke: var(--ferrari-red); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 12px rgba(225, 6, 0, 0.35)); }
+    .circuit-stage__info h3 { font-family: var(--font-serif); font-weight: 400; font-size: 34px; margin: 0 0 8px; }
+    .circuit-stage__info p { margin: 0; color: rgba(244, 239, 230, 0.78); line-height: 1.55; font-size: 15px; }
+
+    /* Ventures */
+    .ventures { background: #100f0d; }
+    .ventures__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px; }
+    .venture-card { background: #171613; border: 1px solid rgba(212, 175, 55, 0.18); border-radius: 18px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.1fr; }
+    .venture-card__img { min-height: 240px; overflow: hidden; }
+    .venture-card__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .venture-card__body { padding: 26px; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+    .venture-card__tag { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); }
+    .venture-card__title { font-family: var(--font-serif); font-weight: 400; font-size: 30px; margin: 0; }
+    .venture-card__desc { margin: 0; font-size: 14px; line-height: 1.55; color: rgba(244, 239, 230, 0.75); }
+
+    /* Footer */
+    .footer-wrap { padding: 24px clamp(16px, 3vw, 40px) 32px; background: var(--bg-obsidian); }
+    .footer { position: relative; background: #111113; border: 2px solid var(--ferrari-red); border-radius: 24px; padding: 64px clamp(24px, 5vw, 64px) 32px; overflow: hidden; }
+    .footer__notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--ferrari-red); color: #fff; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 20px; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
+    .footer__statement { font-family: var(--font-serif); font-size: clamp(54px, 10vw, 150px); line-height: 0.9; text-align: center; margin: 12px 0 40px; color: rgba(244, 239, 230, 0.1); user-select: none; }
+    .footer__statement span { color: rgba(225, 6, 0, 0.28); }
+    .marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 16px 0; margin-bottom: 36px; }
+    .marquee__track { display: flex; gap: 48px; white-space: nowrap; width: max-content; animation: marquee 28s linear infinite; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .footer__cols { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px; font-family: var(--font-mono); font-size: 12px; }
+    .footer__cols h4 { margin: 0 0 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); }
+    .footer__cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+    .footer__cols a { color: var(--cream); text-decoration: none; }
+    .footer__cols a:hover { color: var(--ferrari-red); }
+    .footer__bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+
+    @media (max-width: 1024px) {
+      .era__gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 960px) {
+      .era-pill { display: none; }
+      .hero__content { grid-template-columns: 1fr; }
+      .hero__center-hint { display: none; }
+      .hero__widgets { align-items: flex-start; }
+      .era__header { grid-template-columns: 1fr; gap: 16px; }
+      .circuits__layout { grid-template-columns: 1fr; }
+      .ventures__grid { grid-template-columns: 1fr; }
+      .venture-card { grid-template-columns: 1fr; }
+      .nav-overlay__grid { grid-template-columns: 1fr; }
+      .nav-meta { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 20px; }
+      .modal__box { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .era__gallery { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .marquee__track { animation: none; }
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="preloader" id="preloader" role="progressbar" aria-label="Loading Lewis Hamilton Portfolio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <svg class="preloader__ring" viewBox="-110 -110 220 220" aria-hidden="true"></svg>
+    <div class="preloader__center">
+      <span class="preloader__num" id="loaderNum">000</span>
+      <span class="preloader__sub">CAR #44 // 7X CHAMPION</span>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <a class="crest" href="#hero">
+      <span class="crest__badge">44</span>
+      <span>SIR LEWIS HAMILTON</span>
+    </a>
+
+    <nav class="era-pill" aria-label="Era Quick Jump">
+      <a href="#garage" data-target="garage">3D Garage</a>
+      <a href="#mclaren" data-target="mclaren">McLaren</a>
+      <a href="#mercedes" data-target="mercedes">Mercedes</a>
+      <a href="#ferrari" data-target="ferrari" class="is-active">Ferrari</a>
+    </nav>
+
+    <button class="menu-btn" id="menuOpenBtn" aria-expanded="false" aria-controls="navOverlay">
+      <span>Menu</span>
+      <span class="menu-btn__lines" aria-hidden="true"><span></span><span></span></span>
+    </button>
+  </header>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true">
+    <div class="nav-overlay__top">
+      <span class="crest__badge" style="width:36px;height:36px;font-size:14px;">44</span>
+      <button class="nav-close" id="menuCloseBtn">Close ✕</button>
+    </div>
+
+    <div class="nav-overlay__grid">
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link"><span>01</span> Home</a></li>
+        <li><a href="#telemetry" class="nav-link"><span>02</span> Telemetry &amp; Records</a></li>
+        <li><a href="#garage" class="nav-link"><span>03</span> 3D F1 Garage</a></li>
+        <li><a href="#mclaren" class="nav-link"><span>04</span> The Three Eras</a></li>
+        <li><a href="#helmets" class="nav-link"><span>05</span> Helmets Hall of Fame</a></li>
+        <li><a href="#circuits" class="nav-link"><span>06</span> Signature Circuits</a></li>
+        <li><a href="#ventures" class="nav-link"><span>07</span> Beyond the Visor</a></li>
+      </ul>
+
+      <div class="nav-meta">
+        <div class="nav-meta__crest">7× World Champion · 106 Wins · Scuderia Ferrari</div>
+        <p class="nav-meta__quote">“Still I rise—not just for the trophies, but for everyone who never saw themselves on the grid.”</p>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--muted);">
+          STEVENAGE, UK → MARANELLO, ITALY<br>
+          FORMULA 1 DEBUT: AUSTRALIA 2007
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-overlay__foot">
+      <span>CAR #44 ARCHIVE &amp; PORTFOLIO</span>
+      <div class="nav-socials">
+        <a href="#ventures">MISSION 44</a>
+        <a href="#ventures">+44</a>
+        <a href="#ventures">DAWN APOLLO</a>
+        <a href="#ventures">ALMAVE</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero with Three.js WebGL Interactive Portrait -->
+  <section class="hero" id="hero">
+    <div class="hero__topo" aria-hidden="true"></div>
+    <div class="hero__canvas-wrap" id="heroCanvasWrap" aria-hidden="true"></div>
+
+    <div class="hero__content">
+      <div>
+        <p class="hero__kicker">Scuderia Ferrari · Car #44 · 7× World Champion</p>
+        <h1 class="hero__title">Still We <em>Rise.</em></h1>
+        <p class="hero__sub">Twenty seasons at the pinnacle of motorsport. One hundred and six Grand Prix victories across McLaren, Mercedes-AMG, and Scuderia Ferrari.</p>
+      </div>
+
+      <div class="hero__center-hint">Move cursor to shift light &amp; depth</div>
+
+      <div class="hero__widgets">
+        <a class="race-card" href="#garage">
+          <svg width="46" height="34" viewBox="0 0 120 80" fill="none" stroke="#e10600" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 58 L38 20 L86 16 L104 34 L94 60 L58 64 L44 50 Z"/>
+          </svg>
+          <div class="race-card__meta">
+            <span>Interactive 3D Garage</span>
+            <strong>Inspect SF-26, W11 &amp; MP4-27</strong>
+          </div>
+        </a>
+        <a class="scroll-cue" href="#telemetry">Explore 20 Years ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Telemetry -->
+  <section class="section telemetry" id="telemetry">
+    <p class="section__eyebrow">01 // Career Telemetry (2007–2026)</p>
+    <h2 class="section__heading">Every record, rewritten.</h2>
+
+    <div class="telemetry__grid">
+      <div class="stat-card">
+        <div class="stat-card__val">7</div>
+        <div class="stat-card__label">World Titles</div>
+        <div class="stat-card__note">2008, 14, 15, 17, 18, 19, 20</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__val">106</div>
+        <div class="stat-card__label">Grand Prix Wins</div>
+        <div class="stat-card__note">All-time F1 record</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__val">105</div>
+        <div class="stat-card__label">Pole Positions</div>
+        <div class="stat-card__note">All-time F1 record</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__val">209</div>
+        <div class="stat-card__label">Podium Finishes</div>
+        <div class="stat-card__note">All-time F1 record</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__val">401</div>
+        <div class="stat-card__label">Grands Prix Starts</div>
+        <div class="stat-card__note">20 seasons on the grid</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__val">5,285.5</div>
+        <div class="stat-card__label">Career Points</div>
+        <div class="stat-card__note">70 Fastest Laps</div>
+      </div>
+    </div>
+
+    <div class="wins-bar">
+      <div class="wins-bar__head">
+        <span>106 Victories by Constructor</span>
+        <span style="color:var(--gold)">2007 — 2026</span>
+      </div>
+      <div class="wins-bar__track">
+        <div class="wins-bar__seg" style="width:19.8%;background:var(--mclaren-papaya);" title="McLaren: 21 Wins"></div>
+        <div class="wins-bar__seg" style="width:79.2%;background:var(--mercedes-teal);" title="Mercedes-AMG: 84 Wins"></div>
+        <div class="wins-bar__seg" style="width:1%;min-width:10px;background:var(--ferrari-red);" title="Scuderia Ferrari: 1 Win"></div>
+      </div>
+      <div class="wins-bar__legend">
+        <span><i style="background:var(--mclaren-papaya)"></i>McLaren (21 Wins)</span>
+        <span><i style="background:var(--mercedes-teal)"></i>Mercedes-AMG Petronas (84 Wins)</span>
+        <span><i style="background:var(--ferrari-red)"></i>Scuderia Ferrari (1 Win · Barcelona 2026)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive 3D F1 Garage -->
+  <section class="section garage" id="garage">
+    <div class="garage__head">
+      <div>
+        <p class="section__eyebrow">02 // Interactive WebGL Showroom</p>
+        <h2 class="section__heading" style="margin-bottom:0">The 3D Garage</h2>
+      </div>
+      <div class="garage__controls" role="group" aria-label="Select 3D F1 Car">
+        <button class="car-btn is-active" data-car="ferrari">2026 Ferrari SF-26</button>
+        <button class="car-btn" data-car="mercedes">2020 Mercedes W11</button>
+        <button class="car-btn" data-car="mclaren">2012 McLaren MP4-27</button>
+      </div>
+    </div>
+
+    <div class="garage__stage" id="garageStage">
+      <div class="garage__hud">
+        <div class="garage__status" id="garageStatus">Scroll here or select a chassis to load 3D model</div>
+        <div class="garage__mode">
+          <button class="mode-btn is-active" id="modeSolidBtn">Studio Solid</button>
+          <button class="mode-btn" id="modePointsBtn">Point Cloud</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Era I: McLaren -->
+  <section class="section era era--mclaren" id="mclaren">
+    <div class="era__header">
+      <div>
+        <div class="era__years">Chapter I // 2007 — 2012 · Woking</div>
+        <h2 class="era__title">McLaren Mercedes:<br>The Prodigy</h2>
+      </div>
+      <div>
+        <p class="era__summary">From his audacious debut overtake in Melbourne 2007 to that rain-soaked final corner at Interlagos in 2008, Hamilton announced himself with fearless late-braking and 21 victories in Chrome Silver and Rocket Red.</p>
+        <div class="era__chips">
+          <span class="era__chip">21 Wins</span>
+          <span class="era__chip">26 Poles</span>
+          <span class="era__chip">2008 World Champion</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="era__gallery">
+      <figure class="era__card">
+        <img src="./assets/Mine/LEWIS MCLAREN.jpeg" alt="Lewis Hamilton celebrating in McLaren Vodafone race suit" loading="lazy">
+        <figcaption class="era__caption">Night Victory Pose <span>McLaren</span></figcaption>
+      </figure>
+      <figure class="era__card">
+        <img src="./assets/Mine/Lewis Hamilton - McLaren MP4-25.jpeg" alt="Lewis Hamilton raising fist in McLaren MP4-25 cockpit" loading="lazy">
+        <figcaption class="era__caption">MP4-25 Cockpit <span>2010</span></figcaption>
+      </figure>
+      <figure class="era__card">
+        <img src="./assets/Mine/Lewis Hamilton at McLaren.jpeg" alt="Lewis Hamilton driving McLaren in heavy rain spray" loading="lazy">
+        <figcaption class="era__caption">Wet-Weather Mastery <span>2011</span></figcaption>
+      </figure>
+      <figure class="era__card">
+        <img src="./assets/Autofetched/mclaren-mp4-22.jpg" alt="McLaren MP4-22 chassis" loading="lazy">
+        <figcaption class="era__caption">McLaren MP4-22 <span>2007</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Era II: Mercedes-AMG Petronas -->
+  <section class="section era era--mercedes" id="mercedes">
+    <div class="era__header">
+      <div>
+        <div class="era__years">Chapter II // 2013 — 2024 · Brackley</div>
+        <h2 class="era__title">Mercedes-AMG:<br>The Dynasty</h2>
+      </div>
+      <div>
+        <p class="era__summary">A twelve-season partnership that redefined Formula 1. Eighty-four victories, six Drivers' Championships, and nine triumphs at Silverstone—culminating in an unforgettable farewell home win in 2024.</p>
+        <div class="era__chips">
+          <span class="era__chip">84 Wins</span>
+          <span class="era__chip">6 World Titles</span>
+          <span class="era__chip">9× British GP Winner</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="era__gallery">
+      <figure class="era__card">
+        <img src="./assets/Mine/Lewis Hamilton - Mercedes F1.jpeg" alt="Lewis Hamilton Abu Dhabi donuts in Mercedes-AMG F1" loading="lazy">
+        <figcaption class="era__caption">Yas Marina Farewell <span>Abu Dhabi</span></figcaption>
+      </figure>
+      <figure class="era__card">
+        <img src="./assets/Mine/Lewis Hamilton wins the Hungarian GP, 2019 - photo by Motorsport Images.jpeg" alt="Lewis Hamilton celebrating 2019 Hungarian GP win" loading="lazy">
+        <figcaption class="era__caption">8th Hungaroring Win <span>2019</span></figcaption>
+      </figure>
+      <figure class="era__card">
+        <img src="./assets/Mine/Lewis Hamilton.jpeg" alt="Lewis Hamilton in 2020 black Mercedes suit and purple helmet" loading="lazy">
+        <figcaption class="era__caption">W11 — 7th Crown <span>2020</span></figcaption>
+      </figure>
+      <figure class="era__card">
+        <img src="./assets/Mine/lewis hamilton • '23 brazil.jpeg" alt="Lewis Hamilton in Brazil 2023 tribute helmet" loading="lazy">
+        <figcaption class="era__caption">Interlagos Tribute <span>Brazil 2023</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Era III: Scuderia Ferrari -->
+  <section class="section era era--ferrari" id="ferrari">
+    <div class="era__header">
+      <div>
+        <div class="era__years">Chapter III // 2025 — Present · Maranello</div>
+        <h2 class="era__title">Scuderia Ferrari:<br>The Crimson Chapter</h2>
+      </div>
+      <div>
+        <p class="era__summary">Joining the Prancing Horse in 2025, Hamilton spent a transitional year building with Maranello before storming back in 2026—taking his landmark first victory in Ferrari red at Barcelona-Catalunya and climbing to 3rd in the championship.</p>
+        <div class="era__chips">
+          <span class="era__chip">Barcelona 2026 Winner</span>
+          <span class="era__chip">7 Podiums in 2026</span>
+          <span class="era__chip">267 Pts (2026)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="era__gallery">
+      <figure class="era__card">
+        <img src="./assets/Mine/lewis hamilton • '25 japan.jpeg" alt="Top-down view of Lewis Hamilton in Ferrari cockpit at Japan 2025" loading="lazy">
+        <figcaption class="era__caption">Suzuka Cockpit #44 <span>Japan 2025</span></figcaption>
+      </figure>
+      <figure class="era__card">
+        <img src="./assets/Mine/LEWIS HAMILTON SINGAPORE 2025_.jpeg" alt="Lewis Hamilton in Scuderia Ferrari suit and gold helmet" loading="lazy">
+        <figcaption class="era__caption">Marina Bay Portrait <span>Singapore 2025</span></figcaption>
+      </figure>
+      <figure class="era__card">
+        <img src="./assets/Autofetched/ferrari-fanzone-2025.jpg" alt="Lewis Hamilton on Suzuka Fanzone stage in Ferrari red" loading="lazy">
+        <figcaption class="era__caption">Tifosi &amp; Fanzone <span>2025</span></figcaption>
+      </figure>
+      <figure class="era__card">
+        <img src="./assets/Autofetched/ferrari-bahrain-2026.jpg" alt="Lewis Hamilton Ferrari qualifying under Bahrain floodlights 2026" loading="lazy">
+        <figcaption class="era__caption">SF-26 Floodlights <span>Bahrain 2026</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Helmets Hall of Fame -->
+  <section class="section helmets" id="helmets">
+    <div class="helmets__top">
+      <div>
+        <p class="section__eyebrow">04 // Archive</p>
+        <h2 class="section__heading" style="margin-bottom:0">Helmets Hall of Fame</h2>
+      </div>
+      <div class="helmets__filters" role="group" aria-label="Filter helmets by era">
+        <button class="filter-btn is-active" data-filter="all">All (10)</button>
+        <button class="filter-btn" data-filter="mclaren">McLaren</button>
+        <button class="filter-btn" data-filter="mercedes">Mercedes</button>
+        <button class="filter-btn" data-filter="ferrari">Ferrari</button>
+      </div>
+    </div>
+
+    <div class="helmets__grid" id="helmetsGrid"></div>
+  </section>
+
+  <!-- Helmet Detail Modal -->
+  <div class="modal" id="helmetModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal__box">
+      <button class="modal__close" id="modalCloseBtn">Close ✕</button>
+      <div class="modal__img"><img id="modalImg" src="" alt=""></div>
+      <div class="modal__body">
+        <span class="section__eyebrow" id="modalEra"></span>
+        <h3 style="font-family:var(--font-serif);font-size:36px;font-weight:400;margin:0;" id="modalTitle"></h3>
+        <p style="margin:0;color:rgba(244,239,230,0.8);line-height:1.6;font-size:15px;" id="modalDesc"></p>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--gold);padding-top:8px;" id="modalStats"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signature Circuits -->
+  <section class="section circuits" id="circuits">
+    <p class="section__eyebrow">05 // On Track</p>
+    <h2 class="section__heading">Signature Circuits</h2>
+
+    <div class="circuits__layout">
+      <div class="circuit-tabs" id="circuitTabs"></div>
+      <div class="circuit-stage">
+        <svg viewBox="0 0 260 150" id="circuitSvg" aria-hidden="true">
+          <path id="circuitPath" d=""></path>
+        </svg>
+        <div class="circuit-stage__info">
+          <h3 id="circuitName"></h3>
+          <p id="circuitStory"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beyond the Visor -->
+  <section class="section ventures" id="ventures">
+    <p class="section__eyebrow">06 // The Man</p>
+    <h2 class="section__heading">Beyond the Visor</h2>
+
+    <div class="ventures__grid">
+      <article class="venture-card">
+        <div class="venture-card__img"><img src="./assets/Autofetched/venture-mission44.jpg" alt="Mission 44" loading="lazy"></div>
+        <div class="venture-card__body">
+          <span class="venture-card__tag">Foundation · Est. 2021</span>
+          <h3 class="venture-card__title">Mission 44</h3>
+          <p class="venture-card__desc">Founded to build a fairer, more inclusive future—opening STEM and motorsport career pathways for underrepresented young people globally.</p>
+        </div>
+      </article>
+
+      <article class="venture-card">
+        <div class="venture-card__img"><img src="./assets/Autofetched/venture-plus44.jpg" alt="+44 Plus 44" loading="lazy"></div>
+        <div class="venture-card__body">
+          <span class="venture-card__tag">Fashion &amp; Culture</span>
+          <h3 class="venture-card__title">+44 (Plus 44)</h3>
+          <p class="venture-card__desc">Creative lifestyle and streetwear house anchored by his lifelong racing number, bridging paddock heritage with high-fashion collaborations.</p>
+        </div>
+      </article>
+
+      <article class="venture-card">
+        <div class="venture-card__img"><img src="./assets/Autofetched/venture-dawn-apollo.jpg" alt="Dawn Apollo Films" loading="lazy"></div>
+        <div class="venture-card__body">
+          <span class="venture-card__tag">Cinema · Est. 2022</span>
+          <h3 class="venture-card__title">Dawn Apollo Films</h3>
+          <p class="venture-card__desc">Production studio co-founded to tell bold, diverse stories—spanning Apple Original Films' F1 feature and Hamilton's documentary.</p>
+        </div>
+      </article>
+
+      <article class="venture-card">
+        <div class="venture-card__img"><img src="./assets/Autofetched/venture-almave.jpg" alt="Almave" loading="lazy"></div>
+        <div class="venture-card__body">
+          <span class="venture-card__tag">Distilled Agave · Jalisco</span>
+          <h3 class="venture-card__title">Almave</h3>
+          <p class="venture-card__desc">Non-alcoholic blue agave spirit crafted in Jalisco with master distiller Iván Saldaña—authentic agave character without the alcohol.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer-wrap">
+    <footer class="footer">
+      <div class="footer__notch">Car #44 · Legacy</div>
+      <div class="footer__statement">STILL WE <span>RISE.</span></div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>SCUDERIA FERRARI</span><span>·</span>
+          <span>MISSION 44</span><span>·</span>
+          <span>+44</span><span>·</span>
+          <span>DAWN APOLLO FILMS</span><span>·</span>
+          <span>ALMAVE</span><span>·</span>
+          <span>DENVER BRONCOS</span><span>·</span>
+          <span>MERCEDES-AMG</span><span>·</span>
+          <span>MCLAREN</span><span>·</span>
+          <span>SCUDERIA FERRARI</span><span>·</span>
+          <span>MISSION 44</span><span>·</span>
+          <span>+44</span><span>·</span>
+          <span>DAWN APOLLO FILMS</span><span>·</span>
+          <span>ALMAVE</span><span>·</span>
+          <span>DENVER BRONCOS</span><span>·</span>
+          <span>MERCEDES-AMG</span><span>·</span>
+          <span>MCLAREN</span><span>·</span>
+        </div>
+      </div>
+
+      <div class="footer__cols">
+        <div>
+          <h4>Chapters</h4>
+          <ul>
+            <li><a href="#mclaren">McLaren (2007–2012)</a></li>
+            <li><a href="#mercedes">Mercedes-AMG (2013–2024)</a></li>
+            <li><a href="#ferrari">Scuderia Ferrari (2025–2026)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>3D &amp; Archive</h4>
+          <ul>
+            <li><a href="#garage">3D F1 Garage</a></li>
+            <li><a href="#telemetry">Telemetry &amp; Records</a></li>
+            <li><a href="#helmets">Helmets Hall of Fame</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Ventures</h4>
+          <ul>
+            <li><a href="#ventures">Mission 44</a></li>
+            <li><a href="#ventures">+44 Studio</a></li>
+            <li><a href="#ventures">Dawn Apollo Films &amp; Almave</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>SIR LEWIS HAMILTON · #44 PORTFOLIO ARCHIVE</span>
+        <span>THREE.JS WEBGL PORTRAIT + 3D GLB GARAGE</span>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module">
+    import * as THREE from "three";
+    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+    // 1. Preloader
+    const preloader = document.getElementById("preloader");
+    const loaderNum = document.getElementById("loaderNum");
+    const ringSvg = document.querySelector(".preloader__ring");
+    const SVG_NS = "http://www.w3.org/2000/svg";
+    const RING_DOTS = 72;
+    const ringDots = [];
+
+    for (let i = 0; i < RING_DOTS; i++) {
+      const a = (i / RING_DOTS) * Math.PI * 2 - Math.PI / 2;
+      const c = document.createElementNS(SVG_NS, "circle");
+      c.setAttribute("cx", (92 * Math.cos(a)).toFixed(2));
+      c.setAttribute("cy", (92 * Math.sin(a)).toFixed(2));
+      c.setAttribute("r", "1.6");
+      ringSvg.appendChild(c);
+      ringDots.push(c);
+    }
+
+    function setLoaderProgress(p) {
+      const pct = Math.round(Math.max(0, Math.min(1, p)) * 100);
+      loaderNum.textContent = String(pct).padStart(3, "0");
+      preloader.setAttribute("aria-valuenow", String(pct));
+      for (let i = 0; i < RING_DOTS; i++) {
+        if (i / RING_DOTS < p) ringDots[i].setAttribute("data-on", "");
+        else ringDots[i].removeAttribute("data-on");
+      }
+    }
+
+    // 2. Three.js WebGL Interactive Portrait Hero
+    const heroWrap = document.getElementById("heroCanvasWrap");
+    const heroRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+    heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    heroWrap.appendChild(heroRenderer.domElement);
+
+    const heroScene = new THREE.Scene();
+    const heroCam = new THREE.PerspectiveCamera(32, 1, 0.1, 50);
+    heroCam.position.set(0, 0, 4.4);
+
+    const pointer = new THREE.Vector2(0, 0);
+    const smoothPointer = new THREE.Vector2(0, 0);
+    window.addEventListener("pointermove", (e) => {
+      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    let prog = 0;
+    const fakeTick = setInterval(() => {
+      prog = Math.min(0.88, prog + 0.14);
+      setLoaderProgress(prog);
+    }, 50);
+
+    const texLoader = new THREE.TextureLoader();
+    texLoader.load("./assets/Mine/Lewis Hamilton, 2025 Singapore GP.jpeg", (texture) => {
+      clearInterval(fakeTick);
+      setLoaderProgress(1);
+      setTimeout(() => preloader.classList.add("is-done"), 240);
+
+      texture.colorSpace = THREE.SRGBColorSpace;
+      const imgAspect = texture.image.width / texture.image.height;
+      const planeH = 2.95;
+      const planeW = planeH * imgAspect;
+
+      const planeGeo = new THREE.PlaneGeometry(planeW, planeH, 32, 32);
+      const planeMat = new THREE.ShaderMaterial({
+        uniforms: {
+          uTex: { value: texture },
+          uPointer: { value: smoothPointer },
+          uTime: { value: 0 },
+          uRed: { value: new THREE.Color("#e10600") },
+          uGold: { value: new THREE.Color("#d4af37") },
+        },
+        transparent: true,
+        vertexShader: `
+          uniform vec2 uPointer;
+          varying vec2 vUv;
+          void main() {
+            vUv = uv;
+            vec3 pos = position;
+            float dist = length(uv - 0.5);
+            pos.z += (1.0 - smoothstep(0.0, 0.7, dist)) * 0.14;
+            pos.x += uPointer.x * 0.08 * (1.0 - dist);
+            pos.y += uPointer.y * 0.06 * (1.0 - dist);
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+          }
+        `,
+        fragmentShader: `
+          uniform sampler2D uTex;
+          uniform vec2 uPointer;
+          uniform float uTime;
+          uniform vec3 uRed;
+          uniform vec3 uGold;
+          varying vec2 vUv;
+          void main() {
+            vec4 tex = texture2D(uTex, vUv);
+            float lum = dot(tex.rgb, vec3(0.299, 0.587, 0.114));
+            vec2 lightUv = uPointer * 0.45 + 0.5;
+            float dLight = length(vUv - lightUv);
+            float spot = exp(-dLight * dLight * 4.5);
+            vec2 edge = abs(vUv - 0.5) * 2.0;
+            float vig = smoothstep(1.0, 0.5, max(edge.x * 0.92, edge.y));
+            vec3 base = tex.rgb * (0.78 + spot * 0.5);
+            base += uRed * spot * (1.0 - lum) * 0.22;
+            base += uGold * pow(spot, 2.0) * 0.14;
+            float sweep = exp(-pow((vUv.y - vUv.x * 0.4 - sin(uTime * 0.4) * 0.6), 2.0) * 18.0);
+            base += uGold * sweep * 0.06;
+            gl_FragColor = vec4(base, vig);
+          }
+        `,
+      });
+
+      const portraitMesh = new THREE.Mesh(planeGeo, planeMat);
+      portraitMesh.position.y = -0.05;
+      heroScene.add(portraitMesh);
+
+      const P_COUNT = 3000;
+      const pPos = new Float32Array(P_COUNT * 3);
+      const pRand = new Float32Array(P_COUNT);
+      for (let i = 0; i < P_COUNT; i++) {
+        pPos[i * 3] = (Math.random() - 0.5) * 7.5;
+        pPos[i * 3 + 1] = (Math.random() - 0.5) * 4.8;
+        pPos[i * 3 + 2] = (Math.random() - 0.5) * 2.5 - 0.4;
+        pRand[i] = Math.random();
+      }
+      const pGeo = new THREE.BufferGeometry();
+      pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
+      pGeo.setAttribute("aRand", new THREE.BufferAttribute(pRand, 1));
+      const pMat = new THREE.ShaderMaterial({
+        uniforms: {
+          uTime: { value: 0 },
+          uPointer: { value: smoothPointer },
+          uRed: { value: new THREE.Color("#e10600") },
+          uGold: { value: new THREE.Color("#d4af37") },
+        },
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        vertexShader: `
+          attribute float aRand;
+          uniform float uTime;
+          uniform vec2 uPointer;
+          varying float vRand;
+          void main() {
+            vec3 pos = position;
+            pos.y = mod(pos.y + uTime * (0.04 + aRand * 0.06) + 2.4, 4.8) - 2.4;
+            pos.x += sin(uTime * 0.35 + aRand * 30.0) * 0.12 - uPointer.x * 0.18 * aRand;
+            pos.y -= uPointer.y * 0.12 * aRand;
+            vec4 mv = modelViewMatrix * vec4(pos, 1.0);
+            gl_Position = projectionMatrix * mv;
+            gl_PointSize = (6.0 + aRand * 10.0) / -mv.z;
+            vRand = aRand;
+          }
+        `,
+        fragmentShader: `
+          uniform vec3 uRed;
+          uniform vec3 uGold;
+          varying float vRand;
+          void main() {
+            float r = length(gl_PointCoord - 0.5);
+            if (r > 0.5) discard;
+            float a = exp(-14.0 * r * r) * (0.25 + vRand * 0.45);
+            vec3 col = mix(uGold, uRed, step(0.65, vRand));
+            gl_FragColor = vec4(col, a);
+          }
+        `,
+      });
+      heroScene.add(new THREE.Points(pGeo, pMat));
+
+      function resizeHero() {
+        const w = heroWrap.clientWidth;
+        const h = heroWrap.clientHeight;
+        heroRenderer.setSize(w, h, false);
+        heroCam.aspect = w / h;
+        heroCam.updateProjectionMatrix();
+      }
+      window.addEventListener("resize", resizeHero);
+      resizeHero();
+
+      const start = performance.now() * 0.001;
+      function animateHero() {
+        requestAnimationFrame(animateHero);
+        const t = performance.now() * 0.001 - start;
+        smoothPointer.lerp(pointer, 0.06);
+        planeMat.uniforms.uTime.value = t;
+        pMat.uniforms.uTime.value = t;
+        portraitMesh.rotation.y = smoothPointer.x * 0.07;
+        portraitMesh.rotation.x = -smoothPointer.y * 0.05;
+        heroRenderer.render(heroScene, heroCam);
+      }
+      animateHero();
+    });
+
+    // 3. Interactive 3D F1 Garage (GLB Showroom)
+    const garageStage = document.getElementById("garageStage");
+    const garageStatus = document.getElementById("garageStatus");
+    const modeSolidBtn = document.getElementById("modeSolidBtn");
+    const modePointsBtn = document.getElementById("modePointsBtn");
+
+    const CARS = {
+      ferrari: { label: "2026 Scuderia Ferrari SF-26", url: "./assets/models/ferrari-2026.glb", color: 0xe10600 },
+      mercedes: { label: "2020 Mercedes-AMG W11 (7th Title)", url: "./assets/models/mercedes-2020.glb", color: 0x00d2be },
+      mclaren: { label: "2012 McLaren MP4-27", url: "./assets/models/mclaren-2012.glb", color: 0xff5500 },
+    };
+
+    let garageInited = false;
+    let gRenderer, gScene, gCam, gControls, currentCarGroup, currentPointsGroup;
+    let viewMode = "solid";
+    const gltfLoader = new GLTFLoader();
+    const carCache = new Map();
+
+    function initGarageScene() {
+      if (garageInited) return;
+      garageInited = true;
+
+      gRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+      gRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      gRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+      gRenderer.toneMappingExposure = 1.25;
+      garageStage.insertBefore(gRenderer.domElement, garageStage.firstChild);
+
+      gScene = new THREE.Scene();
+      gCam = new THREE.PerspectiveCamera(36, garageStage.clientWidth / garageStage.clientHeight, 0.1, 100);
+      gCam.position.set(3.6, 1.45, 4.2);
+
+      gControls = new OrbitControls(gCam, gRenderer.domElement);
+      gControls.enableDamping = true;
+      gControls.enablePan = false;
+      gControls.minDistance = 2.2;
+      gControls.maxDistance = 8.5;
+      gControls.maxPolarAngle = Math.PI * 0.49;
+      gControls.autoRotate = true;
+      gControls.autoRotateSpeed = 0.9;
+
+      const hemi = new THREE.HemisphereLight(0xfff4e0, 0x1a1c22, 1.4);
+      gScene.add(hemi);
+      const key = new THREE.DirectionalLight(0xffffff, 2.4);
+      key.position.set(5, 8, 5);
+      gScene.add(key);
+      const rim = new THREE.DirectionalLight(0xe10600, 1.5);
+      rim.position.set(-5, 3, -4);
+      gScene.add(rim);
+
+      function resizeGarage() {
+        const w = garageStage.clientWidth;
+        const h = garageStage.clientHeight;
+        gRenderer.setSize(w, h, false);
+        gCam.aspect = w / h;
+        gCam.updateProjectionMatrix();
+      }
+      window.addEventListener("resize", resizeGarage);
+      resizeGarage();
+
+      function animateGarage() {
+        requestAnimationFrame(animateGarage);
+        gControls.update();
+        gRenderer.render(gScene, gCam);
+      }
+      animateGarage();
+    }
+
+    function buildPointCloudFromGroup(group, accentHex) {
+      const positions = [];
+      group.updateMatrixWorld(true);
+      group.traverse((child) => {
+        if (child.isMesh && child.geometry) {
+          const posAttr = child.geometry.attributes.position;
+          if (!posAttr) return;
+          const v = new THREE.Vector3();
+          const step = Math.max(1, Math.floor(posAttr.count / 1200));
+          for (let i = 0; i < posAttr.count; i += step) {
+            v.fromBufferAttribute(posAttr, i).applyMatrix4(child.matrixWorld);
+            positions.push(v.x, v.y, v.z);
+          }
+        }
+      });
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+      const mat = new THREE.PointsMaterial({
+        color: accentHex,
+        size: 0.025,
+        transparent: true,
+        opacity: 0.85,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      });
+      return new THREE.Points(geo, mat);
+    }
+
+    function applyGarageVisibility() {
+      if (currentCarGroup) currentCarGroup.visible = viewMode === "solid";
+      if (currentPointsGroup) currentPointsGroup.visible = viewMode === "points";
+    }
+
+    async function loadCar(key) {
+      initGarageScene();
+      const spec = CARS[key];
+      garageStatus.textContent = `Loading ${spec.label}...`;
+
+      if (currentCarGroup) gScene.remove(currentCarGroup);
+      if (currentPointsGroup) gScene.remove(currentPointsGroup);
+
+      if (carCache.has(key)) {
+        const cached = carCache.get(key);
+        currentCarGroup = cached.solid;
+        currentPointsGroup = cached.points;
+        gScene.add(currentCarGroup);
+        gScene.add(currentPointsGroup);
+        applyGarageVisibility();
+        garageStatus.textContent = `${spec.label} · Drag to orbit · Scroll to zoom`;
+        return;
+      }
+
+      try {
+        const gltf = await gltfLoader.loadAsync(spec.url, (ev) => {
+          if (ev.total) {
+            const pct = Math.round((ev.loaded / ev.total) * 100);
+            garageStatus.textContent = `Loading ${spec.label} · ${pct}%`;
+          }
+        });
+        const root = gltf.scene;
+        const box = new THREE.Box3().setFromObject(root);
+        const size = box.getSize(new THREE.Vector3());
+        const center = box.getCenter(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z) || 1;
+        const scale = 4.2 / maxDim;
+        root.scale.setScalar(scale);
+        root.position.sub(center.multiplyScalar(scale));
+        root.position.y -= (box.min.y * scale - center.y * scale) * 0.15;
+
+        const pts = buildPointCloudFromGroup(root, spec.color);
+        carCache.set(key, { solid: root, points: pts });
+
+        currentCarGroup = root;
+        currentPointsGroup = pts;
+        gScene.add(currentCarGroup);
+        gScene.add(currentPointsGroup);
+        applyGarageVisibility();
+        garageStatus.textContent = `${spec.label} · Drag to orbit · Scroll to zoom`;
+      } catch (err) {
+        console.error(err);
+        garageStatus.textContent = `Could not load ${spec.label}`;
+      }
+    }
+
+    document.querySelectorAll(".car-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".car-btn").forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        loadCar(btn.dataset.car);
+      });
+    });
+
+    modeSolidBtn.addEventListener("click", () => {
+      viewMode = "solid";
+      modeSolidBtn.classList.add("is-active");
+      modePointsBtn.classList.remove("is-active");
+      applyGarageVisibility();
+    });
+    modePointsBtn.addEventListener("click", () => {
+      viewMode = "points";
+      modePointsBtn.classList.add("is-active");
+      modeSolidBtn.classList.remove("is-active");
+      applyGarageVisibility();
+    });
+
+    const garageObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        garageObserver.disconnect();
+        loadCar("ferrari");
+      }
+    }, { threshold: 0.15 });
+    garageObserver.observe(document.getElementById("garage"));
+
+    // 4. Nav Overlay & Era Quick-Jump
+    const navOverlay = document.getElementById("navOverlay");
+    const menuOpenBtn = document.getElementById("menuOpenBtn");
+    const menuCloseBtn = document.getElementById("menuCloseBtn");
+    function toggleMenu(open) {
+      navOverlay.classList.toggle("is-open", open);
+      navOverlay.setAttribute("aria-hidden", String(!open));
+      menuOpenBtn.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("no-scroll", open);
+    }
+    menuOpenBtn.addEventListener("click", () => toggleMenu(true));
+    menuCloseBtn.addEventListener("click", () => toggleMenu(false));
+    document.querySelectorAll(".nav-link").forEach((a) => a.addEventListener("click", () => toggleMenu(false)));
+
+    const eraLinks = document.querySelectorAll(".era-pill a");
+    const eraObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          eraLinks.forEach((l) => l.classList.toggle("is-active", l.dataset.target === id));
+        }
+      });
+    }, { threshold: 0.35 });
+    document.querySelectorAll("#garage, .era").forEach((s) => eraObserver.observe(s));
+
+    // 5. Helmets Hall of Fame
+    const HELMETS = [
+      { year: "2008", era: "mclaren", team: "McLaren MP4-23", title: "Senna Yellow Crown", img: "./assets/Autofetched/helmet-2008.jpg", stats: "5 Wins · 1st World Title", desc: "Iconic vibrant yellow shell inspired by Ayrton Senna, carried to Lewis's first Formula 1 World Championship in the rain at Interlagos." },
+      { year: "2014", era: "mercedes", team: "Mercedes F1 W05", title: "White, Crimson & Gold", img: "./assets/Autofetched/helmet-2014.jpg", stats: "11 Wins · 2nd World Title", desc: "Transitioned to a pearlescent white base with bold crimson and gold leaf stripes, clinching his second world crown under the Abu Dhabi floodlights." },
+      { year: "2017", era: "mercedes", team: "Mercedes F1 W08", title: "Candy Apple & Gold", img: "./assets/Autofetched/helmet-2017.jpg", stats: "9 Wins · 4th World Title", desc: "Fan-designed shell blending glossy white, candy-apple red, and championship gold details as Hamilton matched Prost and Vettel with four titles." },
+      { year: "2018", era: "mercedes", team: "Mercedes F1 W09", title: "Five-Star Crimson", img: "./assets/Autofetched/helmet-2018.jpg", stats: "11 Wins · 5th World Title", desc: "Refined metallic red and white geometry worn during one of his most dominant campaigns, equalling Juan Manuel Fangio's five titles." },
+      { year: "2019", era: "mercedes", team: "Mercedes F1 W10", title: "Satin Pearl & Burgundy", img: "./assets/Autofetched/helmet-2019.jpg", stats: "11 Wins · 6th World Title", desc: "Minimalist satin pearl finish with burgundy-crimson speed lines, sealing a sixth World Drivers' Championship in Austin." },
+      { year: "2020", era: "mercedes", team: "Mercedes F1 W11", title: "Black & Purple Unity", img: "./assets/Autofetched/helmet-2020.jpg", stats: "11 Wins · 7th World Title", desc: "Deep obsidian black and royal purple worn alongside the black W11 livery—matching Michael Schumacher's all-time record of seven titles." },
+      { year: "2021", era: "mercedes", team: "Mercedes F1 W12", title: "Interlagos Spectrum", img: "./assets/Autofetched/helmet-2021.jpg", stats: "São Paulo Sprint-to-Win", desc: "Deep purple and obsidian shell with a wraparound rainbow prism stripe—worn during his unforgettable charge from P20 to P1 in Brazil." },
+      { year: "2023", era: "mercedes", team: "Mercedes F1 W14", title: "Electric Volt & Chrome", img: "./assets/Autofetched/helmet-2023.jpg", stats: "6 Podiums · 1 Pole", desc: "High-visibility neon volt yellow paired with liquid-chrome purple aero accents, cutting through night circuits like Singapore and Las Vegas." },
+      { year: "2024", era: "mercedes", team: "Mercedes F1 W15", title: "Silverstone IX", img: "./assets/Autofetched/helmet-2024.jpg", stats: "9th British GP Victory", desc: "Brushed titanium silver and volt yellow celebrating his record-breaking ninth British Grand Prix win—his emotional final victory for Mercedes." },
+      { year: "2025", era: "ferrari", team: "Scuderia Ferrari SF-25", title: "Maranello Modena Yellow", img: "./assets/Autofetched/helmet-2025-ferrari.jpg", stats: "Ferrari Debut Era", desc: "Signed 2025 Scuderia Ferrari helmet uniting his signature Modena yellow roots with the Prancing Horse for his historic Italian chapter." },
+    ];
+
+    const helmetsGrid = document.getElementById("helmetsGrid");
+    const helmetModal = document.getElementById("helmetModal");
+    const modalImg = document.getElementById("modalImg");
+    const modalEra = document.getElementById("modalEra");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDesc = document.getElementById("modalDesc");
+    const modalStats = document.getElementById("modalStats");
+
+    HELMETS.forEach((h) => {
+      const card = document.createElement("article");
+      card.className = "helmet-card";
+      card.dataset.era = h.era;
+      card.innerHTML = `
+        <div class="helmet-card__media"><img src="${h.img}" alt="${h.year} ${h.title}" loading="lazy"></div>
+        <div class="helmet-card__tag">
+          <strong>${h.title}</strong>
+          <span>${h.year} · ${h.era.toUpperCase()}</span>
+        </div>
+      `;
+      card.addEventListener("click", () => {
+        modalImg.src = h.img;
+        modalImg.alt = `${h.year} ${h.title}`;
+        modalEra.textContent = `${h.year} // ${h.team}`;
+        modalTitle.textContent = h.title;
+        modalDesc.textContent = h.desc;
+        modalStats.textContent = h.stats;
+        helmetModal.classList.add("is-open");
+        helmetModal.setAttribute("aria-hidden", "false");
+      });
+      helmetsGrid.appendChild(card);
+    });
+
+    document.getElementById("modalCloseBtn").addEventListener("click", () => {
+      helmetModal.classList.remove("is-open");
+      helmetModal.setAttribute("aria-hidden", "true");
+    });
+    helmetModal.addEventListener("click", (e) => {
+      if (e.target === helmetModal) {
+        helmetModal.classList.remove("is-open");
+        helmetModal.setAttribute("aria-hidden", "true");
+      }
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (helmetModal.classList.contains("is-open")) {
+          helmetModal.classList.remove("is-open");
+          helmetModal.setAttribute("aria-hidden", "true");
+        }
+        if (navOverlay.classList.contains("is-open")) toggleMenu(false);
+      }
+    });
+
+    document.querySelectorAll(".filter-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        const f = btn.dataset.filter;
+        document.querySelectorAll(".helmet-card").forEach((card) => {
+          card.classList.toggle("is-hidden", f !== "all" && card.dataset.era !== f);
+        });
+      });
+    });
+
+    // 6. Circuits
+    const CIRCUITS = [
+      { name: "Silverstone Circuit", country: "United Kingdom · 5.891 km", wins: "9 Wins", story: "An all-time Formula 1 record for victories at a single circuit. From his wet-weather masterclass in 2008 to his emotional ninth triumph in 2024, Silverstone is Hamilton's fortress.", path: "M35 108 L62 42 L112 24 L175 28 L218 52 L212 92 L170 112 L138 96 L108 122 L62 124 Z" },
+      { name: "Circuit de Barcelona-Catalunya", country: "Spain · 4.657 km", wins: "7 Wins", story: "Site of six Mercedes victories—and in 2026, the stage of his landmark first Grand Prix win in Scuderia Ferrari Rosso Corsa.", path: "M30 85 L120 26 L210 38 L228 72 L188 106 L142 92 L110 122 L54 116 Z" },
+      { name: "Autódromo José Carlos Pace", country: "Brazil (Interlagos) · 4.309 km", wins: "3 Wins", story: "Where he clinched his maiden 2008 title at the final corner—and delivered one of F1's greatest drives in 2021 from P20 in the Sprint to victory on Sunday.", path: "M42 40 L150 24 L216 58 L194 114 L126 98 L94 126 L46 98 Z" },
+      { name: "Hungaroring", country: "Hungary · 4.381 km", wins: "8 Wins", story: "Relentless precision through technical, sweeping corners—eight Hungarian Grand Prix victories across McLaren and Mercedes.", path: "M34 94 L72 34 L166 28 L222 64 L204 118 L128 110 L86 128 Z" },
+      { name: "Autodromo Nazionale Monza", country: "Italy · 5.793 km", wins: "5 Wins", story: "The Temple of Speed—five victories already in his career, now carrying the roar of the Tifosi in Ferrari red.", path: "M32 104 L186 30 L226 42 L212 76 L112 118 L48 122 Z" }
+    ];
+    const circuitTabs = document.getElementById("circuitTabs");
+    const circuitPath = document.getElementById("circuitPath");
+    const circuitName = document.getElementById("circuitName");
+    const circuitStory = document.getElementById("circuitStory");
+    function selectCircuit(idx) {
+      const c = CIRCUITS[idx];
+      circuitPath.setAttribute("d", c.path);
+      circuitName.textContent = c.name;
+      circuitStory.textContent = c.story;
+      document.querySelectorAll(".circuit-tab").forEach((t, i) => t.classList.toggle("is-active", i === idx));
+    }
+    CIRCUITS.forEach((c, idx) => {
+      const btn = document.createElement("button");
+      btn.className = "circuit-tab";
+      btn.innerHTML = `<div><strong>${c.name}</strong><small>${c.country}</small></div><span class="circuit-tab__wins">${c.wins}</span>`;
+      btn.addEventListener("click", () => selectCircuit(idx));
+      circuitTabs.appendChild(btn);
+    });
+    selectCircuit(0);
+  </script>
+</body>
+</html>
