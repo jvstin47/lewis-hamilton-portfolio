@@ -925,8 +925,8 @@
         <p class="hero__kicker">Scuderia Ferrari · Car #44 · 7× World Champion</p>
       </div>
       <div class="hero__specs">
-        <span>CHASSIS // <strong>2020 MERCEDES-AMG W11</strong></span>
-        <span>RECORD // <strong>106 WINS · 7× WORLD CHAMPION</strong></span>
+        <span>CHASSIS // <strong>2026 SCUDERIA FERRARI SF-26</strong></span>
+        <span>RECORD // <strong>106 WINS · 105 POLES</strong></span>
         <div class="hero__mode-pill" role="group" aria-label="Hero 3D Render Mode">
           <button class="hero__mode-btn is-active" id="heroSolidBtn">3D Studio</button>
           <button class="hero__mode-btn" id="heroPointsBtn">Aero Points</button>
@@ -1307,6 +1307,7 @@
     import * as THREE from "three";
     import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
     import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
     // 1. Preloader
     const preloader = document.getElementById("preloader");
@@ -1318,44 +1319,57 @@
       preloader.setAttribute("aria-valuenow", String(pct));
     }
 
-    // 2. Interactive 3D WebGL Hero (2026 Scuderia Ferrari SF-26 + Wind-Tunnel Particles)
+    // 2. Interactive 3D WebGL Hero (2026 Scuderia Ferrari SF-26 with Studio IBL & Soft Shadows)
     const heroWrap = document.getElementById("heroCanvasWrap");
     const heroSolidBtn = document.getElementById("heroSolidBtn");
     const heroPointsBtn = document.getElementById("heroPointsBtn");
     const heroRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
     heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     heroRenderer.toneMapping = THREE.ACESFilmicToneMapping;
-    heroRenderer.toneMappingExposure = 1.3;
+    heroRenderer.toneMappingExposure = 0.95;
+    heroRenderer.shadowMap.enabled = true;
+    heroRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
     heroWrap.appendChild(heroRenderer.domElement);
 
     const heroScene = new THREE.Scene();
-    const heroCam = new THREE.PerspectiveCamera(34, 1, 0.1, 60);
-    heroCam.position.set(3.25, 0.92, 3.65);
+    const heroPmrem = new THREE.PMREMGenerator(heroRenderer);
+    heroScene.environment = heroPmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    heroScene.environmentIntensity = 0.85;
+
+    const heroCam = new THREE.PerspectiveCamera(32, 1, 0.1, 60);
+    heroCam.position.set(-2.95, 1.25, 3.25);
 
     const heroControls = new OrbitControls(heroCam, heroRenderer.domElement);
     heroControls.enableDamping = true;
     heroControls.enablePan = false;
     heroControls.enableZoom = false;
-    heroControls.target.set(0, -0.05, 0);
-    heroControls.maxPolarAngle = Math.PI * 0.485;
+    heroControls.target.set(0, 0.08, 0);
+    heroControls.maxPolarAngle = Math.PI * 0.48;
     heroControls.autoRotate = true;
-    heroControls.autoRotateSpeed = 0.55;
+    heroControls.autoRotateSpeed = 0.35;
 
-    // 3-point studio lighting + cursor-reactive spotlight
-    heroScene.add(new THREE.HemisphereLight(0xfff4e0, 0x121318, 1.8));
-    const hKey = new THREE.DirectionalLight(0xffffff, 2.8);
-    hKey.position.set(5, 8, 5);
+    // Studio key + soft ground shadow catcher (no harsh grid)
+    const hKey = new THREE.DirectionalLight(0xffffff, 1.4);
+    hKey.position.set(4, 7, 4);
+    hKey.castShadow = true;
+    hKey.shadow.mapSize.set(2048, 2048);
+    hKey.shadow.camera.near = 1;
+    hKey.shadow.camera.far = 18;
+    hKey.shadow.camera.left = -3.5;
+    hKey.shadow.camera.right = 3.5;
+    hKey.shadow.camera.top = 3.5;
+    hKey.shadow.camera.bottom = -3.5;
+    hKey.shadow.bias = -0.0005;
     heroScene.add(hKey);
-    const hRim = new THREE.DirectionalLight(0xe10600, 2.2);
-    hRim.position.set(-5, 3, -4);
-    heroScene.add(hRim);
-    const hCursorLight = new THREE.PointLight(0xffd200, 2.4, 8);
-    hCursorLight.position.set(1.5, 1.2, 2.0);
-    heroScene.add(hCursorLight);
 
-    const hGrid = new THREE.GridHelper(12, 28, 0x3a2022, 0x17181d);
-    hGrid.position.y = -0.18;
-    heroScene.add(hGrid);
+    const hShadowPlane = new THREE.Mesh(
+      new THREE.PlaneGeometry(14, 14),
+      new THREE.ShadowMaterial({ opacity: 0.55 })
+    );
+    hShadowPlane.rotation.x = -Math.PI / 2;
+    hShadowPlane.position.y = -0.22;
+    hShadowPlane.receiveShadow = true;
+    heroScene.add(hShadowPlane);
 
     const pointer = new THREE.Vector2(0, 0);
     const smoothPointer = new THREE.Vector2(0, 0);
@@ -1431,7 +1445,6 @@
       const t = performance.now() * 0.001 - start;
       smoothPointer.lerp(pointer, 0.06);
       pMat.uniforms.uTime.value = t;
-      hCursorLight.position.set(smoothPointer.x * 2.6, 0.8 + smoothPointer.y * 1.2, 2.2);
       heroControls.update();
       heroRenderer.render(heroScene, heroCam);
     }
@@ -1461,23 +1474,29 @@
     });
 
     heroGltfLoader.load(
-      "./assets/models/mercedes-2020.glb",
+      "./assets/models/ferrari-2026.glb",
       (gltf) => {
         setLoaderProgress(1);
         setTimeout(() => preloader.classList.add("is-done"), 240);
 
         const root = gltf.scene;
+        root.traverse((obj) => {
+          if (obj.isMesh) {
+            obj.castShadow = true;
+            obj.receiveShadow = true;
+          }
+        });
         const box = new THREE.Box3().setFromObject(root);
         const size = box.getSize(new THREE.Vector3());
         const center = box.getCenter(new THREE.Vector3());
         const maxDim = Math.max(size.x, size.y, size.z) || 1;
-        const scale = 3.25 / maxDim;
+        const scale = 3.55 / maxDim;
         root.scale.setScalar(scale);
         root.position.sub(center.multiplyScalar(scale));
-        root.position.y = -0.18 - box.min.y * scale;
+        root.position.y = -0.22 - box.min.y * scale;
 
         heroCarSolid = root;
-        heroCarPoints = buildPointCloudFromGroup(root, 0x00d2be);
+        heroCarPoints = buildPointCloudFromGroup(root, 0xe10600);
         heroScene.add(heroCarSolid);
         heroScene.add(heroCarPoints);
         applyHeroMode();
@@ -1518,39 +1537,44 @@
       gRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
       gRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       gRenderer.toneMapping = THREE.ACESFilmicToneMapping;
-      gRenderer.toneMappingExposure = 1.25;
+      gRenderer.toneMappingExposure = 0.95;
+      gRenderer.shadowMap.enabled = true;
+      gRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
       garageStage.insertBefore(gRenderer.domElement, garageStage.firstChild);
 
       gScene = new THREE.Scene();
-      gCam = new THREE.PerspectiveCamera(34, garageStage.clientWidth / garageStage.clientHeight, 0.1, 100);
-      gCam.position.set(2.2, 0.65, 2.5);
+      const gPmrem = new THREE.PMREMGenerator(gRenderer);
+      gScene.environment = gPmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+      gScene.environmentIntensity = 0.85;
+
+      gCam = new THREE.PerspectiveCamera(32, garageStage.clientWidth / garageStage.clientHeight, 0.1, 100);
+      gCam.position.set(-2.85, 1.15, 3.05);
 
       gControls = new OrbitControls(gCam, gRenderer.domElement);
       gControls.enableDamping = true;
       gControls.enablePan = false;
       gControls.target.set(0, 0.02, 0);
-      gControls.minDistance = 1.6;
-      gControls.maxDistance = 6.0;
-      gControls.maxPolarAngle = Math.PI * 0.485;
+      gControls.minDistance = 1.8;
+      gControls.maxDistance = 6.5;
+      gControls.maxPolarAngle = Math.PI * 0.48;
       gControls.autoRotate = true;
-      gControls.autoRotateSpeed = 0.85;
+      gControls.autoRotateSpeed = 0.45;
 
-      // Grounded studio turntable grid
-      const grid = new THREE.GridHelper(10, 24, 0x3a3b42, 0x1a1b20);
-      grid.position.y = -0.35;
-      gScene.add(grid);
+      const gKey = new THREE.DirectionalLight(0xffffff, 1.4);
+      gKey.position.set(4, 7, 4);
+      gKey.castShadow = true;
+      gKey.shadow.mapSize.set(2048, 2048);
+      gKey.shadow.bias = -0.0005;
+      gScene.add(gKey);
 
-      const hemi = new THREE.HemisphereLight(0xfff4e0, 0x1a1c22, 1.9);
-      gScene.add(hemi);
-      const key = new THREE.DirectionalLight(0xffffff, 2.8);
-      key.position.set(5, 8, 5);
-      gScene.add(key);
-      const fill = new THREE.DirectionalLight(0xd4af37, 1.4);
-      fill.position.set(-4, 4, 4);
-      gScene.add(fill);
-      const rim = new THREE.DirectionalLight(0xe10600, 1.8);
-      rim.position.set(-5, 3, -4);
-      gScene.add(rim);
+      const gShadowPlane = new THREE.Mesh(
+        new THREE.PlaneGeometry(14, 14),
+        new THREE.ShadowMaterial({ opacity: 0.55 })
+      );
+      gShadowPlane.rotation.x = -Math.PI / 2;
+      gShadowPlane.position.y = -0.35;
+      gShadowPlane.receiveShadow = true;
+      gScene.add(gShadowPlane);
 
       function resizeGarage() {
         const w = garageStage.clientWidth;
@@ -1630,11 +1654,17 @@
           }
         });
         const root = gltf.scene;
+        root.traverse((obj) => {
+          if (obj.isMesh) {
+            obj.castShadow = true;
+            obj.receiveShadow = true;
+          }
+        });
         const box = new THREE.Box3().setFromObject(root);
         const size = box.getSize(new THREE.Vector3());
         const center = box.getCenter(new THREE.Vector3());
         const maxDim = Math.max(size.x, size.y, size.z) || 1;
-        const scale = 4.8 / maxDim;
+        const scale = 4.2 / maxDim;
         root.scale.setScalar(scale);
         root.position.sub(center.multiplyScalar(scale));
         root.position.y = -0.35 - box.min.y * scale;
