@@ -651,7 +651,49 @@
         if (ev.total) garageStatus.textContent = `Loading ${data.title} · ${Math.round((ev.loaded / ev.total) * 100)}%`;
       });
       const root = gltf.scene;
-      root.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+      root.traverse((o) => {
+        if (!o.isMesh) return;
+        const mats = Array.isArray(o.material) ? o.material : [o.material];
+        let isDecalOrGlass = false;
+        let hideBlur = false;
+
+        mats.forEach((m) => {
+          if (!m) return;
+          const n = (m.name || "").toLowerCase();
+          if (n.includes("blur")) {
+            hideBlur = true;
+          } else if (
+            n.includes("decal") ||
+            n.includes("number") ||
+            n.includes("logo") ||
+            n.includes("stripe") ||
+            n.includes("alpha") ||
+            n.includes("revs")
+          ) {
+            isDecalOrGlass = true;
+            m.transparent = true;
+            m.alphaTest = 0.08;
+            m.depthWrite = false;
+            m.polygonOffset = true;
+            m.polygonOffsetFactor = -2;
+            m.polygonOffsetUnits = -2;
+            m.needsUpdate = true;
+          } else if (n.includes("glass")) {
+            isDecalOrGlass = true;
+            m.transparent = true;
+            m.opacity = 0.35;
+            m.depthWrite = false;
+            m.needsUpdate = true;
+          }
+        });
+
+        if (hideBlur) {
+          o.visible = false;
+        } else {
+          o.castShadow = !isDecalOrGlass;
+          o.receiveShadow = true;
+        }
+      });
       const box = new THREE.Box3().setFromObject(root);
       const size = box.getSize(new THREE.Vector3());
       const center = box.getCenter(new THREE.Vector3());
