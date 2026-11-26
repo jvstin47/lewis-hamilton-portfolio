@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sir Lewis Hamilton — #44 | Still We Rise</title>
   <meta name="description" content="Official-style digital portfolio of Sir Lewis Hamilton (#44): 7-Time Formula 1 World Champion, 106 Grand Prix Wins, Scuderia Ferrari, 3D F1 Garage, and Beyond the Visor.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0b0c'/%3E%3Ccircle cx='32' cy='32' r='26' fill='%23e10600'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='monospace' font-weight='700' font-size='26' fill='%23ffffff'%3E44%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <style>
@@ -287,16 +288,34 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 100px clamp(20px, 4vw, 48px) 32px;
-      background: radial-gradient(ellipse at 50% 40%, rgba(225, 6, 0, 0.14), transparent 65%), var(--bg-obsidian);
+      padding: 100px clamp(20px, 4vw, 48px) 36px;
+      background: radial-gradient(ellipse at 50% 40%, rgba(225, 6, 0, 0.16), transparent 65%), var(--bg-obsidian);
     }
-    .hero__canvas-wrap { position: absolute; inset: 0; z-index: 1; }
+    .hero__portrait {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+    }
+    .hero__portrait img {
+      height: 100%;
+      width: auto;
+      max-width: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      display: block;
+      -webkit-mask-image: radial-gradient(ellipse 68% 82% at 50% 45%, #000 50%, transparent 96%);
+      mask-image: radial-gradient(ellipse 68% 82% at 50% 45%, #000 50%, transparent 96%);
+    }
+    .hero__canvas-wrap { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
     .hero__canvas-wrap::after {
       content: "";
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: linear-gradient(to top, rgba(11, 11, 12, 0.92) 0%, rgba(11, 11, 12, 0.35) 28%, transparent 55%);
+      background: linear-gradient(to top, rgba(11, 11, 12, 0.94) 0%, rgba(11, 11, 12, 0.42) 30%, transparent 58%);
     }
     .hero__canvas-wrap canvas { width: 100%; height: 100%; display: block; }
     .hero__topo {
@@ -581,7 +600,20 @@
     .circuit-tab small { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
     .circuit-tab__wins { font-family: var(--font-mono); font-size: 13px; color: var(--gold); }
     .circuit-stage { background: var(--bg-carbon); border: 1px solid var(--line); border-radius: 18px; padding: 32px; display: grid; gap: 20px; }
-    .circuit-stage svg { width: 100%; max-height: 220px; stroke: var(--ferrari-red); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 12px rgba(225, 6, 0, 0.35)); }
+    .circuit-stage__map {
+      height: 240px;
+      display: grid;
+      place-items: center;
+      background: rgba(11, 11, 12, 0.55);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .circuit-stage__map img {
+      max-width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      filter: invert(1) contrast(1.25) drop-shadow(0 0 8px rgba(225, 6, 0, 0.35));
+    }
     .circuit-stage__info h3 { font-family: var(--font-serif); font-weight: 400; font-size: 34px; margin: 0 0 8px; }
     .circuit-stage__info p { margin: 0; color: rgba(244, 239, 230, 0.78); line-height: 1.55; font-size: 15px; }
 
@@ -722,9 +754,12 @@
     </div>
   </div>
 
-  <!-- Hero with Three.js WebGL Interactive Portrait -->
+  <!-- Hero with Crisp Editorial Portrait + Three.js WebGL Particle & Light Field -->
   <section class="hero" id="hero">
     <div class="hero__topo" aria-hidden="true"></div>
+    <div class="hero__portrait" aria-hidden="true">
+      <img id="heroPortraitImg" src="./assets/Mine/Lewis Hamilton, 2025 Singapore GP.jpeg" alt="">
+    </div>
     <div class="hero__canvas-wrap" id="heroCanvasWrap" aria-hidden="true"></div>
 
     <div class="hero__content">
@@ -983,9 +1018,9 @@
     <div class="circuits__layout">
       <div class="circuit-tabs" id="circuitTabs"></div>
       <div class="circuit-stage">
-        <svg viewBox="0 0 260 150" id="circuitSvg" aria-hidden="true">
-          <path id="circuitPath" d=""></path>
-        </svg>
+        <div class="circuit-stage__map">
+          <img id="circuitMapImg" src="./assets/circuits/silverstone.svg" alt="Circuit track map">
+        </div>
         <div class="circuit-stage__info">
           <h3 id="circuitName"></h3>
           <p id="circuitStory"></p>
@@ -1132,8 +1167,9 @@
       }
     }
 
-    // 2. Three.js WebGL Interactive Portrait Hero
+    // 2. Crisp Editorial Portrait + Three.js WebGL Particle & Light Field
     const heroWrap = document.getElementById("heroCanvasWrap");
+    const heroPortraitImg = document.getElementById("heroPortraitImg");
     const heroRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
     heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     heroWrap.appendChild(heroRenderer.domElement);
@@ -1151,149 +1187,96 @@
 
     let prog = 0;
     const fakeTick = setInterval(() => {
-      prog = Math.min(0.88, prog + 0.14);
+      prog = Math.min(0.88, prog + 0.16);
       setLoaderProgress(prog);
-    }, 50);
+    }, 45);
 
-    const texLoader = new THREE.TextureLoader();
-    texLoader.load("./assets/Mine/Lewis Hamilton, 2025 Singapore GP.jpeg", (texture) => {
+    function finishHeroLoad() {
       clearInterval(fakeTick);
       setLoaderProgress(1);
-      setTimeout(() => preloader.classList.add("is-done"), 240);
+      setTimeout(() => preloader.classList.add("is-done"), 220);
+    }
 
-      texture.colorSpace = THREE.SRGBColorSpace;
-      const imgAspect = texture.image.width / texture.image.height;
-      const planeH = 2.95;
-      const planeW = planeH * imgAspect;
+    if (heroPortraitImg.complete) {
+      finishHeroLoad();
+    } else {
+      heroPortraitImg.addEventListener("load", finishHeroLoad, { once: true });
+      heroPortraitImg.addEventListener("error", finishHeroLoad, { once: true });
+    }
 
-      const planeGeo = new THREE.PlaneGeometry(planeW, planeH, 32, 32);
-      const planeMat = new THREE.ShaderMaterial({
-        uniforms: {
-          uTex: { value: texture },
-          uPointer: { value: smoothPointer },
-          uTime: { value: 0 },
-          uRed: { value: new THREE.Color("#e10600") },
-          uGold: { value: new THREE.Color("#d4af37") },
-        },
-        transparent: true,
-        vertexShader: `
-          uniform vec2 uPointer;
-          varying vec2 vUv;
-          void main() {
-            vUv = uv;
-            vec3 pos = position;
-            float dist = length(uv - 0.5);
-            pos.z += (1.0 - smoothstep(0.0, 0.7, dist)) * 0.14;
-            pos.x += uPointer.x * 0.08 * (1.0 - dist);
-            pos.y += uPointer.y * 0.06 * (1.0 - dist);
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-          }
-        `,
-        fragmentShader: `
-          uniform sampler2D uTex;
-          uniform vec2 uPointer;
-          uniform float uTime;
-          uniform vec3 uRed;
-          uniform vec3 uGold;
-          varying vec2 vUv;
-          void main() {
-            vec4 tex = texture2D(uTex, vUv);
-            float lum = dot(tex.rgb, vec3(0.299, 0.587, 0.114));
-            vec2 lightUv = uPointer * 0.45 + 0.5;
-            float dLight = length(vUv - lightUv);
-            float spot = exp(-dLight * dLight * 4.5);
-            float rEdge = length((vUv - 0.5) * vec2(1.22, 1.05)) * 2.0;
-            float vig = smoothstep(0.98, 0.36, rEdge);
-            vec3 base = tex.rgb * (0.78 + spot * 0.5);
-            base += uRed * spot * (1.0 - lum) * 0.22;
-            base += uGold * pow(spot, 2.0) * 0.14;
-            float sweep = exp(-pow((vUv.y - vUv.x * 0.4 - sin(uTime * 0.4) * 0.6), 2.0) * 18.0);
-            base += uGold * sweep * 0.06;
-            gl_FragColor = vec4(base, vig);
-          }
-        `,
-      });
-
-      const portraitMesh = new THREE.Mesh(planeGeo, planeMat);
-      portraitMesh.position.y = 0.08;
-      heroScene.add(portraitMesh);
-
-      const P_COUNT = 3000;
-      const pPos = new Float32Array(P_COUNT * 3);
-      const pRand = new Float32Array(P_COUNT);
-      for (let i = 0; i < P_COUNT; i++) {
-        pPos[i * 3] = (Math.random() - 0.5) * 7.5;
-        pPos[i * 3 + 1] = (Math.random() - 0.5) * 4.8;
-        pPos[i * 3 + 2] = (Math.random() - 0.5) * 2.5 - 0.4;
-        pRand[i] = Math.random();
-      }
-      const pGeo = new THREE.BufferGeometry();
-      pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
-      pGeo.setAttribute("aRand", new THREE.BufferAttribute(pRand, 1));
-      const pMat = new THREE.ShaderMaterial({
-        uniforms: {
-          uTime: { value: 0 },
-          uPointer: { value: smoothPointer },
-          uRed: { value: new THREE.Color("#e10600") },
-          uGold: { value: new THREE.Color("#d4af37") },
-        },
-        transparent: true,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending,
-        vertexShader: `
-          attribute float aRand;
-          uniform float uTime;
-          uniform vec2 uPointer;
-          varying float vRand;
-          void main() {
-            vec3 pos = position;
-            pos.y = mod(pos.y + uTime * (0.04 + aRand * 0.06) + 2.4, 4.8) - 2.4;
-            pos.x += sin(uTime * 0.35 + aRand * 30.0) * 0.12 - uPointer.x * 0.18 * aRand;
-            pos.y -= uPointer.y * 0.12 * aRand;
-            vec4 mv = modelViewMatrix * vec4(pos, 1.0);
-            gl_Position = projectionMatrix * mv;
-            gl_PointSize = (6.0 + aRand * 10.0) / -mv.z;
-            vRand = aRand;
-          }
-        `,
-        fragmentShader: `
-          uniform vec3 uRed;
-          uniform vec3 uGold;
-          varying float vRand;
-          void main() {
-            float r = length(gl_PointCoord - 0.5);
-            if (r > 0.5) discard;
-            float a = exp(-14.0 * r * r) * (0.25 + vRand * 0.45);
-            vec3 col = mix(uGold, uRed, step(0.65, vRand));
-            gl_FragColor = vec4(col, a);
-          }
-        `,
-      });
-      heroScene.add(new THREE.Points(pGeo, pMat));
-
-      function resizeHero() {
-        const w = heroWrap.clientWidth;
-        const h = heroWrap.clientHeight;
-        heroRenderer.setSize(w, h, false);
-        heroCam.aspect = w / h;
-        heroCam.updateProjectionMatrix();
-      }
-      window.addEventListener("resize", resizeHero);
-      resizeHero();
-
-      const start = performance.now() * 0.001;
-      function animateHero() {
-        requestAnimationFrame(animateHero);
-        const t = performance.now() * 0.001 - start;
-        smoothPointer.lerp(pointer, 0.06);
-        planeMat.uniforms.uTime.value = t;
-        pMat.uniforms.uTime.value = t;
-        portraitMesh.rotation.y = smoothPointer.x * 0.07;
-        portraitMesh.rotation.x = -smoothPointer.y * 0.05;
-        heroRenderer.render(heroScene, heroCam);
-      }
-      animateHero();
+    const P_COUNT = 2600;
+    const pPos = new Float32Array(P_COUNT * 3);
+    const pRand = new Float32Array(P_COUNT);
+    for (let i = 0; i < P_COUNT; i++) {
+      pPos[i * 3] = (Math.random() - 0.5) * 7.5;
+      pPos[i * 3 + 1] = (Math.random() - 0.5) * 4.8;
+      pPos[i * 3 + 2] = (Math.random() - 0.5) * 2.5 - 0.2;
+      pRand[i] = Math.random();
+    }
+    const pGeo = new THREE.BufferGeometry();
+    pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
+    pGeo.setAttribute("aRand", new THREE.BufferAttribute(pRand, 1));
+    const pMat = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uPointer: { value: smoothPointer },
+        uRed: { value: new THREE.Color("#e10600") },
+        uGold: { value: new THREE.Color("#d4af37") },
+      },
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      vertexShader: `
+        attribute float aRand;
+        uniform float uTime;
+        uniform vec2 uPointer;
+        varying float vRand;
+        void main() {
+          vec3 pos = position;
+          pos.y = mod(pos.y + uTime * (0.04 + aRand * 0.06) + 2.4, 4.8) - 2.4;
+          pos.x += sin(uTime * 0.35 + aRand * 30.0) * 0.12 - uPointer.x * 0.16 * aRand;
+          pos.y -= uPointer.y * 0.10 * aRand;
+          vec4 mv = modelViewMatrix * vec4(pos, 1.0);
+          gl_Position = projectionMatrix * mv;
+          gl_PointSize = (5.0 + aRand * 9.0) / -mv.z;
+          vRand = aRand;
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 uRed;
+        uniform vec3 uGold;
+        varying float vRand;
+        void main() {
+          float r = length(gl_PointCoord - 0.5);
+          if (r > 0.5) discard;
+          float a = exp(-14.0 * r * r) * (0.22 + vRand * 0.42);
+          vec3 col = mix(uGold, uRed, step(0.62, vRand));
+          gl_FragColor = vec4(col, a);
+        }
+      `,
     });
+    heroScene.add(new THREE.Points(pGeo, pMat));
+
+    function resizeHero() {
+      const w = heroWrap.clientWidth;
+      const h = heroWrap.clientHeight;
+      heroRenderer.setSize(w, h, false);
+      heroCam.aspect = w / h;
+      heroCam.updateProjectionMatrix();
+    }
+    window.addEventListener("resize", resizeHero);
+    resizeHero();
+
+    const start = performance.now() * 0.001;
+    function animateHero() {
+      requestAnimationFrame(animateHero);
+      const t = performance.now() * 0.001 - start;
+      smoothPointer.lerp(pointer, 0.06);
+      pMat.uniforms.uTime.value = t;
+      heroPortraitImg.style.transform = `translate3d(${(-smoothPointer.x * 10).toFixed(2)}px, ${(smoothPointer.y * 8).toFixed(2)}px, 0) scale(1.03)`;
+      heroRenderer.render(heroScene, heroCam);
+    }
+    animateHero();
 
     // 3. Interactive 3D F1 Garage (GLB Showroom)
     const garageStage = document.getElementById("garageStage");
@@ -1325,28 +1308,32 @@
 
       gScene = new THREE.Scene();
       gCam = new THREE.PerspectiveCamera(34, garageStage.clientWidth / garageStage.clientHeight, 0.1, 100);
-      gCam.position.set(2.35, 0.85, 2.75);
+      gCam.position.set(2.2, 0.65, 2.5);
 
       gControls = new OrbitControls(gCam, gRenderer.domElement);
       gControls.enableDamping = true;
       gControls.enablePan = false;
-      gControls.minDistance = 1.8;
-      gControls.maxDistance = 6.5;
+      gControls.target.set(0, 0.02, 0);
+      gControls.minDistance = 1.6;
+      gControls.maxDistance = 6.0;
       gControls.maxPolarAngle = Math.PI * 0.485;
       gControls.autoRotate = true;
       gControls.autoRotateSpeed = 0.85;
 
       // Grounded studio turntable grid
       const grid = new THREE.GridHelper(10, 24, 0x3a3b42, 0x1a1b20);
-      grid.position.y = -0.45;
+      grid.position.y = -0.35;
       gScene.add(grid);
 
-      const hemi = new THREE.HemisphereLight(0xfff4e0, 0x1a1c22, 1.4);
+      const hemi = new THREE.HemisphereLight(0xfff4e0, 0x1a1c22, 1.9);
       gScene.add(hemi);
-      const key = new THREE.DirectionalLight(0xffffff, 2.4);
+      const key = new THREE.DirectionalLight(0xffffff, 2.8);
       key.position.set(5, 8, 5);
       gScene.add(key);
-      const rim = new THREE.DirectionalLight(0xe10600, 1.5);
+      const fill = new THREE.DirectionalLight(0xd4af37, 1.4);
+      fill.position.set(-4, 4, 4);
+      gScene.add(fill);
+      const rim = new THREE.DirectionalLight(0xe10600, 1.8);
       rim.position.set(-5, 3, -4);
       gScene.add(rim);
 
@@ -1432,10 +1419,10 @@
         const size = box.getSize(new THREE.Vector3());
         const center = box.getCenter(new THREE.Vector3());
         const maxDim = Math.max(size.x, size.y, size.z) || 1;
-        const scale = 4.6 / maxDim;
+        const scale = 4.8 / maxDim;
         root.scale.setScalar(scale);
         root.position.sub(center.multiplyScalar(scale));
-        root.position.y = -0.45 - box.min.y * scale;
+        root.position.y = -0.35 - box.min.y * scale;
 
         const pts = buildPointCloudFromGroup(root, spec.color);
         carCache.set(key, { solid: root, points: pts });
@@ -1506,18 +1493,18 @@
     }, { threshold: 0.35 });
     document.querySelectorAll("#garage, .era").forEach((s) => eraObserver.observe(s));
 
-    // 5. Helmets Hall of Fame
+    // 5. Helmets Hall of Fame (100% Real Lewis Hamilton Helmets)
     const HELMETS = [
-      { year: "2008", era: "mclaren", team: "McLaren MP4-23", title: "Senna Yellow Crown", img: "./assets/Autofetched/helmet-2008.jpg", stats: "5 Wins · 1st World Title", desc: "Iconic vibrant yellow shell inspired by Ayrton Senna, carried to Lewis's first Formula 1 World Championship in the rain at Interlagos." },
-      { year: "2014", era: "mercedes", team: "Mercedes F1 W05", title: "White, Crimson & Gold", img: "./assets/Autofetched/helmet-2014.jpg", stats: "11 Wins · 2nd World Title", desc: "Transitioned to a pearlescent white base with bold crimson and gold leaf stripes, clinching his second world crown under the Abu Dhabi floodlights." },
-      { year: "2017", era: "mercedes", team: "Mercedes F1 W08", title: "Candy Apple & Gold", img: "./assets/Autofetched/helmet-2017.jpg", stats: "9 Wins · 4th World Title", desc: "Fan-designed shell blending glossy white, candy-apple red, and championship gold details as Hamilton matched Prost and Vettel with four titles." },
-      { year: "2018", era: "mercedes", team: "Mercedes F1 W09", title: "Five-Star Crimson", img: "./assets/Autofetched/helmet-2018.jpg", stats: "11 Wins · 5th World Title", desc: "Refined metallic red and white geometry worn during one of his most dominant campaigns, equalling Juan Manuel Fangio's five titles." },
-      { year: "2019", era: "mercedes", team: "Mercedes F1 W10", title: "Satin Pearl & Burgundy", img: "./assets/Autofetched/helmet-2019.jpg", stats: "11 Wins · 6th World Title", desc: "Minimalist satin pearl finish with burgundy-crimson speed lines, sealing a sixth World Drivers' Championship in Austin." },
-      { year: "2020", era: "mercedes", team: "Mercedes F1 W11", title: "Black & Purple Unity", img: "./assets/Autofetched/helmet-2020.jpg", stats: "11 Wins · 7th World Title", desc: "Deep obsidian black and royal purple worn alongside the black W11 livery—matching Michael Schumacher's all-time record of seven titles." },
-      { year: "2021", era: "mercedes", team: "Mercedes F1 W12", title: "Interlagos Spectrum", img: "./assets/Autofetched/helmet-2021.jpg", stats: "São Paulo Sprint-to-Win", desc: "Deep purple and obsidian shell with a wraparound rainbow prism stripe—worn during his unforgettable charge from P20 to P1 in Brazil." },
-      { year: "2023", era: "mercedes", team: "Mercedes F1 W14", title: "Electric Volt & Chrome", img: "./assets/Autofetched/helmet-2023.jpg", stats: "6 Podiums · 1 Pole", desc: "High-visibility neon volt yellow paired with liquid-chrome purple aero accents, cutting through night circuits like Singapore and Las Vegas." },
-      { year: "2024", era: "mercedes", team: "Mercedes F1 W15", title: "Silverstone IX", img: "./assets/Autofetched/helmet-2024.jpg", stats: "9th British GP Victory", desc: "Brushed titanium silver and volt yellow celebrating his record-breaking ninth British Grand Prix win—his emotional final victory for Mercedes." },
-      { year: "2025", era: "ferrari", team: "Scuderia Ferrari SF-25", title: "Maranello Modena Yellow", img: "./assets/Autofetched/helmet-2025-ferrari.jpg", stats: "Ferrari Debut Era", desc: "Signed 2025 Scuderia Ferrari helmet uniting his signature Modena yellow roots with the Prancing Horse for his historic Italian chapter." },
+      { year: "2008", era: "mclaren", team: "McLaren MP4-23", title: "Senna Yellow Crown", img: "./assets/helmets/helmet-real-13.jpg", stats: "5 Wins · 1st World Title", desc: "Iconic Vodafone McLaren yellow shell inspired by Ayrton Senna, carried to Lewis's first Formula 1 World Championship in the rain at Interlagos." },
+      { year: "2018", era: "mercedes", team: "Mercedes F1 W09", title: "Five-Star Gold & Red", img: "./assets/helmets/helmet-real-18.jpg", stats: "11 Wins · 5th World Title", desc: "Championship gold and crimson geometry worn during one of his most dominant campaigns, equalling Juan Manuel Fangio's five titles." },
+      { year: "2019", era: "mercedes", team: "Mercedes F1 W10", title: "Burgundy & Pearl", img: "./assets/helmets/helmet-real-02.jpg", stats: "11 Wins · 6th World Title", desc: "Deep metallic burgundy and pearl white finish with Petronas visor strip, sealing a sixth World Drivers' Championship in Austin." },
+      { year: "2020", era: "mercedes", team: "Mercedes F1 W11", title: "Black & Purple Unity", img: "./assets/helmets/helmet-real-17.jpg", stats: "11 Wins · 7th World Title", desc: "Deep obsidian black and royal purple worn alongside the black W11 livery—matching Michael Schumacher's all-time record of seven titles." },
+      { year: "2021", era: "mercedes", team: "Mercedes F1 W12", title: "Interlagos Spectrum", img: "./assets/helmets/helmet-real-15.jpg", stats: "São Paulo Sprint-to-Win", desc: "Deep purple and obsidian shell with a wraparound rainbow prism stripe—worn during his unforgettable charge from P20 to P1 in Brazil." },
+      { year: "2022", era: "mercedes", team: "Mercedes F1 W13", title: "Brazil Honorary Citizen", img: "./assets/helmets/helmet-real-09.jpg", stats: "Interlagos Tribute", desc: "Brazilian flag green, yellow, and Ordem e Progresso blue worn in São Paulo after being granted honorary Brazilian citizenship." },
+      { year: "2024", era: "mercedes", team: "Mercedes F1 W15", title: "Silverstone Chrome & Gold", img: "./assets/helmets/helmet-real-11.jpg", stats: "9th British GP Victory", desc: "Mirror-chrome silver and gold crest celebrating his record-breaking ninth British Grand Prix win—his emotional final victory for Mercedes." },
+      { year: "2025", era: "ferrari", team: "Scuderia Ferrari SF-25", title: "Maranello Modena Yellow", img: "./assets/helmets/helmet-real-03.jpg", stats: "Ferrari Debut Era", desc: "Scuderia Ferrari yellow shell with Prancing Horse crest and crimson pinstripes, uniting his karting roots with Maranello." },
+      { year: "2025", era: "ferrari", team: "Scuderia Ferrari SF-25", title: "Singapore Gold Spec", img: "./assets/helmets/helmet-real-14.jpg", stats: "Marina Bay Night Edition", desc: "Mirror-gold Ferrari special edition worn under the Marina Bay floodlights, featuring the Singapore lion motif and gold leaf finish." },
+      { year: "2025", era: "ferrari", team: "Scuderia Ferrari SF-25", title: "Signed Melbourne Edition", img: "./assets/Autofetched/helmet-2025-ferrari.jpg", stats: "Australian GP Debut", desc: "Signed 2025 Scuderia Ferrari helmet from his debut Grand Prix weekend in Ferrari red." },
     ];
 
     const helmetsGrid = document.getElementById("helmetsGrid");
@@ -1532,7 +1519,6 @@
       const card = document.createElement("article");
       card.className = "helmet-card";
       card.dataset.era = h.era;
-      if (h.year === "2008" || h.year === "2017") card.dataset.lightbg = "true";
       card.innerHTML = `
         <div class="helmet-card__media"><img src="${h.img}" alt="${h.year} ${h.title}" loading="lazy"></div>
         <div class="helmet-card__tag">
@@ -1584,21 +1570,22 @@
       });
     });
 
-    // 6. Circuits
+    // 6. Real Official F1 Circuit Maps
     const CIRCUITS = [
-      { name: "Silverstone Circuit", country: "United Kingdom · 5.891 km", wins: "9 Wins", story: "An all-time Formula 1 record for victories at a single circuit. From his wet-weather masterclass in 2008 to his emotional ninth triumph in 2024, Silverstone is Hamilton's fortress.", path: "M 52 118 C 36 112, 34 86, 52 74 L 84 54 C 98 44, 92 24, 114 22 C 138 20, 152 38, 174 34 C 198 30, 224 38, 226 56 C 228 74, 198 76, 194 90 C 190 104, 214 114, 198 126 C 182 136, 158 118, 146 102 C 136 88, 122 96, 118 112 C 114 128, 86 132, 52 118 Z" },
-      { name: "Circuit de Barcelona-Catalunya", country: "Spain · 4.657 km", wins: "7 Wins", story: "Site of six Mercedes victories—and in 2026, the stage of his landmark first Grand Prix win in Scuderia Ferrari Rosso Corsa.", path: "M 34 94 C 28 84, 38 72, 56 64 L 132 30 C 154 20, 172 28, 188 42 C 204 56, 226 52, 230 68 C 234 84, 212 96, 194 94 C 176 92, 170 76, 156 80 C 142 84, 152 108, 134 118 C 116 128, 92 122, 68 114 C 50 108, 40 102, 34 94 Z" },
-      { name: "Autódromo José Carlos Pace", country: "Brazil (Interlagos) · 4.309 km", wins: "3 Wins", story: "Where he clinched his maiden 2008 title at the final corner—and delivered one of F1's greatest drives in 2021 from P20 in the Sprint to victory on Sunday.", path: "M 48 54 C 58 34, 98 22, 148 26 C 194 30, 222 48, 218 72 C 214 94, 186 108, 158 98 C 138 90, 132 72, 114 78 C 96 84, 112 114, 92 126 C 72 136, 48 120, 44 96 C 40 78, 42 66, 48 54 Z" },
-      { name: "Hungaroring", country: "Hungary · 4.381 km", wins: "8 Wins", story: "Relentless precision through technical, sweeping corners—eight Hungarian Grand Prix victories across McLaren and Mercedes.", path: "M 44 108 C 32 98, 42 74, 58 52 C 72 34, 94 24, 128 28 C 164 32, 204 42, 218 62 C 230 78, 214 106, 192 114 C 170 122, 154 100, 136 104 C 118 108, 116 128, 92 130 C 68 132, 54 118, 44 108 Z" },
-      { name: "Autodromo Nazionale Monza", country: "Italy · 5.793 km", wins: "5 Wins", story: "The Temple of Speed—five victories already in his career, now carrying the roar of the Tifosi in Ferrari red.", path: "M 36 108 C 28 102, 40 90, 58 82 L 154 38 C 176 28, 202 22, 218 32 C 232 42, 222 64, 198 76 L 146 98 C 128 106, 118 118, 92 120 C 68 122, 44 114, 36 108 Z" }
+      { name: "Silverstone Circuit", country: "United Kingdom · 5.891 km", wins: "9 Wins", story: "An all-time Formula 1 record for victories at a single circuit. From his wet-weather masterclass in 2008 to his emotional ninth triumph in 2024, Silverstone is Hamilton's fortress.", svg: "./assets/circuits/silverstone.svg" },
+      { name: "Circuit de Barcelona-Catalunya", country: "Spain · 4.657 km", wins: "7 Wins", story: "Site of six Mercedes victories—and in 2026, the stage of his landmark first Grand Prix win in Scuderia Ferrari Rosso Corsa.", svg: "./assets/circuits/catalunya.svg" },
+      { name: "Autódromo José Carlos Pace", country: "Brazil (Interlagos) · 4.309 km", wins: "3 Wins", story: "Where he clinched his maiden 2008 title at the final corner—and delivered one of F1's greatest drives in 2021 from P20 in the Sprint to victory on Sunday.", svg: "./assets/circuits/interlagos.svg" },
+      { name: "Hungaroring", country: "Hungary · 4.381 km", wins: "8 Wins", story: "Relentless precision through technical, sweeping corners—eight Hungarian Grand Prix victories across McLaren and Mercedes.", svg: "./assets/circuits/hungaroring.svg" },
+      { name: "Autodromo Nazionale Monza", country: "Italy · 5.793 km", wins: "5 Wins", story: "The Temple of Speed—five victories already in his career, now carrying the roar of the Tifosi in Ferrari red.", svg: "./assets/circuits/monza.svg" }
     ];
     const circuitTabs = document.getElementById("circuitTabs");
-    const circuitPath = document.getElementById("circuitPath");
+    const circuitMapImg = document.getElementById("circuitMapImg");
     const circuitName = document.getElementById("circuitName");
     const circuitStory = document.getElementById("circuitStory");
     function selectCircuit(idx) {
       const c = CIRCUITS[idx];
-      circuitPath.setAttribute("d", c.path);
+      circuitMapImg.src = c.svg;
+      circuitMapImg.alt = `${c.name} track map`;
       circuitName.textContent = c.name;
       circuitStory.textContent = c.story;
       document.querySelectorAll(".circuit-tab").forEach((t, i) => t.classList.toggle("is-active", i === idx));
