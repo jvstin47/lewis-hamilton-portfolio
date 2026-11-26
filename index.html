@@ -314,6 +314,13 @@
       inset: 0;
       z-index: 2;
     }
+    .hero__canvas-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(to top, #0b0b0c 0%, rgba(11, 11, 12, 0.72) 18%, transparent 38%);
+    }
     .hero__canvas-wrap canvas { width: 100%; height: 100%; display: block; cursor: grab; }
     .hero__canvas-wrap canvas:active { cursor: grabbing; }
     .hero__top-meta {
@@ -827,7 +834,7 @@
         <p class="hero__sub">Twenty seasons at the pinnacle of motorsport. One hundred and six Grand Prix victories across McLaren, Mercedes-AMG, and Scuderia Ferrari.</p>
       </div>
 
-      <div class="hero__center-hint">Drag to orbit SF-26 · Move cursor for light</div>
+      <div class="hero__center-hint"></div>
 
       <div class="hero__widgets">
         <a class="race-card" href="#garage">
@@ -1235,13 +1242,13 @@
 
     const heroScene = new THREE.Scene();
     const heroCam = new THREE.PerspectiveCamera(34, 1, 0.1, 60);
-    heroCam.position.set(2.35, 0.62, 2.75);
+    heroCam.position.set(3.25, 0.92, 3.65);
 
     const heroControls = new OrbitControls(heroCam, heroRenderer.domElement);
     heroControls.enableDamping = true;
     heroControls.enablePan = false;
     heroControls.enableZoom = false;
-    heroControls.target.set(0, -0.14, 0);
+    heroControls.target.set(0, -0.05, 0);
     heroControls.maxPolarAngle = Math.PI * 0.485;
     heroControls.autoRotate = true;
     heroControls.autoRotateSpeed = 0.55;
@@ -1259,7 +1266,7 @@
     heroScene.add(hCursorLight);
 
     const hGrid = new THREE.GridHelper(12, 28, 0x3a2022, 0x17181d);
-    hGrid.position.y = -0.36;
+    hGrid.position.y = -0.18;
     heroScene.add(hGrid);
 
     const pointer = new THREE.Vector2(0, 0);
@@ -1376,10 +1383,10 @@
         const size = box.getSize(new THREE.Vector3());
         const center = box.getCenter(new THREE.Vector3());
         const maxDim = Math.max(size.x, size.y, size.z) || 1;
-        const scale = 4.6 / maxDim;
+        const scale = 3.25 / maxDim;
         root.scale.setScalar(scale);
         root.position.sub(center.multiplyScalar(scale));
-        root.position.y = -0.36 - box.min.y * scale;
+        root.position.y = -0.18 - box.min.y * scale;
 
         heroCarSolid = root;
         heroCarPoints = buildPointCloudFromGroup(root, 0xe10600);
