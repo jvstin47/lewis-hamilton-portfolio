@@ -133,7 +133,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px clamp(20px, 4vw, 48px);
+      padding: 18px clamp(20px, 4vw, 48px) 28px;
+      background: linear-gradient(to bottom, rgba(11, 11, 12, 0.85) 0%, rgba(11, 11, 12, 0.4) 60%, transparent 100%);
       pointer-events: none;
     }
     .topbar > * { pointer-events: auto; }
@@ -290,6 +291,13 @@
       background: radial-gradient(ellipse at 50% 40%, rgba(225, 6, 0, 0.14), transparent 65%), var(--bg-obsidian);
     }
     .hero__canvas-wrap { position: absolute; inset: 0; z-index: 1; }
+    .hero__canvas-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(to top, rgba(11, 11, 12, 0.92) 0%, rgba(11, 11, 12, 0.35) 28%, transparent 55%);
+    }
     .hero__canvas-wrap canvas { width: 100%; height: 100%; display: block; }
     .hero__topo {
       position: absolute; inset: 0; z-index: 0; opacity: 0.18; pointer-events: none;
@@ -507,15 +515,31 @@
       border-radius: 999px; padding: 8px 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
     }
     .filter-btn.is-active, .filter-btn:hover { background: var(--cream); color: #111; border-color: var(--cream); }
-    .helmets__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+    .helmets__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
     .helmet-card {
       position: relative; background: #141417; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; cursor: pointer;
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s;
     }
     .helmet-card:hover { transform: translateY(-4px); border-color: var(--gold); }
     .helmet-card.is-hidden { display: none; }
-    .helmet-card__media { aspect-ratio: 1 / 1; overflow: hidden; background: #0e0e10; }
-    .helmet-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s; }
+    .helmet-card__media {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 45%, #1d1e23 0%, #0b0b0c 80%);
+    }
+    .helmet-card__media img {
+      width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s;
+      -webkit-mask-image: radial-gradient(circle at 50% 48%, #000 48%, transparent 88%);
+      mask-image: radial-gradient(circle at 50% 48%, #000 48%, transparent 88%);
+    }
+    .helmet-card[data-lightbg="true"] .helmet-card__media {
+      background: radial-gradient(circle at 50% 48%, #2a2824 0%, #0b0b0c 74%);
+    }
+    .helmet-card[data-lightbg="true"] .helmet-card__media img {
+      -webkit-mask-image: radial-gradient(ellipse 46% 42% at 50% 48%, #000 52%, transparent 82%);
+      mask-image: radial-gradient(ellipse 46% 42% at 50% 48%, #000 52%, transparent 82%);
+      filter: brightness(0.92) contrast(1.06);
+    }
     .helmet-card:hover .helmet-card__media img { transform: scale(1.06); }
     .helmet-card__tag {
       position: absolute; right: 0; bottom: 0; background: #0b0b0c; padding: 10px 16px 10px 18px;
@@ -588,8 +612,16 @@
     .footer__cols a:hover { color: var(--ferrari-red); }
     .footer__bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
 
+    @media (max-width: 1200px) {
+      .helmets__grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
     @media (max-width: 1024px) {
       .era__gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 760px) {
+      .helmets__grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 960px) {
@@ -1170,8 +1202,8 @@
             vec2 lightUv = uPointer * 0.45 + 0.5;
             float dLight = length(vUv - lightUv);
             float spot = exp(-dLight * dLight * 4.5);
-            vec2 edge = abs(vUv - 0.5) * 2.0;
-            float vig = smoothstep(1.0, 0.5, max(edge.x * 0.92, edge.y));
+            float rEdge = length((vUv - 0.5) * vec2(1.22, 1.05)) * 2.0;
+            float vig = smoothstep(0.98, 0.36, rEdge);
             vec3 base = tex.rgb * (0.78 + spot * 0.5);
             base += uRed * spot * (1.0 - lum) * 0.22;
             base += uGold * pow(spot, 2.0) * 0.14;
@@ -1183,7 +1215,7 @@
       });
 
       const portraitMesh = new THREE.Mesh(planeGeo, planeMat);
-      portraitMesh.position.y = -0.05;
+      portraitMesh.position.y = 0.08;
       heroScene.add(portraitMesh);
 
       const P_COUNT = 3000;
@@ -1292,17 +1324,22 @@
       garageStage.insertBefore(gRenderer.domElement, garageStage.firstChild);
 
       gScene = new THREE.Scene();
-      gCam = new THREE.PerspectiveCamera(36, garageStage.clientWidth / garageStage.clientHeight, 0.1, 100);
-      gCam.position.set(3.6, 1.45, 4.2);
+      gCam = new THREE.PerspectiveCamera(34, garageStage.clientWidth / garageStage.clientHeight, 0.1, 100);
+      gCam.position.set(2.35, 0.85, 2.75);
 
       gControls = new OrbitControls(gCam, gRenderer.domElement);
       gControls.enableDamping = true;
       gControls.enablePan = false;
-      gControls.minDistance = 2.2;
-      gControls.maxDistance = 8.5;
-      gControls.maxPolarAngle = Math.PI * 0.49;
+      gControls.minDistance = 1.8;
+      gControls.maxDistance = 6.5;
+      gControls.maxPolarAngle = Math.PI * 0.485;
       gControls.autoRotate = true;
-      gControls.autoRotateSpeed = 0.9;
+      gControls.autoRotateSpeed = 0.85;
+
+      // Grounded studio turntable grid
+      const grid = new THREE.GridHelper(10, 24, 0x3a3b42, 0x1a1b20);
+      grid.position.y = -0.45;
+      gScene.add(grid);
 
       const hemi = new THREE.HemisphereLight(0xfff4e0, 0x1a1c22, 1.4);
       gScene.add(hemi);
@@ -1395,10 +1432,10 @@
         const size = box.getSize(new THREE.Vector3());
         const center = box.getCenter(new THREE.Vector3());
         const maxDim = Math.max(size.x, size.y, size.z) || 1;
-        const scale = 4.2 / maxDim;
+        const scale = 4.6 / maxDim;
         root.scale.setScalar(scale);
         root.position.sub(center.multiplyScalar(scale));
-        root.position.y -= (box.min.y * scale - center.y * scale) * 0.15;
+        root.position.y = -0.45 - box.min.y * scale;
 
         const pts = buildPointCloudFromGroup(root, spec.color);
         carCache.set(key, { solid: root, points: pts });
@@ -1495,6 +1532,7 @@
       const card = document.createElement("article");
       card.className = "helmet-card";
       card.dataset.era = h.era;
+      if (h.year === "2008" || h.year === "2017") card.dataset.lightbg = "true";
       card.innerHTML = `
         <div class="helmet-card__media"><img src="${h.img}" alt="${h.year} ${h.title}" loading="lazy"></div>
         <div class="helmet-card__tag">
@@ -1548,11 +1586,11 @@
 
     // 6. Circuits
     const CIRCUITS = [
-      { name: "Silverstone Circuit", country: "United Kingdom · 5.891 km", wins: "9 Wins", story: "An all-time Formula 1 record for victories at a single circuit. From his wet-weather masterclass in 2008 to his emotional ninth triumph in 2024, Silverstone is Hamilton's fortress.", path: "M35 108 L62 42 L112 24 L175 28 L218 52 L212 92 L170 112 L138 96 L108 122 L62 124 Z" },
-      { name: "Circuit de Barcelona-Catalunya", country: "Spain · 4.657 km", wins: "7 Wins", story: "Site of six Mercedes victories—and in 2026, the stage of his landmark first Grand Prix win in Scuderia Ferrari Rosso Corsa.", path: "M30 85 L120 26 L210 38 L228 72 L188 106 L142 92 L110 122 L54 116 Z" },
-      { name: "Autódromo José Carlos Pace", country: "Brazil (Interlagos) · 4.309 km", wins: "3 Wins", story: "Where he clinched his maiden 2008 title at the final corner—and delivered one of F1's greatest drives in 2021 from P20 in the Sprint to victory on Sunday.", path: "M42 40 L150 24 L216 58 L194 114 L126 98 L94 126 L46 98 Z" },
-      { name: "Hungaroring", country: "Hungary · 4.381 km", wins: "8 Wins", story: "Relentless precision through technical, sweeping corners—eight Hungarian Grand Prix victories across McLaren and Mercedes.", path: "M34 94 L72 34 L166 28 L222 64 L204 118 L128 110 L86 128 Z" },
-      { name: "Autodromo Nazionale Monza", country: "Italy · 5.793 km", wins: "5 Wins", story: "The Temple of Speed—five victories already in his career, now carrying the roar of the Tifosi in Ferrari red.", path: "M32 104 L186 30 L226 42 L212 76 L112 118 L48 122 Z" }
+      { name: "Silverstone Circuit", country: "United Kingdom · 5.891 km", wins: "9 Wins", story: "An all-time Formula 1 record for victories at a single circuit. From his wet-weather masterclass in 2008 to his emotional ninth triumph in 2024, Silverstone is Hamilton's fortress.", path: "M 52 118 C 36 112, 34 86, 52 74 L 84 54 C 98 44, 92 24, 114 22 C 138 20, 152 38, 174 34 C 198 30, 224 38, 226 56 C 228 74, 198 76, 194 90 C 190 104, 214 114, 198 126 C 182 136, 158 118, 146 102 C 136 88, 122 96, 118 112 C 114 128, 86 132, 52 118 Z" },
+      { name: "Circuit de Barcelona-Catalunya", country: "Spain · 4.657 km", wins: "7 Wins", story: "Site of six Mercedes victories—and in 2026, the stage of his landmark first Grand Prix win in Scuderia Ferrari Rosso Corsa.", path: "M 34 94 C 28 84, 38 72, 56 64 L 132 30 C 154 20, 172 28, 188 42 C 204 56, 226 52, 230 68 C 234 84, 212 96, 194 94 C 176 92, 170 76, 156 80 C 142 84, 152 108, 134 118 C 116 128, 92 122, 68 114 C 50 108, 40 102, 34 94 Z" },
+      { name: "Autódromo José Carlos Pace", country: "Brazil (Interlagos) · 4.309 km", wins: "3 Wins", story: "Where he clinched his maiden 2008 title at the final corner—and delivered one of F1's greatest drives in 2021 from P20 in the Sprint to victory on Sunday.", path: "M 48 54 C 58 34, 98 22, 148 26 C 194 30, 222 48, 218 72 C 214 94, 186 108, 158 98 C 138 90, 132 72, 114 78 C 96 84, 112 114, 92 126 C 72 136, 48 120, 44 96 C 40 78, 42 66, 48 54 Z" },
+      { name: "Hungaroring", country: "Hungary · 4.381 km", wins: "8 Wins", story: "Relentless precision through technical, sweeping corners—eight Hungarian Grand Prix victories across McLaren and Mercedes.", path: "M 44 108 C 32 98, 42 74, 58 52 C 72 34, 94 24, 128 28 C 164 32, 204 42, 218 62 C 230 78, 214 106, 192 114 C 170 122, 154 100, 136 104 C 118 108, 116 128, 92 130 C 68 132, 54 118, 44 108 Z" },
+      { name: "Autodromo Nazionale Monza", country: "Italy · 5.793 km", wins: "5 Wins", story: "The Temple of Speed—five victories already in his career, now carrying the roar of the Tifosi in Ferrari red.", path: "M 36 108 C 28 102, 40 90, 58 82 L 154 38 C 176 28, 202 22, 218 32 C 232 42, 222 64, 198 76 L 146 98 C 128 106, 118 118, 92 120 C 68 122, 44 114, 36 108 Z" }
     ];
     const circuitTabs = document.getElementById("circuitTabs");
     const circuitPath = document.getElementById("circuitPath");
