@@ -54,6 +54,11 @@
     #editorial-menu-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
     #editorial-menu-overlay:not(.open) { opacity: 0; visibility: hidden; pointer-events: none; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .animate-marquee { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+    .animate-marquee:hover { animation-play-state: paused; }
+    @keyframes traceDash { to { stroke-dashoffset: -120; } }
+    .racing-trace { stroke-dasharray: 12 8; animation: traceDash 6s linear infinite; }
+    .hero-tilt { transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
   </style>
   <script type="importmap">
     {
@@ -102,67 +107,147 @@
   </header>
 
   <main class="flex-1 w-full max-w-6xl mx-auto px-4 md:px-8 pt-28 md:pt-24 pb-24 md:pb-16">
-    <!-- SECTION 1: HERO -->
-    <section id="hero" class="relative py-6 md:py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-      <div class="lg:col-span-6 flex flex-col gap-5">
+    <!-- SECTION 1: EXPERIMENTAL KINETIC HERO -->
+    <section id="hero" class="relative pt-4 pb-10 md:pt-8 md:pb-14 overflow-hidden">
+      <!-- Ambient Backdrop & Architectural 44 Watermark -->
+      <div id="hero-glow" class="pointer-events-none absolute -top-24 -right-24 w-[420px] h-[420px] md:w-[580px] md:h-[580px] rounded-full blur-[120px] opacity-30 transition-colors duration-700" style="background: radial-gradient(circle, #e00600 0%, rgba(212,175,55,0.28) 45%, transparent 75%);"></div>
+      <div class="pointer-events-none select-none absolute -top-6 right-0 lg:right-8 font-serif font-bold text-[180px] md:text-[280px] leading-none tracking-tighter text-white/[0.025]">44</div>
+
+      <!-- Subtle Kinetic Racing-Line Trace -->
+      <svg class="pointer-events-none absolute inset-x-0 top-12 w-full h-40 opacity-20" viewBox="0 0 1200 160" fill="none" preserveAspectRatio="none" aria-hidden="true">
+        <path class="racing-trace" d="M-20 120 C 210 120, 260 25, 490 42 C 700 58, 760 135, 980 72 C 1090 40, 1160 28, 1240 34" stroke="url(#heroTraceGrad)" stroke-width="1.5"/>
+        <defs>
+          <linearGradient id="heroTraceGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#e00600" stop-opacity="0"/>
+            <stop offset="35%" stop-color="#e00600" stop-opacity="0.9"/>
+            <stop offset="70%" stop-color="#f2ca50" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#39e6d1" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <!-- Top Pit-Wall Control Bar -->
+      <div class="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-8 pb-4 border-b border-white/[0.06]">
         <div class="flex items-center gap-2 flex-wrap">
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-sans text-[10px] font-bold tracking-[0.16em] uppercase">
+          <div id="hero-team-pill" class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-secondary-container text-on-secondary-container font-sans text-[10px] font-bold tracking-[0.18em] uppercase transition-colors duration-300">
             <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-            <span>Scuderia Ferrari</span>
+            <span id="hero-team-name">Scuderia Ferrari</span>
           </div>
-          <div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-primary font-mono text-[11px]">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface-container-high text-primary font-mono text-[11px] border border-white/[0.06]">
             <span class="font-bold">#44</span>
             <span class="text-on-surface-variant">·</span>
-            <span>7× World Champion</span>
+            <span>7× WORLD CHAMPION</span>
           </div>
         </div>
 
-        <h1 class="font-serif text-5xl md:text-7xl font-bold text-on-surface tracking-tight leading-[0.95]">
-          Still We <span class="italic text-primary font-medium">Rise.</span>
-        </h1>
-
-        <p class="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-xl">
-          Two decades of unapologetic speed, seven world championships, and an enduring legacy spanning from Stevenage to Maranello.
-        </p>
-
-        <!-- 2026 Breakthrough Widget -->
-        <div class="p-4 rounded-xl bg-gradient-to-r from-secondary-container/20 via-surface-container to-surface-container border border-white/[0.06] flex flex-col gap-3 shadow-lg">
-          <div class="flex items-center justify-between gap-2 flex-wrap">
-            <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[10px] uppercase font-bold tracking-wider">BREAKTHROUGH</span>
-              <span class="font-serif text-lg text-on-surface font-semibold">Barcelona-Catalunya GP</span>
-            </div>
-            <span class="font-mono text-sm text-secondary font-bold">2026 WIN</span>
-          </div>
-          <div class="grid grid-cols-3 gap-2 py-2 rounded bg-surface-container-lowest/80 px-3">
-            <div class="flex flex-col">
-              <span class="font-mono text-[10px] text-outline uppercase">Fastest Lap</span>
-              <span class="font-mono text-sm text-tertiary font-semibold">1:15.847</span>
-            </div>
-            <div class="flex flex-col">
-              <span class="font-mono text-[10px] text-outline uppercase">Gap to P2</span>
-              <span class="font-mono text-sm text-primary font-semibold">+4.421s</span>
-            </div>
-            <div class="flex flex-col">
-              <span class="font-mono text-[10px] text-outline uppercase">Chassis</span>
-              <span class="font-mono text-sm text-on-surface font-semibold">SF-26 V6</span>
-            </div>
-          </div>
-          <a href="#telemetry" class="w-full py-3 rounded bg-primary text-on-primary font-sans text-xs font-bold tracking-[0.18em] text-center uppercase flex items-center justify-center gap-1.5 shadow-md hover:bg-primary-fixed-dim transition-all">
-            <span>Explore 20 Years</span>
-            <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
-          </a>
+        <!-- Interactive Hero Era Switcher -->
+        <div class="flex items-center gap-1.5 bg-surface-container-lowest/90 p-1 rounded-lg border border-white/[0.08]" role="tablist" aria-label="Hero Era Switcher">
+          <button type="button" data-hero-era="ferrari" class="hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider bg-secondary-container text-white font-semibold transition-all">2026 Ferrari</button>
+          <button type="button" data-hero-era="mercedes" class="hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all">2020 Mercedes</button>
+          <button type="button" data-hero-era="mclaren" class="hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all">2008 McLaren</button>
         </div>
       </div>
 
-      <div class="lg:col-span-6">
-        <div class="relative w-full aspect-[4/5] max-h-[620px] rounded-2xl bg-gradient-to-b from-surface-container to-surface-container-lowest overflow-hidden shadow-2xl border border-white/[0.08]">
-          <img src="./assets/Mine/lewis hamilton • '25 japan.jpeg" alt="Sir Lewis Hamilton in Scuderia Ferrari cockpit #44 at Suzuka 2025" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-transparent to-transparent"></div>
-          <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between px-3.5 py-2 rounded-lg bg-surface/85 backdrop-blur-md border border-white/[0.08] font-mono text-[11px]">
-            <span class="text-primary uppercase">SUZUKA COCKPIT // #44</span>
-            <span class="text-on-surface uppercase font-semibold">106 WINS · 105 POLES</span>
+      <!-- Main Asymmetric Editorial Stage -->
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <!-- Left: Kinetic Headline + Telemetry Ticket -->
+        <div class="lg:col-span-6 flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <span id="hero-kicker" class="font-mono text-[11px] tracking-[0.24em] text-primary uppercase">CHAPTER III // MARANELLO · SF-26</span>
+            <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[82px] font-bold text-on-surface tracking-tight leading-[0.92]">
+              Still We<br>
+              <span class="italic text-primary font-medium">Rise.</span>
+            </h1>
           </div>
+
+          <p id="hero-copy" class="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-xl">
+            Two decades of unapologetic speed, seven world championships, and an enduring legacy spanning from Stevenage to Maranello.
+          </p>
+
+          <!-- Live Pit-Wall Telemetry Strip -->
+          <div class="grid grid-cols-3 gap-2.5 p-3 rounded-xl bg-surface-container-low/90 border border-white/[0.07] backdrop-blur-md">
+            <div class="flex flex-col gap-0.5 px-2 border-r border-white/[0.06]">
+              <span class="font-mono text-[10px] text-outline uppercase">V-Max</span>
+              <span id="hero-stat-speed" class="font-mono text-base md:text-lg font-bold text-tertiary">338 km/h</span>
+            </div>
+            <div class="flex flex-col gap-0.5 px-2 border-r border-white/[0.06]">
+              <span class="font-mono text-[10px] text-outline uppercase">Benchmark</span>
+              <span id="hero-stat-lap" class="font-mono text-base md:text-lg font-bold text-primary">1:15.847</span>
+            </div>
+            <div class="flex flex-col gap-0.5 px-2">
+              <span class="font-mono text-[10px] text-outline uppercase">Delta</span>
+              <span id="hero-stat-delta" class="font-mono text-base md:text-lg font-bold text-secondary">+4.421s</span>
+            </div>
+          </div>
+
+          <!-- 2026 Breakthrough Ticket + Dual CTA -->
+          <div class="p-4 rounded-xl bg-gradient-to-r from-secondary-container/15 via-surface-container to-surface-container border border-white/[0.08] flex flex-col gap-3.5 shadow-xl">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[10px] uppercase font-bold tracking-wider">BREAKTHROUGH</span>
+                <span id="hero-milestone-title" class="font-serif text-lg text-on-surface font-semibold">Barcelona-Catalunya GP</span>
+              </div>
+              <span id="hero-milestone-badge" class="font-mono text-xs text-secondary font-bold">2026 WIN · SF-26</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5">
+              <a href="#garage" class="py-3 px-4 rounded-lg bg-primary text-on-primary font-sans text-xs font-bold tracking-[0.16em] text-center uppercase flex items-center justify-center gap-1.5 shadow-md hover:bg-primary-fixed-dim transition-all">
+                <span>Enter 3D Garage</span>
+                <span class="material-symbols-outlined text-[16px]">view_in_ar</span>
+              </a>
+              <a href="#telemetry" class="py-3 px-4 rounded-lg bg-surface-container-highest text-on-surface font-sans text-xs font-bold tracking-[0.16em] text-center uppercase flex items-center justify-center gap-1.5 border border-white/[0.08] hover:border-primary/50 hover:text-primary transition-all">
+                <span>Explore 20 Years</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 3D Tilt Layered Portrait + Floating Helmet Inset -->
+        <div class="lg:col-span-6 relative">
+          <div id="hero-tilt-stage" class="hero-tilt relative w-full aspect-[4/5] max-h-[600px] rounded-2xl bg-surface-container-lowest overflow-hidden shadow-2xl border border-white/[0.09]">
+            <img id="hero-main-img" src="./assets/Mine/lewis hamilton • '25 japan.jpeg" alt="Sir Lewis Hamilton in Scuderia Ferrari cockpit #44 at Suzuka 2025" class="w-full h-full object-cover transition-opacity duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/15 to-transparent"></div>
+
+            <!-- Top-Left Live Pit-Wall Tag -->
+            <div class="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface/80 backdrop-blur-md border border-white/[0.08] font-mono text-[10px] tracking-wider uppercase">
+              <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+              <span id="hero-hud-tag" class="text-on-surface">SUZUKA COCKPIT // #44</span>
+            </div>
+
+            <!-- Bottom Overlay Telemetry & Floating Helmet Card -->
+            <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3">
+              <div class="flex flex-col gap-1 px-3.5 py-2.5 rounded-xl bg-surface/85 backdrop-blur-md border border-white/[0.08]">
+                <span class="font-mono text-[10px] text-outline uppercase tracking-widest">Career Record</span>
+                <span class="font-mono text-xs md:text-sm text-on-surface font-semibold">106 WINS · 105 POLES · 202 PODIUMS</span>
+              </div>
+
+              <a href="#helmets" title="View Helmet Archive" class="hidden sm:flex items-center gap-2.5 p-1.5 pr-3 rounded-xl bg-surface/90 backdrop-blur-md border border-white/[0.1] hover:border-primary/60 transition-all shadow-lg group">
+                <img id="hero-helmet-thumb" src="./assets/Autofetched/helmet-2025-ferrari.jpg" alt="Era Helmet" class="w-11 h-11 rounded-lg object-cover">
+                <div class="flex flex-col">
+                  <span class="font-mono text-[9px] text-primary uppercase tracking-wider">Helmet Spec</span>
+                  <span id="hero-helmet-label" class="font-serif text-xs text-on-surface group-hover:text-primary transition-colors">2025 Rosso</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Kinetic Speed Ticker -->
+      <div class="relative z-10 mt-10 border-y border-white/[0.06] py-2.5 overflow-hidden bg-surface-container-lowest/60">
+        <div class="animate-marquee font-mono text-[11px] tracking-[0.22em] text-on-surface-variant uppercase whitespace-nowrap">
+          <span class="mx-6 text-primary font-semibold">44 // SIR LEWIS HAMILTON</span>
+          <span class="mx-6">· 7× FORMULA 1 WORLD CHAMPION</span>
+          <span class="mx-6 text-secondary">· 106 GRAND PRIX VICTORIES</span>
+          <span class="mx-6">· 105 POLE POSITIONS</span>
+          <span class="mx-6 text-tertiary">· 202 CAREER PODIUMS</span>
+          <span class="mx-6">· STEVENAGE TO MARANELLO</span>
+          <span class="mx-6 text-primary font-semibold">44 // SIR LEWIS HAMILTON</span>
+          <span class="mx-6">· 7× FORMULA 1 WORLD CHAMPION</span>
+          <span class="mx-6 text-secondary">· 106 GRAND PRIX VICTORIES</span>
+          <span class="mx-6">· 105 POLE POSITIONS</span>
+          <span class="mx-6 text-tertiary">· 202 CAREER PODIUMS</span>
+          <span class="mx-6">· STEVENAGE TO MARANELLO</span>
         </div>
       </div>
     </section>
@@ -851,6 +936,106 @@
       cTabs.appendChild(btn);
     });
     selectCircuit(0);
+
+    // Experimental Hero Era Switcher + Subtle 3D Portrait Tilt
+    const HERO_ERAS = {
+      ferrari: {
+        team: "Scuderia Ferrari",
+        pillClass: "inline-flex items-center gap-1.5 px-3 py-1 rounded bg-secondary-container text-on-secondary-container font-sans text-[10px] font-bold tracking-[0.18em] uppercase transition-colors duration-300",
+        glow: "radial-gradient(circle, #e00600 0%, rgba(212,175,55,0.28) 45%, transparent 75%)",
+        kicker: "CHAPTER III // MARANELLO · SF-26",
+        copy: "Two decades of unapologetic speed, seven world championships, and an enduring legacy spanning from Stevenage to Maranello.",
+        speed: "338 km/h",
+        lap: "1:15.847",
+        delta: "+4.421s",
+        milestoneTitle: "Barcelona-Catalunya GP",
+        milestoneBadge: "2026 WIN · SF-26",
+        img: "./assets/Mine/lewis hamilton • '25 japan.jpeg",
+        hudTag: "SUZUKA COCKPIT // #44",
+        helmetThumb: "./assets/Autofetched/helmet-2025-ferrari.jpg",
+        helmetLabel: "2025 Rosso",
+        activeBtnClass: "hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider bg-secondary-container text-white font-semibold transition-all"
+      },
+      mercedes: {
+        team: "Mercedes-AMG Petronas",
+        pillClass: "inline-flex items-center gap-1.5 px-3 py-1 rounded bg-tertiary/20 text-tertiary border border-tertiary/30 font-sans text-[10px] font-bold tracking-[0.18em] uppercase transition-colors duration-300",
+        glow: "radial-gradient(circle, #39e6d1 0%, rgba(212,175,55,0.22) 45%, transparent 75%)",
+        kicker: "CHAPTER II // BRACKLEY · W11 EQ",
+        copy: "Six Drivers' Championships and eighty-four Grand Prix victories forged in silver and obsidian with the Silver Arrows.",
+        speed: "344 km/h",
+        lap: "1:24.303",
+        delta: "6× WDC",
+        milestoneTitle: "Silverstone Record 9th",
+        milestoneBadge: "2024 WIN · W15",
+        img: "./assets/Autofetched/mercedes-2021-silverstone.jpg",
+        hudTag: "SILVERSTONE // HAMMERTIME",
+        helmetThumb: "./assets/Autofetched/helmet-2020.jpg",
+        helmetLabel: "2020 Purple",
+        activeBtnClass: "hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider bg-tertiary text-on-tertiary font-semibold transition-all"
+      },
+      mclaren: {
+        team: "Vodafone McLaren",
+        pillClass: "inline-flex items-center gap-1.5 px-3 py-1 rounded bg-primary text-on-primary font-sans text-[10px] font-bold tracking-[0.18em] uppercase transition-colors duration-300",
+        glow: "radial-gradient(circle, #f2ca50 0%, rgba(224,6,0,0.22) 45%, transparent 75%)",
+        kicker: "CHAPTER I // WOKING · MP4-23",
+        copy: "The audacious rookie season, twenty-one wins in chrome, and the last-corner Interlagos overtake that crowned a champion.",
+        speed: "331 km/h",
+        lap: "1:10.540",
+        delta: "2008 WDC",
+        milestoneTitle: "Interlagos Last Corner",
+        milestoneBadge: "2008 TITLE · MP4-23",
+        img: "./assets/Autofetched/mclaren-mp4-22.jpg",
+        hudTag: "WOKING ARCHIVE // MP4",
+        helmetThumb: "./assets/Autofetched/helmet-2008.jpg",
+        helmetLabel: "2008 Yellow",
+        activeBtnClass: "hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider bg-primary text-on-primary font-semibold transition-all"
+      }
+    };
+
+    const heroEraBtns = document.querySelectorAll(".hero-era-btn");
+    const heroMainImg = document.getElementById("hero-main-img");
+    heroEraBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const era = HERO_ERAS[btn.dataset.heroEra];
+        if (!era) return;
+        document.getElementById("hero-team-pill").className = era.pillClass;
+        document.getElementById("hero-team-name").textContent = era.team;
+        document.getElementById("hero-glow").style.background = era.glow;
+        document.getElementById("hero-kicker").textContent = era.kicker;
+        document.getElementById("hero-copy").textContent = era.copy;
+        document.getElementById("hero-stat-speed").textContent = era.speed;
+        document.getElementById("hero-stat-lap").textContent = era.lap;
+        document.getElementById("hero-stat-delta").textContent = era.delta;
+        document.getElementById("hero-milestone-title").textContent = era.milestoneTitle;
+        document.getElementById("hero-milestone-badge").textContent = era.milestoneBadge;
+        document.getElementById("hero-hud-tag").textContent = era.hudTag;
+        document.getElementById("hero-helmet-thumb").src = era.helmetThumb;
+        document.getElementById("hero-helmet-label").textContent = era.helmetLabel;
+        heroMainImg.style.opacity = "0.25";
+        setTimeout(() => {
+          heroMainImg.src = era.img;
+          heroMainImg.style.opacity = "1";
+        }, 160);
+        heroEraBtns.forEach((b) => {
+          b.className = b === btn
+            ? era.activeBtnClass
+            : "hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all";
+        });
+      });
+    });
+
+    const tiltStage = document.getElementById("hero-tilt-stage");
+    if (tiltStage && window.matchMedia("(pointer: fine)").matches) {
+      tiltStage.addEventListener("mousemove", (e) => {
+        const rect = tiltStage.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        tiltStage.style.transform = `perspective(1000px) rotateY(${(x * 7).toFixed(2)}deg) rotateX(${(-y * 7).toFixed(2)}deg)`;
+      });
+      tiltStage.addEventListener("mouseleave", () => {
+        tiltStage.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg)";
+      });
+    }
   </script>
 </body>
 </html>
