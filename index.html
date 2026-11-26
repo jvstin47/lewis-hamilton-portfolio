@@ -664,9 +664,40 @@
       garageStage.insertBefore(gRenderer.domElement, garageStage.firstChild);
 
       gScene = new THREE.Scene();
+
+      // Custom Dark Studio Softbox IBL (eliminates milky RoomEnvironment washout)
+      const studioEnv = new THREE.Scene();
+      studioEnv.background = new THREE.Color(0x050507);
+      const overheadStrip = new THREE.Mesh(
+        new THREE.PlaneGeometry(14, 2.6),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+      );
+      overheadStrip.material.color.multiplyScalar(4.2);
+      overheadStrip.position.set(0, 6.5, 0.5);
+      overheadStrip.rotation.x = Math.PI / 2;
+      studioEnv.add(overheadStrip);
+
+      const frontRimStrip = new THREE.Mesh(
+        new THREE.PlaneGeometry(10, 1.4),
+        new THREE.MeshBasicMaterial({ color: 0xfff3dc, side: THREE.DoubleSide })
+      );
+      frontRimStrip.material.color.multiplyScalar(2.6);
+      frontRimStrip.position.set(-5.5, 3.2, 5.5);
+      frontRimStrip.lookAt(0, 0, 0);
+      studioEnv.add(frontRimStrip);
+
+      const rearCrimsonStrip = new THREE.Mesh(
+        new THREE.PlaneGeometry(10, 1.2),
+        new THREE.MeshBasicMaterial({ color: 0xff3b2f, side: THREE.DoubleSide })
+      );
+      rearCrimsonStrip.material.color.multiplyScalar(1.8);
+      rearCrimsonStrip.position.set(4.5, 2.4, -6.0);
+      rearCrimsonStrip.lookAt(0, 0, 0);
+      studioEnv.add(rearCrimsonStrip);
+
       const pmrem = new THREE.PMREMGenerator(gRenderer);
-      gScene.environment = pmrem.fromScene(new RoomEnvironment(), 0.03).texture;
-      gScene.environmentIntensity = 1.35;
+      gScene.environment = pmrem.fromScene(studioEnv, 0.04).texture;
+      gScene.environmentIntensity = 1.25;
 
       gCam = new THREE.PerspectiveCamera(32, garageStage.clientWidth / garageStage.clientHeight, 0.1, 100);
       gCam.position.set(-3.2, 1.25, 3.5);
@@ -681,47 +712,74 @@
       gControls.autoRotate = true;
       gControls.autoRotateSpeed = 0.45;
 
-      // 3-point automotive studio lighting
-      gScene.add(new THREE.HemisphereLight(0xfff6e5, 0x16161a, 0.9));
+      // Balanced studio lighting (no harsh sun washout)
+      gScene.add(new THREE.HemisphereLight(0xf6f4ef, 0x0b0b0e, 0.55));
 
-      const key = new THREE.DirectionalLight(0xffffff, 2.2);
-      key.position.set(4, 7, 4);
+      const key = new THREE.DirectionalLight(0xfffaf2, 1.25);
+      key.position.set(3.5, 6.5, 3.8);
       key.castShadow = true;
       key.shadow.mapSize.set(2048, 2048);
-      key.shadow.bias = -0.0005;
+      key.shadow.camera.left = -3.2;
+      key.shadow.camera.right = 3.2;
+      key.shadow.camera.top = 3.2;
+      key.shadow.camera.bottom = -3.2;
+      key.shadow.camera.near = 1;
+      key.shadow.camera.far = 16;
+      key.shadow.bias = -0.0003;
+      key.shadow.normalBias = 0.02;
+      key.shadow.radius = 4;
       gScene.add(key);
 
-      const fill = new THREE.DirectionalLight(0xffe6c2, 1.1);
-      fill.position.set(-5, 3.5, 4);
+      const fill = new THREE.DirectionalLight(0xdbe8ff, 0.55);
+      fill.position.set(-5, 3.0, 3.5);
       gScene.add(fill);
 
-      const rim = new THREE.DirectionalLight(0xff2a1a, 1.4);
-      rim.position.set(-3, 2.5, -5);
+      const rim = new THREE.DirectionalLight(0xff2a1a, 0.85);
+      rim.position.set(-2.5, 2.2, -5.0);
       gScene.add(rim);
 
-      // Subtle grounded turntable disc + fine ring
-      const shadowPlane = new THREE.Mesh(new THREE.PlaneGeometry(14, 14), new THREE.ShadowMaterial({ opacity: 0.6 }));
+      // Seamless dark studio floor: soft radial contact shadow + subtle floor pool (no hard disc edge)
+      const shadowPlane = new THREE.Mesh(new THREE.PlaneGeometry(16, 16), new THREE.ShadowMaterial({ opacity: 0.45 }));
       shadowPlane.rotation.x = -Math.PI / 2;
       shadowPlane.position.y = -0.35;
       shadowPlane.receiveShadow = true;
       gScene.add(shadowPlane);
 
-      const disc = new THREE.Mesh(
-        new THREE.CircleGeometry(2.55, 64),
-        new THREE.MeshStandardMaterial({ color: 0x151518, roughness: 0.55, metalness: 0.25, transparent: true, opacity: 0.65 })
+      const aoCanvas = document.createElement("canvas");
+      aoCanvas.width = 512;
+      aoCanvas.height = 512;
+      const aoCtx = aoCanvas.getContext("2d");
+      const aoGrad = aoCtx.createRadialGradient(256, 256, 28, 256, 256, 256);
+      aoGrad.addColorStop(0, "rgba(0, 0, 0, 0.85)");
+      aoGrad.addColorStop(0.45, "rgba(0, 0, 0, 0.45)");
+      aoGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
+      aoCtx.fillStyle = aoGrad;
+      aoCtx.fillRect(0, 0, 512, 512);
+      const contactShadow = new THREE.Mesh(
+        new THREE.PlaneGeometry(4.8, 2.5),
+        new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(aoCanvas), transparent: true, depthWrite: false })
       );
-      disc.rotation.x = -Math.PI / 2;
-      disc.position.y = -0.352;
-      disc.receiveShadow = true;
-      gScene.add(disc);
+      contactShadow.rotation.x = -Math.PI / 2;
+      contactShadow.position.y = -0.351;
+      gScene.add(contactShadow);
 
-      const ring = new THREE.Mesh(
-        new THREE.RingGeometry(2.52, 2.55, 72),
-        new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.22, side: THREE.DoubleSide })
+      const poolCanvas = document.createElement("canvas");
+      poolCanvas.width = 512;
+      poolCanvas.height = 512;
+      const poolCtx = poolCanvas.getContext("2d");
+      const poolGrad = poolCtx.createRadialGradient(256, 256, 10, 256, 256, 256);
+      poolGrad.addColorStop(0, "rgba(255, 255, 255, 0.045)");
+      poolGrad.addColorStop(0.55, "rgba(255, 255, 255, 0.012)");
+      poolGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
+      poolCtx.fillStyle = poolGrad;
+      poolCtx.fillRect(0, 0, 512, 512);
+      const floorPool = new THREE.Mesh(
+        new THREE.PlaneGeometry(9.5, 9.5),
+        new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(poolCanvas), transparent: true, depthWrite: false })
       );
-      ring.rotation.x = -Math.PI / 2;
-      ring.position.y = -0.348;
-      gScene.add(ring);
+      floorPool.rotation.x = -Math.PI / 2;
+      floorPool.position.y = -0.353;
+      gScene.add(floorPool);
 
       function resizeG() {
         gRenderer.setSize(garageStage.clientWidth, garageStage.clientHeight, false);
@@ -801,9 +859,9 @@
             m.depthWrite = false;
             m.needsUpdate = true;
           } else if (n.includes("paint") || n.includes("carbody") || n.includes("chassis")) {
-            m.roughness = Math.min(m.roughness ?? 0.3, 0.18);
-            m.metalness = Math.max(m.metalness ?? 0.2, 0.35);
-            m.envMapIntensity = 1.65;
+            m.roughness = Math.min(m.roughness ?? 0.3, 0.14);
+            m.metalness = Math.max(m.metalness ?? 0.2, 0.3);
+            m.envMapIntensity = 1.9;
             m.needsUpdate = true;
           }
         });
