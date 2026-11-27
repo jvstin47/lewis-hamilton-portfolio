@@ -107,147 +107,155 @@
   </header>
 
   <main class="flex-1 w-full max-w-6xl mx-auto px-4 md:px-8 pt-28 md:pt-24 pb-24 md:pb-16">
-    <!-- SECTION 1: EXPERIMENTAL KINETIC HERO -->
-    <section id="hero" class="relative pt-4 pb-10 md:pt-8 md:pb-14 overflow-hidden">
-      <!-- Ambient Backdrop & Architectural 44 Watermark -->
-      <div id="hero-glow" class="pointer-events-none absolute -top-24 -right-24 w-[420px] h-[420px] md:w-[580px] md:h-[580px] rounded-full blur-[120px] opacity-30 transition-colors duration-700" style="background: radial-gradient(circle, #e00600 0%, rgba(212,175,55,0.28) 45%, transparent 75%);"></div>
-      <div class="pointer-events-none select-none absolute -top-6 right-0 lg:right-8 font-serif font-bold text-[180px] md:text-[280px] leading-none tracking-tighter text-white/[0.025]">44</div>
+    <!-- SECTION 1: ACTIVE THEORY-INSPIRED WEBGL HERO -->
+    <section id="hero" class="relative w-screen left-1/2 -translate-x-1/2 min-h-[calc(100vh-5.5rem)] flex flex-col justify-between overflow-hidden bg-[#0a0a0c] border-b border-white/[0.08]">
+      <!-- Full-Bleed WebGL Wind-Tunnel Particle Canvas -->
+      <canvas id="hero-webgl" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
-      <!-- Subtle Kinetic Racing-Line Trace -->
-      <svg class="pointer-events-none absolute inset-x-0 top-12 w-full h-40 opacity-20" viewBox="0 0 1200 160" fill="none" preserveAspectRatio="none" aria-hidden="true">
-        <path class="racing-trace" d="M-20 120 C 210 120, 260 25, 490 42 C 700 58, 760 135, 980 72 C 1090 40, 1160 28, 1240 34" stroke="url(#heroTraceGrad)" stroke-width="1.5"/>
-        <defs>
-          <linearGradient id="heroTraceGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#e00600" stop-opacity="0"/>
-            <stop offset="35%" stop-color="#e00600" stop-opacity="0.9"/>
-            <stop offset="70%" stop-color="#f2ca50" stop-opacity="0.9"/>
-            <stop offset="100%" stop-color="#39e6d1" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-      </svg>
+      <!-- Spatial Grid & Corner Reticles -->
+      <div class="pointer-events-none absolute inset-0 z-[1] opacity-25" style="background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 64px 64px;"></div>
+      <div class="pointer-events-none select-none absolute -bottom-10 left-4 md:left-10 font-serif font-bold text-[200px] md:text-[340px] leading-none tracking-tighter text-white/[0.025] z-[1]">44</div>
 
-      <!-- Top Pit-Wall Control Bar -->
-      <div class="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-8 pb-4 border-b border-white/[0.06]">
-        <div class="flex items-center gap-2 flex-wrap">
-          <div id="hero-team-pill" class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-secondary-container text-on-secondary-container font-sans text-[10px] font-bold tracking-[0.18em] uppercase transition-colors duration-300">
-            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-            <span id="hero-team-name">Scuderia Ferrari</span>
+      <!-- Inner Container -->
+      <div class="relative z-10 w-full max-w-6xl mx-auto px-4 md:px-8 pt-6 pb-8 flex-1 flex flex-col justify-between gap-6">
+        <!-- Top Spatial OS Telemetry Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/[0.08]">
+          <div class="flex items-center gap-2 flex-wrap">
+            <div id="hero-team-pill" class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-secondary-container text-on-secondary-container font-sans text-[10px] font-bold tracking-[0.18em] uppercase transition-colors duration-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+              <span id="hero-team-name">Scuderia Ferrari</span>
+            </div>
+            <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded bg-black/50 backdrop-blur-md text-on-surface-variant font-mono text-[10px] border border-white/[0.08]">
+              <span id="hero-coords">X: 0.500 // Y: 0.500</span>
+              <span class="text-white/20">|</span>
+              <span id="hero-warp-status" class="text-tertiary">WIND TUNNEL: ACTIVE</span>
+            </div>
           </div>
-          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface-container-high text-primary font-mono text-[11px] border border-white/[0.06]">
-            <span class="font-bold">#44</span>
-            <span class="text-on-surface-variant">·</span>
-            <span>7× WORLD CHAMPION</span>
+
+          <!-- Era Switcher + Hold-for-DRS Boost -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <button type="button" id="hero-drs-btn" class="px-3 py-1.5 rounded-lg bg-white/[0.06] hover:bg-secondary-container/80 text-on-surface font-mono text-[10px] uppercase tracking-widest border border-white/[0.12] transition-all select-none active:scale-95">
+              ⚡ Hold DRS Warp
+            </button>
+            <div class="flex items-center gap-1 bg-black/70 backdrop-blur-md p-1 rounded-lg border border-white/[0.1]" role="tablist" aria-label="Hero Era Switcher">
+              <button type="button" data-hero-era="ferrari" class="hero-era-btn px-2.5 py-1 rounded font-mono text-[10px] uppercase tracking-wider bg-secondary-container text-white font-semibold transition-all">2026 Ferrari</button>
+              <button type="button" data-hero-era="mercedes" class="hero-era-btn px-2.5 py-1 rounded font-mono text-[10px] uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all">2020 Mercedes</button>
+              <button type="button" data-hero-era="mclaren" class="hero-era-btn px-2.5 py-1 rounded font-mono text-[10px] uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all">2008 McLaren</button>
+            </div>
           </div>
         </div>
 
-        <!-- Interactive Hero Era Switcher -->
-        <div class="flex items-center gap-1.5 bg-surface-container-lowest/90 p-1 rounded-lg border border-white/[0.08]" role="tablist" aria-label="Hero Era Switcher">
-          <button type="button" data-hero-era="ferrari" class="hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider bg-secondary-container text-white font-semibold transition-all">2026 Ferrari</button>
-          <button type="button" data-hero-era="mercedes" class="hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all">2020 Mercedes</button>
-          <button type="button" data-hero-era="mclaren" class="hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all">2008 McLaren</button>
-        </div>
-      </div>
-
-      <!-- Main Asymmetric Editorial Stage -->
-      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-        <!-- Left: Kinetic Headline + Telemetry Ticket -->
-        <div class="lg:col-span-6 flex flex-col gap-6">
-          <div class="flex flex-col gap-2">
-            <span id="hero-kicker" class="font-mono text-[11px] tracking-[0.24em] text-primary uppercase">CHAPTER III // MARANELLO · SF-26</span>
-            <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[82px] font-bold text-on-surface tracking-tight leading-[0.92]">
-              Still We<br>
-              <span class="italic text-primary font-medium">Rise.</span>
-            </h1>
-          </div>
-
-          <p id="hero-copy" class="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-xl">
-            Two decades of unapologetic speed, seven world championships, and an enduring legacy spanning from Stevenage to Maranello.
-          </p>
-
-          <!-- Live Pit-Wall Telemetry Strip -->
-          <div class="grid grid-cols-3 gap-2.5 p-3 rounded-xl bg-surface-container-low/90 border border-white/[0.07] backdrop-blur-md">
-            <div class="flex flex-col gap-0.5 px-2 border-r border-white/[0.06]">
-              <span class="font-mono text-[10px] text-outline uppercase">V-Max</span>
-              <span id="hero-stat-speed" class="font-mono text-base md:text-lg font-bold text-tertiary">338 km/h</span>
-            </div>
-            <div class="flex flex-col gap-0.5 px-2 border-r border-white/[0.06]">
-              <span class="font-mono text-[10px] text-outline uppercase">Benchmark</span>
-              <span id="hero-stat-lap" class="font-mono text-base md:text-lg font-bold text-primary">1:15.847</span>
-            </div>
-            <div class="flex flex-col gap-0.5 px-2">
-              <span class="font-mono text-[10px] text-outline uppercase">Delta</span>
-              <span id="hero-stat-delta" class="font-mono text-base md:text-lg font-bold text-secondary">+4.421s</span>
-            </div>
-          </div>
-
-          <!-- 2026 Breakthrough Ticket + Dual CTA -->
-          <div class="p-4 rounded-xl bg-gradient-to-r from-secondary-container/15 via-surface-container to-surface-container border border-white/[0.08] flex flex-col gap-3.5 shadow-xl">
-            <div class="flex items-center justify-between gap-2 flex-wrap">
+        <!-- Main Asymmetric WebGL Stage -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center my-auto py-2">
+          <!-- Left: Kinetic Headline + Telemetry HUD -->
+          <div class="lg:col-span-6 flex flex-col gap-5">
+            <div class="flex flex-col gap-2">
               <div class="flex items-center gap-2">
-                <span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[10px] uppercase font-bold tracking-wider">BREAKTHROUGH</span>
-                <span id="hero-milestone-title" class="font-serif text-lg text-on-surface font-semibold">Barcelona-Catalunya GP</span>
+                <span class="w-4 h-[1px] bg-primary"></span>
+                <span id="hero-kicker" class="font-mono text-[11px] tracking-[0.26em] text-primary uppercase">CHAPTER III // MARANELLO · SF-26</span>
               </div>
-              <span id="hero-milestone-badge" class="font-mono text-xs text-secondary font-bold">2026 WIN · SF-26</span>
+              <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[84px] font-bold text-on-surface tracking-tight leading-[0.9]">
+                Still We<br>
+                <span class="italic text-primary font-medium">Rise.</span>
+              </h1>
             </div>
-            <div class="grid grid-cols-2 gap-2.5">
-              <a href="#garage" class="py-3 px-4 rounded-lg bg-primary text-on-primary font-sans text-xs font-bold tracking-[0.16em] text-center uppercase flex items-center justify-center gap-1.5 shadow-md hover:bg-primary-fixed-dim transition-all">
-                <span>Enter 3D Garage</span>
-                <span class="material-symbols-outlined text-[16px]">view_in_ar</span>
-              </a>
-              <a href="#telemetry" class="py-3 px-4 rounded-lg bg-surface-container-highest text-on-surface font-sans text-xs font-bold tracking-[0.16em] text-center uppercase flex items-center justify-center gap-1.5 border border-white/[0.08] hover:border-primary/50 hover:text-primary transition-all">
-                <span>Explore 20 Years</span>
-                <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
-              </a>
+
+            <p id="hero-copy" class="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-xl">
+              Two decades of unapologetic speed, seven world championships, and an enduring legacy spanning from Stevenage to Maranello.
+            </p>
+
+            <!-- Live Pit-Wall Telemetry Strip -->
+            <div class="grid grid-cols-3 gap-2.5 p-3 rounded-xl bg-black/55 border border-white/[0.09] backdrop-blur-xl">
+              <div class="flex flex-col gap-0.5 px-2 border-r border-white/[0.08]">
+                <span class="font-mono text-[10px] text-outline uppercase">V-Max</span>
+                <span id="hero-stat-speed" class="font-mono text-base md:text-lg font-bold text-tertiary">338 km/h</span>
+              </div>
+              <div class="flex flex-col gap-0.5 px-2 border-r border-white/[0.08]">
+                <span class="font-mono text-[10px] text-outline uppercase">Benchmark</span>
+                <span id="hero-stat-lap" class="font-mono text-base md:text-lg font-bold text-primary">1:15.847</span>
+              </div>
+              <div class="flex flex-col gap-0.5 px-2">
+                <span class="font-mono text-[10px] text-outline uppercase">Delta</span>
+                <span id="hero-stat-delta" class="font-mono text-base md:text-lg font-bold text-secondary">+4.421s</span>
+              </div>
+            </div>
+
+            <!-- Breakthrough Ticket + Dual CTA -->
+            <div class="p-4 rounded-xl bg-gradient-to-r from-secondary-container/20 via-black/60 to-black/60 backdrop-blur-xl border border-white/[0.1] flex flex-col gap-3.5 shadow-2xl">
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[10px] uppercase font-bold tracking-wider">BREAKTHROUGH</span>
+                  <span id="hero-milestone-title" class="font-serif text-lg text-on-surface font-semibold">Barcelona-Catalunya GP</span>
+                </div>
+                <span id="hero-milestone-badge" class="font-mono text-xs text-secondary font-bold">2026 WIN · SF-26</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2.5">
+                <a href="#garage" class="py-3 px-4 rounded-lg bg-primary text-on-primary font-sans text-xs font-bold tracking-[0.16em] text-center uppercase flex items-center justify-center gap-1.5 shadow-md hover:bg-primary-fixed-dim transition-all">
+                  <span>Enter 3D Garage</span>
+                  <span class="material-symbols-outlined text-[16px]">view_in_ar</span>
+                </a>
+                <a href="#telemetry" class="py-3 px-4 rounded-lg bg-white/[0.06] text-on-surface font-sans text-xs font-bold tracking-[0.16em] text-center uppercase flex items-center justify-center gap-1.5 border border-white/[0.1] hover:border-primary/50 hover:text-primary transition-all">
+                  <span>Explore 20 Years</span>
+                  <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Right: 3D Tilt Layered Portrait + Floating Helmet Inset -->
-        <div class="lg:col-span-6 relative">
-          <div id="hero-tilt-stage" class="hero-tilt relative w-full aspect-[4/5] max-h-[600px] rounded-2xl bg-surface-container-lowest overflow-hidden shadow-2xl border border-white/[0.09]">
-            <img id="hero-main-img" src="./assets/Mine/lewis hamilton • '25 japan.jpeg" alt="Sir Lewis Hamilton in Scuderia Ferrari cockpit #44 at Suzuka 2025" class="w-full h-full object-cover transition-opacity duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/15 to-transparent"></div>
+          <!-- Right: Interactive GLSL Chromatic-Ripple Portrait Frame -->
+          <div class="lg:col-span-6 relative">
+            <div id="hero-tilt-stage" class="hero-tilt relative w-full aspect-[4/5] max-h-[580px] rounded-2xl bg-[#0c0c0e] overflow-hidden shadow-2xl border border-white/[0.12]">
+              <!-- Fallback img underneath while WebGL texture loads -->
+              <img id="hero-main-img" src="./assets/Mine/lewis hamilton • '25 japan.jpeg" alt="Sir Lewis Hamilton in Scuderia Ferrari cockpit #44 at Suzuka 2025" class="absolute inset-0 w-full h-full object-cover">
+              <!-- Real-time GLSL Liquid Chromatic Displacement Canvas -->
+              <canvas id="hero-portrait-webgl" class="absolute inset-0 w-full h-full block z-[1]"></canvas>
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/20 z-[2]"></div>
 
-            <!-- Top-Left Live Pit-Wall Tag -->
-            <div class="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface/80 backdrop-blur-md border border-white/[0.08] font-mono text-[10px] tracking-wider uppercase">
-              <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
-              <span id="hero-hud-tag" class="text-on-surface">SUZUKA COCKPIT // #44</span>
-            </div>
+              <!-- Corner HUD Brackets -->
+              <div class="pointer-events-none absolute top-3 left-3 w-4 h-4 border-t border-l border-primary/60 z-[3]"></div>
+              <div class="pointer-events-none absolute top-3 right-3 w-4 h-4 border-t border-r border-primary/60 z-[3]"></div>
 
-            <!-- Bottom Overlay Telemetry & Floating Helmet Card -->
-            <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3">
-              <div class="flex flex-col gap-1 px-3.5 py-2.5 rounded-xl bg-surface/85 backdrop-blur-md border border-white/[0.08]">
-                <span class="font-mono text-[10px] text-outline uppercase tracking-widest">Career Record</span>
-                <span class="font-mono text-xs md:text-sm text-on-surface font-semibold">106 WINS · 105 POLES · 202 PODIUMS</span>
+              <!-- Top-Left Live Pit-Wall Tag -->
+              <div class="absolute top-4 left-4 z-[3] flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/[0.1] font-mono text-[10px] tracking-wider uppercase">
+                <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                <span id="hero-hud-tag" class="text-on-surface">SUZUKA COCKPIT // #44</span>
               </div>
 
-              <a href="#helmets" title="View Helmet Archive" class="hidden sm:flex items-center gap-2.5 p-1.5 pr-3 rounded-xl bg-surface/90 backdrop-blur-md border border-white/[0.1] hover:border-primary/60 transition-all shadow-lg group">
-                <img id="hero-helmet-thumb" src="./assets/Autofetched/helmet-2025-ferrari.jpg" alt="Era Helmet" class="w-11 h-11 rounded-lg object-cover">
-                <div class="flex flex-col">
-                  <span class="font-mono text-[9px] text-primary uppercase tracking-wider">Helmet Spec</span>
-                  <span id="hero-helmet-label" class="font-serif text-xs text-on-surface group-hover:text-primary transition-colors">2025 Rosso</span>
+              <!-- Bottom Overlay Telemetry & Floating Helmet Card -->
+              <div class="absolute bottom-4 left-4 right-4 z-[3] flex items-end justify-between gap-3">
+                <div class="flex flex-col gap-1 px-3.5 py-2.5 rounded-xl bg-black/80 backdrop-blur-md border border-white/[0.1]">
+                  <span class="font-mono text-[10px] text-outline uppercase tracking-widest">Career Record</span>
+                  <span class="font-mono text-xs md:text-sm text-on-surface font-semibold">106 WINS · 105 POLES · 202 PODIUMS</span>
                 </div>
-              </a>
+
+                <a href="#helmets" title="View Helmet Archive" class="hidden sm:flex items-center gap-2.5 p-1.5 pr-3 rounded-xl bg-black/85 backdrop-blur-md border border-white/[0.12] hover:border-primary/60 transition-all shadow-lg group">
+                  <img id="hero-helmet-thumb" src="./assets/Autofetched/helmet-2025-ferrari.jpg" alt="Era Helmet" class="w-11 h-11 rounded-lg object-cover">
+                  <div class="flex flex-col">
+                    <span class="font-mono text-[9px] text-primary uppercase tracking-wider">Helmet Spec</span>
+                    <span id="hero-helmet-label" class="font-serif text-xs text-on-surface group-hover:text-primary transition-colors">2025 Rosso</span>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Bottom Kinetic Speed Ticker -->
-      <div class="relative z-10 mt-10 border-y border-white/[0.06] py-2.5 overflow-hidden bg-surface-container-lowest/60">
+      <div class="relative z-10 w-full border-t border-white/[0.08] py-2.5 overflow-hidden bg-black/70 backdrop-blur-md">
         <div class="animate-marquee font-mono text-[11px] tracking-[0.22em] text-on-surface-variant uppercase whitespace-nowrap">
           <span class="mx-6 text-primary font-semibold">44 // SIR LEWIS HAMILTON</span>
           <span class="mx-6">· 7× FORMULA 1 WORLD CHAMPION</span>
           <span class="mx-6 text-secondary">· 106 GRAND PRIX VICTORIES</span>
           <span class="mx-6">· 105 POLE POSITIONS</span>
           <span class="mx-6 text-tertiary">· 202 CAREER PODIUMS</span>
-          <span class="mx-6">· STEVENAGE TO MARANELLO</span>
+          <span class="mx-6">· MOVE CURSOR TO DISTORT · HOLD DRS FOR WARP</span>
           <span class="mx-6 text-primary font-semibold">44 // SIR LEWIS HAMILTON</span>
           <span class="mx-6">· 7× FORMULA 1 WORLD CHAMPION</span>
           <span class="mx-6 text-secondary">· 106 GRAND PRIX VICTORIES</span>
           <span class="mx-6">· 105 POLE POSITIONS</span>
           <span class="mx-6 text-tertiary">· 202 CAREER PODIUMS</span>
-          <span class="mx-6">· STEVENAGE TO MARANELLO</span>
+          <span class="mx-6">· MOVE CURSOR TO DISTORT · HOLD DRS FOR WARP</span>
         </div>
       </div>
     </section>
@@ -995,15 +1003,16 @@
     });
     selectCircuit(0);
 
-    // Experimental Hero Era Switcher + Subtle 3D Portrait Tilt
+    // Active Theory-Inspired WebGL Hero: GPU Wind-Tunnel + GLSL Chromatic Portrait + Scramble Text
     const HERO_ERAS = {
       ferrari: {
         team: "Scuderia Ferrari",
         pillClass: "inline-flex items-center gap-1.5 px-3 py-1 rounded bg-secondary-container text-on-secondary-container font-sans text-[10px] font-bold tracking-[0.18em] uppercase transition-colors duration-300",
-        glow: "radial-gradient(circle, #e00600 0%, rgba(212,175,55,0.28) 45%, transparent 75%)",
+        colorA: 0xe00600,
+        colorB: 0xf2ca50,
         kicker: "CHAPTER III // MARANELLO · SF-26",
         copy: "Two decades of unapologetic speed, seven world championships, and an enduring legacy spanning from Stevenage to Maranello.",
-        speed: "338 km/h",
+        speed: 338,
         lap: "1:15.847",
         delta: "+4.421s",
         milestoneTitle: "Barcelona-Catalunya GP",
@@ -1012,15 +1021,16 @@
         hudTag: "SUZUKA COCKPIT // #44",
         helmetThumb: "./assets/Autofetched/helmet-2025-ferrari.jpg",
         helmetLabel: "2025 Rosso",
-        activeBtnClass: "hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider bg-secondary-container text-white font-semibold transition-all"
+        activeBtnClass: "hero-era-btn px-2.5 py-1 rounded font-mono text-[10px] uppercase tracking-wider bg-secondary-container text-white font-semibold transition-all"
       },
       mercedes: {
         team: "Mercedes-AMG Petronas",
         pillClass: "inline-flex items-center gap-1.5 px-3 py-1 rounded bg-tertiary/20 text-tertiary border border-tertiary/30 font-sans text-[10px] font-bold tracking-[0.18em] uppercase transition-colors duration-300",
-        glow: "radial-gradient(circle, #39e6d1 0%, rgba(212,175,55,0.22) 45%, transparent 75%)",
+        colorA: 0x39e6d1,
+        colorB: 0xd4af37,
         kicker: "CHAPTER II // BRACKLEY · W11 EQ",
         copy: "Six Drivers' Championships and eighty-four Grand Prix victories forged in silver and obsidian with the Silver Arrows.",
-        speed: "344 km/h",
+        speed: 344,
         lap: "1:24.303",
         delta: "6× WDC",
         milestoneTitle: "Silverstone Record 9th",
@@ -1029,15 +1039,16 @@
         hudTag: "SILVERSTONE // HAMMERTIME",
         helmetThumb: "./assets/Autofetched/helmet-2020.jpg",
         helmetLabel: "2020 Purple",
-        activeBtnClass: "hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider bg-tertiary text-on-tertiary font-semibold transition-all"
+        activeBtnClass: "hero-era-btn px-2.5 py-1 rounded font-mono text-[10px] uppercase tracking-wider bg-tertiary text-on-tertiary font-semibold transition-all"
       },
       mclaren: {
         team: "Vodafone McLaren",
         pillClass: "inline-flex items-center gap-1.5 px-3 py-1 rounded bg-primary text-on-primary font-sans text-[10px] font-bold tracking-[0.18em] uppercase transition-colors duration-300",
-        glow: "radial-gradient(circle, #f2ca50 0%, rgba(224,6,0,0.22) 45%, transparent 75%)",
+        colorA: 0xf2ca50,
+        colorB: 0xe00600,
         kicker: "CHAPTER I // WOKING · MP4-23",
         copy: "The audacious rookie season, twenty-one wins in chrome, and the last-corner Interlagos overtake that crowned a champion.",
-        speed: "331 km/h",
+        speed: 331,
         lap: "1:10.540",
         delta: "2008 WDC",
         milestoneTitle: "Interlagos Last Corner",
@@ -1046,9 +1057,279 @@
         hudTag: "WOKING ARCHIVE // MP4",
         helmetThumb: "./assets/Autofetched/helmet-2008.jpg",
         helmetLabel: "2008 Yellow",
-        activeBtnClass: "hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider bg-primary text-on-primary font-semibold transition-all"
+        activeBtnClass: "hero-era-btn px-2.5 py-1 rounded font-mono text-[10px] uppercase tracking-wider bg-primary text-on-primary font-semibold transition-all"
       }
     };
+
+    function scrambleText(el, finalStr) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#·";
+      let frame = 0;
+      const total = 14;
+      const id = setInterval(() => {
+        frame++;
+        el.textContent = finalStr
+          .split("")
+          .map((ch, idx) => (ch === " " || idx < (frame / total) * finalStr.length ? ch : chars[Math.floor(Math.random() * chars.length)]))
+          .join("");
+        if (frame >= total) {
+          el.textContent = finalStr;
+          clearInterval(id);
+        }
+      }, 22);
+    }
+
+    // Hero WebGL State
+    let heroBoostTarget = 0;
+    let heroBoost = 0;
+    let heroBaseSpeed = 338;
+    const mouseNorm = new THREE.Vector2(0.5, 0.5);
+    const mouseTarget = new THREE.Vector2(0.5, 0.5);
+    let mouseVel = 0;
+
+    // 1. Full-Bleed Wind-Tunnel Particle Shader
+    const heroCanvas = document.getElementById("hero-webgl");
+    const heroEl = document.getElementById("hero");
+    const hRenderer = new THREE.WebGLRenderer({ canvas: heroCanvas, alpha: true, antialias: false, powerPreference: "high-performance" });
+    hRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    const hScene = new THREE.Scene();
+    const hCam = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    hCam.position.z = 12;
+
+    const P_COUNT = 2600;
+    const pPos = new Float32Array(P_COUNT * 3);
+    const pSeed = new Float32Array(P_COUNT * 3);
+    for (let i = 0; i < P_COUNT; i++) {
+      pPos[i * 3] = (Math.random() - 0.5) * 26;
+      pPos[i * 3 + 1] = (Math.random() - 0.5) * 14;
+      pPos[i * 3 + 2] = (Math.random() - 0.5) * 18;
+      pSeed[i * 3] = Math.random();
+      pSeed[i * 3 + 1] = 0.4 + Math.random() * 1.4;
+      pSeed[i * 3 + 2] = Math.random() * Math.PI * 2;
+    }
+    const pGeo = new THREE.BufferGeometry();
+    pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
+    pGeo.setAttribute("aSeed", new THREE.BufferAttribute(pSeed, 3));
+
+    const pUniforms = {
+      uTime: { value: 0 },
+      uBoost: { value: 0 },
+      uMouse: { value: new THREE.Vector2(0, 0) },
+      uVel: { value: 0 },
+      uColorA: { value: new THREE.Color(0xe00600) },
+      uColorB: { value: new THREE.Color(0xf2ca50) }
+    };
+    const pMat = new THREE.ShaderMaterial({
+      uniforms: pUniforms,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      vertexShader: `
+        attribute vec3 aSeed;
+        uniform float uTime;
+        uniform float uBoost;
+        uniform vec2 uMouse;
+        uniform float uVel;
+        varying float vAlpha;
+        varying float vMix;
+        void main() {
+          vec3 p = position;
+          float speed = (1.8 + uBoost * 7.5) * aSeed.y;
+          p.z = mod(p.z + uTime * speed + 9.0, 18.0) - 9.0;
+          p.x += sin(uTime * 0.7 + aSeed.z) * 0.35;
+          p.y += cos(uTime * 0.6 + aSeed.z) * 0.25;
+          vec2 mWorld = uMouse * vec2(11.0, 6.0);
+          vec2 diff = p.xy - mWorld;
+          float d = length(diff);
+          float push = smoothstep(3.8, 0.0, d) * (1.2 + uVel * 2.5 + uBoost * 1.8);
+          p.xy += normalize(diff + 0.001) * push;
+          vec4 mv = modelViewMatrix * vec4(p, 1.0);
+          gl_PointSize = (2.0 + aSeed.x * 3.5 + uBoost * 3.0) * (12.0 / max(1.0, -mv.z));
+          vAlpha = smoothstep(-9.0, -2.0, p.z) * (1.0 - smoothstep(4.5, 9.0, p.z)) * (0.45 + 0.45 * aSeed.x);
+          vMix = aSeed.x;
+          gl_Position = projectionMatrix * mv;
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 uColorA;
+        uniform vec3 uColorB;
+        varying float vAlpha;
+        varying float vMix;
+        void main() {
+          float d = length(gl_PointCoord - 0.5);
+          if (d > 0.5) discard;
+          float glow = pow(1.0 - d * 2.0, 1.8);
+          vec3 col = mix(uColorA, uColorB, vMix);
+          gl_FragColor = vec4(col, glow * vAlpha);
+        }
+      `
+    });
+    hScene.add(new THREE.Points(pGeo, pMat));
+
+    // 2. Interactive GLSL Chromatic-Ripple Portrait Plane
+    const pCanvas = document.getElementById("hero-portrait-webgl");
+    const tiltStage = document.getElementById("hero-tilt-stage");
+    const pRenderer = new THREE.WebGLRenderer({ canvas: pCanvas, alpha: true, antialias: true, powerPreference: "high-performance" });
+    pRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    const pScene = new THREE.Scene();
+    const pCam = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, 0.1, 10);
+    pCam.position.z = 1;
+
+    const texLoader = new THREE.TextureLoader();
+    const eraTexCache = new Map();
+    function loadHeroTex(url, cb) {
+      if (eraTexCache.has(url)) { cb(eraTexCache.get(url)); return; }
+      texLoader.load(url, (t) => {
+        t.colorSpace = THREE.SRGBColorSpace;
+        t.minFilter = THREE.LinearFilter;
+        eraTexCache.set(url, t);
+        cb(t);
+      });
+    }
+
+    const imgUniforms = {
+      uTex: { value: null },
+      uTime: { value: 0 },
+      uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+      uHover: { value: 0 },
+      uBoost: { value: 0 },
+      uVel: { value: 0 },
+      uImgAspect: { value: 0.84 },
+      uBoxAspect: { value: 0.8 }
+    };
+    const imgMat = new THREE.ShaderMaterial({
+      uniforms: imgUniforms,
+      transparent: true,
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform sampler2D uTex;
+        uniform float uTime;
+        uniform vec2 uMouse;
+        uniform float uHover;
+        uniform float uBoost;
+        uniform float uVel;
+        uniform float uImgAspect;
+        uniform float uBoxAspect;
+        varying vec2 vUv;
+        vec2 coverUv(vec2 uv) {
+          vec2 s = vec2(1.0);
+          if (uBoxAspect > uImgAspect) s.y = uImgAspect / uBoxAspect;
+          else s.x = uBoxAspect / uImgAspect;
+          return (uv - 0.5) * s + 0.5;
+        }
+        void main() {
+          vec2 uv = coverUv(vUv);
+          float dist = distance(vUv, uMouse);
+          float ripple = sin(dist * 26.0 - uTime * 6.5) * exp(-dist * 4.5) * (0.012 * uHover + 0.018 * uVel + 0.014 * uBoost);
+          vec2 dir = normalize(vUv - uMouse + 0.0001);
+          uv += dir * ripple;
+          float split = 0.002 + 0.012 * uVel + 0.016 * uBoost + abs(ripple) * 0.6;
+          float r = texture2D(uTex, uv + vec2(split, 0.0)).r;
+          float g = texture2D(uTex, uv).g;
+          float b = texture2D(uTex, uv - vec2(split, 0.0)).b;
+          vec3 col = vec3(r, g, b);
+          float scan = sin(vUv.y * 260.0 + uTime * 4.0) * 0.025;
+          col -= scan * (0.35 + uBoost * 0.65);
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `
+    });
+    const imgPlane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), imgMat);
+    pScene.add(imgPlane);
+    loadHeroTex(HERO_ERAS.ferrari.img, (t) => {
+      imgUniforms.uTex.value = t;
+      imgUniforms.uImgAspect.value = t.image.width / t.image.height;
+    });
+
+    function resizeHeroGL() {
+      const w = heroEl.clientWidth || window.innerWidth;
+      const h = heroEl.clientHeight || 640;
+      hRenderer.setSize(w, h, false);
+      hCam.aspect = w / h;
+      hCam.updateProjectionMatrix();
+
+      const pw = tiltStage.clientWidth || 440;
+      const ph = tiltStage.clientHeight || 550;
+      pRenderer.setSize(pw, ph, false);
+      imgUniforms.uBoxAspect.value = pw / ph;
+    }
+    window.addEventListener("resize", resizeHeroGL);
+    resizeHeroGL();
+
+    const coordsEl = document.getElementById("hero-coords");
+    const warpEl = document.getElementById("hero-warp-status");
+    const speedEl = document.getElementById("hero-stat-speed");
+    heroEl.addEventListener("pointermove", (e) => {
+      const r = heroEl.getBoundingClientRect();
+      const nx = (e.clientX - r.left) / r.width;
+      const ny = (e.clientY - r.top) / r.height;
+      mouseVel = Math.min(1.5, Math.hypot(nx - mouseTarget.x, ny - mouseTarget.y) * 18);
+      mouseTarget.set(nx, ny);
+      if (coordsEl) coordsEl.textContent = `X: ${nx.toFixed(3)} // Y: ${ny.toFixed(3)}`;
+    });
+
+    let pHoverTarget = 0;
+    tiltStage.addEventListener("pointermove", (e) => {
+      pHoverTarget = 1;
+      const r = tiltStage.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      imgUniforms.uMouse.value.set(x, 1.0 - y);
+      if (window.matchMedia("(pointer: fine)").matches) {
+        tiltStage.style.transform = `perspective(1000px) rotateY(${((x - 0.5) * 8).toFixed(2)}deg) rotateX(${(-(y - 0.5) * 8).toFixed(2)}deg)`;
+      }
+    });
+    tiltStage.addEventListener("pointerleave", () => {
+      pHoverTarget = 0;
+      tiltStage.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg)";
+    });
+
+    const drsBtn = document.getElementById("hero-drs-btn");
+    const engageWarp = (on) => {
+      heroBoostTarget = on ? 1 : 0;
+      if (warpEl) {
+        warpEl.textContent = on ? "DRS WARP: ENGAGED" : "WIND TUNNEL: ACTIVE";
+        warpEl.className = on ? "text-secondary font-bold animate-pulse" : "text-tertiary";
+      }
+      drsBtn.classList.toggle("bg-secondary-container", on);
+      drsBtn.classList.toggle("text-white", on);
+    };
+    drsBtn.addEventListener("pointerdown", () => engageWarp(true));
+    window.addEventListener("pointerup", () => engageWarp(false));
+    window.addEventListener("keydown", (e) => { if (e.code === "Space" && document.activeElement === document.body) { e.preventDefault(); engageWarp(true); } });
+    window.addEventListener("keyup", (e) => { if (e.code === "Space") engageWarp(false); });
+
+    const heroClock = new THREE.Clock();
+    (function heroLoop() {
+      requestAnimationFrame(heroLoop);
+      const t = heroClock.getElapsedTime();
+      heroBoost += (heroBoostTarget - heroBoost) * 0.08;
+      mouseNorm.lerp(mouseTarget, 0.1);
+      mouseVel *= 0.92;
+
+      pUniforms.uTime.value = t;
+      pUniforms.uBoost.value = heroBoost;
+      pUniforms.uVel.value = mouseVel;
+      pUniforms.uMouse.value.set(mouseNorm.x * 2 - 1, -(mouseNorm.y * 2 - 1));
+      hRenderer.render(hScene, hCam);
+
+      imgUniforms.uTime.value = t;
+      imgUniforms.uBoost.value = heroBoost;
+      imgUniforms.uVel.value = mouseVel;
+      imgUniforms.uHover.value += (pHoverTarget - imgUniforms.uHover.value) * 0.08;
+      if (imgUniforms.uTex.value) pRenderer.render(pScene, pCam);
+
+      if (heroBoost > 0.02) {
+        speedEl.textContent = `${Math.round(heroBaseSpeed + heroBoost * 24)} km/h`;
+      } else {
+        speedEl.textContent = `${heroBaseSpeed} km/h`;
+      }
+    })();
 
     const heroEraBtns = document.querySelectorAll(".hero-era-btn");
     const heroMainImg = document.getElementById("hero-main-img");
@@ -1056,44 +1337,33 @@
       btn.addEventListener("click", () => {
         const era = HERO_ERAS[btn.dataset.heroEra];
         if (!era) return;
+        heroBaseSpeed = era.speed;
+        pUniforms.uColorA.value.setHex(era.colorA);
+        pUniforms.uColorB.value.setHex(era.colorB);
         document.getElementById("hero-team-pill").className = era.pillClass;
         document.getElementById("hero-team-name").textContent = era.team;
-        document.getElementById("hero-glow").style.background = era.glow;
-        document.getElementById("hero-kicker").textContent = era.kicker;
+        scrambleText(document.getElementById("hero-kicker"), era.kicker);
+        scrambleText(document.getElementById("hero-hud-tag"), era.hudTag);
         document.getElementById("hero-copy").textContent = era.copy;
-        document.getElementById("hero-stat-speed").textContent = era.speed;
+        speedEl.textContent = `${era.speed} km/h`;
         document.getElementById("hero-stat-lap").textContent = era.lap;
         document.getElementById("hero-stat-delta").textContent = era.delta;
         document.getElementById("hero-milestone-title").textContent = era.milestoneTitle;
         document.getElementById("hero-milestone-badge").textContent = era.milestoneBadge;
-        document.getElementById("hero-hud-tag").textContent = era.hudTag;
         document.getElementById("hero-helmet-thumb").src = era.helmetThumb;
         document.getElementById("hero-helmet-label").textContent = era.helmetLabel;
-        heroMainImg.style.opacity = "0.25";
-        setTimeout(() => {
-          heroMainImg.src = era.img;
-          heroMainImg.style.opacity = "1";
-        }, 160);
+        heroMainImg.src = era.img;
+        loadHeroTex(era.img, (tex) => {
+          imgUniforms.uTex.value = tex;
+          imgUniforms.uImgAspect.value = tex.image.width / tex.image.height;
+        });
         heroEraBtns.forEach((b) => {
           b.className = b === btn
             ? era.activeBtnClass
-            : "hero-era-btn px-3 py-1 rounded font-mono text-[10px] uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all";
+            : "hero-era-btn px-2.5 py-1 rounded font-mono text-[10px] uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all";
         });
       });
     });
-
-    const tiltStage = document.getElementById("hero-tilt-stage");
-    if (tiltStage && window.matchMedia("(pointer: fine)").matches) {
-      tiltStage.addEventListener("mousemove", (e) => {
-        const rect = tiltStage.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        tiltStage.style.transform = `perspective(1000px) rotateY(${(x * 7).toFixed(2)}deg) rotateX(${(-y * 7).toFixed(2)}deg)`;
-      });
-      tiltStage.addEventListener("mouseleave", () => {
-        tiltStage.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg)";
-      });
-    }
   </script>
 </body>
 </html>
